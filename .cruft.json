@@ -1,0 +1,19 @@
+{
+  "template": "https://github.com/DHARPA-Project/kiara_modules.project_template.git",
+  "commit": "8ccc14b1bb1c303f9ab5ecde06ab8b4e3a952108",
+  "checkout": null,
+  "context": {
+    "cookiecutter": {
+      "full_name": "Markus Binsteiner",
+      "email": "markus.binsteiner@uni.lu",
+      "project_name": "playground",
+      "project_slug": "playground",
+      "project_short_description": "A playground for developing kiara modules.",
+      "_extensions": [
+        "cookiecutter.extensions.JsonifyExtension"
+      ],
+      "_template": "https://github.com/DHARPA-Project/kiara_modules.project_template.git"
+    }
+  },
+  "directory": null
+}
