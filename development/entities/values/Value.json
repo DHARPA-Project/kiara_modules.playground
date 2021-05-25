@@ -1,0 +1,128 @@
+{
+  "title": "Value",
+  "description": "The underlying base class for all values.\n\nThe important subclasses here are the ones inheriting from 'KiaraValue', as those are registered in the data\nregistry.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "title": "Id",
+      "description": "A unique id for this value.",
+      "type": "string"
+    },
+    "value_schema": {
+      "title": "Value Schema",
+      "description": "The schema of this value.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ValueSchema"
+        }
+      ]
+    },
+    "is_constant": {
+      "title": "Is Constant",
+      "description": "Whether this value is a constant.",
+      "default": false,
+      "type": "boolean"
+    },
+    "origin": {
+      "title": "Origin",
+      "description": "Description of how/where the value was set.",
+      "default": "n/a",
+      "type": "string"
+    },
+    "last_update": {
+      "title": "Last Update",
+      "description": "The time the last update to this value happened.",
+      "type": "string",
+      "format": "date-time"
+    },
+    "is_streaming": {
+      "title": "Is Streaming",
+      "description": "Whether the value is currently streamed into this object.",
+      "default": false,
+      "type": "boolean"
+    },
+    "is_set": {
+      "title": "Is Set",
+      "description": "Whether the value was set (in some way: user input, default, constant...).",
+      "default": false,
+      "type": "boolean"
+    },
+    "is_none": {
+      "title": "Is None",
+      "description": "Whether the value is 'None'.",
+      "default": true,
+      "type": "boolean"
+    },
+    "value_hash": {
+      "title": "Value Hash",
+      "description": "The hash of the current value.",
+      "default": "-- no_value --",
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "$ref": "#/definitions/ValueHashMarker"
+        }
+      ]
+    },
+    "metadata": {
+      "title": "Metadata",
+      "description": "Metadata relating to the actual data (size, no. of rows, etc. -- depending on data type).",
+      "type": "object"
+    }
+  },
+  "required": [
+    "id",
+    "value_schema"
+  ],
+  "additionalProperties": false,
+  "definitions": {
+    "ValueSchema": {
+      "title": "ValueSchema",
+      "description": "The schema of a value.\n\nThe schema contains the [ValueType][kiara.data.values.ValueType] of a value, as well as an optional default that\nwill be used if no user input was given (yet) for a value.\n\nFor more complex container types like arrays, tables, unions etc, types can also be configured with values from the ``type_config`` field.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "title": "Type",
+          "description": "The type of the value.",
+          "type": "string"
+        },
+        "type_config": {
+          "title": "Type Config",
+          "description": "Configuration for the type, in case it's complex.",
+          "type": "object"
+        },
+        "default": {
+          "title": "Default",
+          "description": "A default value.",
+          "default": "__not_set__"
+        },
+        "optional": {
+          "title": "Optional",
+          "description": "Whether this value is required (True), or whether 'None' value is allowed (False).",
+          "default": false,
+          "type": "boolean"
+        },
+        "doc": {
+          "title": "Doc",
+          "description": "A description for the value of this input field.",
+          "default": "-- n/a --",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "ValueHashMarker": {
+      "title": "ValueHashMarker",
+      "description": "An enumeration.",
+      "enum": [
+        "-- no_value --",
+        "-- deferred --",
+        "-- no_hash --"
+      ]
+    }
+  }
+}
