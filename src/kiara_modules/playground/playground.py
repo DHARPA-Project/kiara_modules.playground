@@ -38,9 +38,11 @@ class ExampleModule(KiaraModule):
 
     Examples:
 
-        This example module can be tested on the commandline with the ``kiara run`` command:
+        This example module can be tested on the commandline with one of the relevant ``kiara`` commands:
 
         ```
+        kiara module explain-type playground.playground.example
+        kiara module explain-instance playground.playground.example
         kiara run playground.playground.example text_1="xxx" text_2="yyy"
         ```
 
