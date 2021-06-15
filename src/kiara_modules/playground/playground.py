@@ -41,12 +41,13 @@ class ExampleModule(KiaraModule):
         This example module can be tested on the commandline with the ``kiara run`` command:
 
         ```
-        kiara run playground_example text_1="xxx" text_2="yyy"
+        kiara run playground.playground.example text_1="xxx" text_2="yyy"
         ```
 
     """
 
     _config_cls = ExampleModuleConfig
+    _module_type_name = "example"
 
     def create_input_schema(
         self,
