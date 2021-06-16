@@ -17,7 +17,7 @@ class ExampleModuleConfig(KiaraModuleConfig):
 class ExampleModule(KiaraModule):
     """A very simple example module; concatenate two strings.
 
-    The purpose of this modules is to show the main elements of a ``KiaraModule``:
+    The purpose of this module is to show the main elements of a ``KiaraModule``:
 
     the (optional) configuration
     :    must inherit from ``KiaraModuleConfig``, and the config class must be set as the "_config_cls" attribute
@@ -40,11 +40,13 @@ class ExampleModule(KiaraModule):
 
         This example module can be tested on the commandline with one of the relevant ``kiara`` commands:
 
-        ```
-        kiara module explain-type playground.playground.example
-        kiara module explain-instance playground.playground.example
-        kiara run playground.playground.example text_1="xxx" text_2="yyy"
-        ```
+            kiara module explain-type playground.playground.example
+            kiara module explain-instance playground.playground.example
+            kiara run playground.playground.example text_1="xxx" text_2="yyy"
+
+        To set a different separator in the config for this module, and use that via the cli, you could do:
+
+            kiara run playground.playground.example --module-config separator="." text_1="xxx" text_2="yyy"
 
     """
 

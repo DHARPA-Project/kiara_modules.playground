@@ -3,53 +3,6 @@ name: "linux tests and documentation builds for 'kiara_modules.playground'"
 on: [push]
 
 jobs:
-  test-linux:
-    name: pytest on linux
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python_version: [3.6, 3.7, 3.8, 3.9]
-    steps:
-      - name: "Set up Python ${{ matrix.python_version }}"
-        uses: actions/setup-python@v2
-        with:
-          python-version: "${{ matrix.python_version }}"
-      - uses: actions/checkout@v2
-      - name: install kiara_modules.playground
-        run: pip install -U --pre --extra-index-url https://pypi.fury.io/dharpa/ .[all,dev_testing]
-      - name: Test with pytest
-        run: make test
-
-  mypy-linux:
-    name: mypy check on linux
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python_version: [3.8, 3.9]
-    steps:
-      - name: "Set up Python ${{ matrix.python_version }}"
-        uses: actions/setup-python@v2
-        with:
-          python-version: "${{ matrix.python_version }}"
-      - uses: actions/checkout@v2
-      - name: install kiara_modules.playground
-        run: pip install -U --pre --extra-index-url https://pypi.fury.io/dharpa/ .[all,dev_testing]
-      - name: Test with mypy
-        run: make mypy
-
-  flake8-linux:
-    name: flake8 on linux
-    runs-on: ubuntu-latest
-    steps:
-      - name: Set up Python 3.9
-        uses: actions/setup-python@v2
-        with:
-          python-version: 3.9
-      - uses: actions/checkout@v2
-      - name: install kiara_modules.playground
-        run: pip install -U --pre --extra-index-url https://pypi.fury.io/dharpa/ .[all,dev_testing]
-      - name: Test with flake8
-        run: make flake
 
   build-docs:
     name: build documentation
@@ -82,10 +35,6 @@ jobs:
     name: release python package to gemfury
     if: ${{ github.ref == 'refs/heads/develop' }}
     runs-on: ubuntu-latest
-    needs:
-      - test-linux
-      - mypy-linux
-      - flake8-linux
     env:
         GEMFURY_PUSH_TOKEN: ${{ secrets.GEMFURY_PUSH_TOKEN }}
     steps:
