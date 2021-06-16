@@ -1,6 +1,6 @@
 {
   df(where: {
-    Language: {_eq: "German"}
+    Language: {_eq: "Russian"}
   } ) {
 
     row(limit: 10) {
