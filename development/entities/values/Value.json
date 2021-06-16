@@ -8,6 +8,14 @@
       "description": "A unique id for this value.",
       "type": "string"
     },
+    "aliases": {
+      "title": "Aliases",
+      "description": "Aliases for this value",
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
     "value_schema": {
       "title": "Value Schema",
       "description": "The schema of this value.",
@@ -22,12 +30,6 @@
       "description": "Whether this value is a constant.",
       "default": false,
       "type": "boolean"
-    },
-    "origin": {
-      "title": "Origin",
-      "description": "Description of how/where the value was set.",
-      "default": "n/a",
-      "type": "string"
     },
     "last_update": {
       "title": "Last Update",
@@ -66,10 +68,22 @@
         }
       ]
     },
+    "value_metadata": {
+      "title": "Value Metadata",
+      "description": "Base value metadata.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ValueMetadata"
+        }
+      ]
+    },
     "metadata": {
       "title": "Metadata",
       "description": "Metadata relating to the actual data (size, no. of rows, etc. -- depending on data type).",
-      "type": "object"
+      "type": "object",
+      "additionalProperties": {
+        "type": "object"
+      }
     }
   },
   "required": [
@@ -80,7 +94,7 @@
   "definitions": {
     "ValueSchema": {
       "title": "ValueSchema",
-      "description": "The schema of a value.\n\nThe schema contains the [ValueType][kiara.data.values.ValueType] of a value, as well as an optional default that\nwill be used if no user input was given (yet) for a value.\n\nFor more complex container types like arrays, tables, unions etc, types can also be configured with values from the ``type_config`` field.",
+      "description": "The schema of a value.\n\nThe schema contains the [ValueType][kiara.data.values.ValueType] of a value, as well as an optional default that\nwill be used if no user input was given (yet) for a value.\n\nFor more complex container types like array, tables, unions etc, types can also be configured with values from the ``type_config`` field.",
       "type": "object",
       "properties": {
         "type": {
@@ -123,6 +137,18 @@
         "-- deferred --",
         "-- no_hash --"
       ]
+    },
+    "ValueMetadata": {
+      "title": "ValueMetadata",
+      "type": "object",
+      "properties": {
+        "origin": {
+          "title": "Origin",
+          "description": "Description of how/where the value was set.",
+          "default": "n/a",
+          "type": "string"
+        }
+      }
     }
   }
 }

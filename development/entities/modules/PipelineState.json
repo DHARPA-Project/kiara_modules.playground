@@ -210,7 +210,7 @@
     },
     "ValueSchema": {
       "title": "ValueSchema",
-      "description": "The schema of a value.\n\nThe schema contains the [ValueType][kiara.data.values.ValueType] of a value, as well as an optional default that\nwill be used if no user input was given (yet) for a value.\n\nFor more complex container types like arrays, tables, unions etc, types can also be configured with values from the ``type_config`` field.",
+      "description": "The schema of a value.\n\nThe schema contains the [ValueType][kiara.data.values.ValueType] of a value, as well as an optional default that\nwill be used if no user input was given (yet) for a value.\n\nFor more complex container types like array, tables, unions etc, types can also be configured with values from the ``type_config`` field.",
       "type": "object",
       "properties": {
         "type": {
@@ -268,6 +268,11 @@
           "items": {
             "$ref": "#/definitions/StepValueAddress"
           }
+        },
+        "is_constant": {
+          "title": "Is Constant",
+          "default": "Whether this input is a constant and can't be changed by the user.",
+          "type": "boolean"
         }
       },
       "required": [
@@ -387,6 +392,18 @@
       ],
       "additionalProperties": false
     },
+    "ValueMetadata": {
+      "title": "ValueMetadata",
+      "type": "object",
+      "properties": {
+        "origin": {
+          "title": "Origin",
+          "description": "Description of how/where the value was set.",
+          "default": "n/a",
+          "type": "string"
+        }
+      }
+    },
     "ValueHashMarker": {
       "title": "ValueHashMarker",
       "description": "An enumeration.",
@@ -432,11 +449,22 @@
           "default": false,
           "type": "boolean"
         },
-        "origin": {
-          "title": "Origin",
-          "description": "Description of how/where the value was set.",
-          "default": "n/a",
-          "type": "string"
+        "value_metadata": {
+          "title": "Value Metadata",
+          "description": "The metadata of the value itself (not the actual data).",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ValueMetadata"
+            }
+          ]
+        },
+        "aliases": {
+          "title": "Aliases",
+          "description": "Aliases for this value.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         },
         "last_update": {
           "title": "Last Update",
@@ -472,6 +500,8 @@
         "id",
         "is_set",
         "value_schema",
+        "value_metadata",
+        "aliases",
         "value_hash"
       ],
       "additionalProperties": false

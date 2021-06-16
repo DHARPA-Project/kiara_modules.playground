@@ -12,7 +12,7 @@
       
       
       <link rel="icon" href="assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-7.1.5">
+      <meta name="generator" content="mkdocs-1.2.1, mkdocs-material-7.1.8">
     
     
       
@@ -20,10 +20,10 @@
       
     
     
-      <link rel="stylesheet" href="assets/stylesheets/main.bde7dde4.min.css">
+      <link rel="stylesheet" href="assets/stylesheets/main.ca7ac06f.min.css">
       
         
-        <link rel="stylesheet" href="assets/stylesheets/palette.ef6f36e2.min.css">
+        <link rel="stylesheet" href="assets/stylesheets/palette.f1a3b89f.min.css">
         
       
     
@@ -48,6 +48,8 @@
     
     
       
+
+
     
     
   </head>
@@ -80,7 +82,7 @@
     
       <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="." title="kiara_modules.playground" class="md-header__button md-logo" aria-label="kiara_modules.playground" data-md-component="logo">
+    <a href="index.html" title="kiara_modules.playground" class="md-header__button md-logo" aria-label="kiara_modules.playground" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
@@ -173,7 +175,7 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="." title="kiara_modules.playground" class="md-nav__button md-logo" aria-label="kiara_modules.playground" data-md-component="logo">
+    <a href="index.html" title="kiara_modules.playground" class="md-nav__button md-logo" aria-label="kiara_modules.playground" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
@@ -219,7 +221,7 @@
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <a href="." class="md-nav__link md-nav__link--active">
+      <a href="index.html" class="md-nav__link md-nav__link--active">
         Home
       </a>
       
@@ -267,6 +269,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#re-activate-the-development-environment" class="md-nav__link">
+    Re-activate the development environment
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#make-targets" class="md-nav__link">
     make targets
   </a>
@@ -308,7 +317,7 @@
   
   
     <li class="md-nav__item">
-      <a href="modules_list/" class="md-nav__link">
+      <a href="modules_list.html" class="md-nav__link">
         Included modules
       </a>
     </li>
@@ -323,7 +332,7 @@
   
   
     <li class="md-nav__item">
-      <a href="pipelines_list/" class="md-nav__link">
+      <a href="pipelines_list.html" class="md-nav__link">
         Included pipelines
       </a>
     </li>
@@ -359,7 +368,7 @@
   
   
     <li class="md-nav__item">
-      <a href="api_reference/kiara_modules.playground/" class="md-nav__link">
+      <a href="api_reference/kiara_modules.playground.html" class="md-nav__link">
         kiara_modules.playground
       </a>
     </li>
@@ -371,8 +380,32 @@
   
   
     <li class="md-nav__item">
-      <a href="api_reference/kiara_modules.playground.playground/" class="md-nav__link">
+      <a href="api_reference/kiara_modules.playground.metadata_models.html" class="md-nav__link">
+        ➜ metadata_models
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api_reference/kiara_modules.playground.playground.html" class="md-nav__link">
         ➜ playground
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api_reference/kiara_modules.playground.value_types.html" class="md-nav__link">
+        ➜ value_types
       </a>
     </li>
   
@@ -434,6 +467,13 @@
           <li class="md-nav__item">
   <a href="#prepare-development-environment" class="md-nav__link">
     Prepare development environment
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#re-activate-the-development-environment" class="md-nav__link">
+    Re-activate the development environment
   </a>
   
 </li>
@@ -507,7 +547,7 @@
 <p>If you only want to work on the modules, and not the core <em>Kiara</em> codebase, follow the instructions below. Otherwise, please
 check the notes on how to setup a <em>Kiara</em> development environment under (TODO).</p>
 <div class="codehilite"><pre><span></span><code><span class="go">git clone https://github.com/DHARPA-Project/kiara_modules.playground.git</span>
-<span class="go">cd kiara</span>
+<span class="go">cd kiara_modules.playground</span>
 <span class="go">python3 -m venv .venv</span>
 <span class="go">source .venv/bin/activate</span>
 <span class="go">make init</span>
@@ -517,6 +557,14 @@ check the notes on how to setup a <em>Kiara</em> development environment under (
 <div class="codehilite"><pre><span></span><code><span class="go">kiara run playground_example text_1=&quot;xxx&quot; text_2=&quot;yyy&quot;</span>
 <span class="go">...</span>
 <span class="go">...</span>
+</code></pre></div>
+
+<h3 id="re-activate-the-development-environment">Re-activate the development environment<a class="headerlink" href="#re-activate-the-development-environment" title="Permanent link">&para;</a></h3>
+<p>The 'prepare' step from above only has to be done once. After that, to re-enable your virtual environment,
+you'll need to navigate to the directory again (wherever that is, in your case), and run the <code>source</code> command from before again:</p>
+<div class="codehilite"><pre><span></span><code><span class="go">cd path/to/kiara_modules.playground</span>
+<span class="go">source .venv/bin/activate</span>
+<span class="go">kiara --help  # or whatever, point is, kiara should be available for you now</span>
 </code></pre></div>
 
 <h3 id="make-targets"><code>make</code> targets<a class="headerlink" href="#make-targets" title="Permanent link">&para;</a></h3>
@@ -559,7 +607,8 @@ check the notes on how to setup a <em>Kiara</em> development environment under (
     <nav class="md-footer__inner md-grid" aria-label="Footer">
       
       
-        <a href="modules_list/" class="md-footer__link md-footer__link--next" rel="next">
+        
+        <a href="modules_list.html" class="md-footer__link md-footer__link--next" aria-label="Next: Included modules" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
@@ -594,10 +643,10 @@ check the notes on how to setup a <em>Kiara</em> development environment under (
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.instant", "navigation.tracking"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}, "search": "assets/javascripts/workers/search.d351de03.min.js", "version": null}</script>
+    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.instant", "navigation.tracking"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "assets/javascripts/workers/search.b0710199.min.js", "version": null}</script>
     
     
-      <script src="assets/javascripts/bundle.a1609d9a.min.js"></script>
+      <script src="assets/javascripts/bundle.76f349be.min.js"></script>
       
     
   </body>

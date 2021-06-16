@@ -1,6 +1,6 @@
 {
   "title": "ValueSchema",
-  "description": "The schema of a value.\n\nThe schema contains the [ValueType][kiara.data.values.ValueType] of a value, as well as an optional default that\nwill be used if no user input was given (yet) for a value.\n\nFor more complex container types like arrays, tables, unions etc, types can also be configured with values from the ``type_config`` field.",
+  "description": "The schema of a value.\n\nThe schema contains the [ValueType][kiara.data.values.ValueType] of a value, as well as an optional default that\nwill be used if no user input was given (yet) for a value.\n\nFor more complex container types like array, tables, unions etc, types can also be configured with values from the ``type_config`` field.",
   "type": "object",
   "properties": {
     "type": {

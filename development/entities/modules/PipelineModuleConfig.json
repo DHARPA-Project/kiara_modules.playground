@@ -8,6 +8,11 @@
       "description": "Value constants for this module.",
       "type": "object"
     },
+    "defaults": {
+      "title": "Defaults",
+      "description": "Value defaults for this module.",
+      "type": "object"
+    },
     "steps": {
       "title": "Steps",
       "description": "A list of steps/modules of this pipeline, and their connections.",
@@ -93,18 +98,18 @@
       "properties": {
         "module_type": {
           "title": "Module Type",
-          "description": "The name of the module type.",
+          "description": "The module type.",
           "type": "string"
+        },
+        "module_config": {
+          "title": "Module Config",
+          "description": "The configuration for the module.",
+          "type": "object"
         },
         "step_id": {
           "title": "Step Id",
           "description": "The id of the step.",
           "type": "string"
-        },
-        "module_config": {
-          "title": "Module Config",
-          "description": "The configuration for the module (module-type specific).",
-          "type": "object"
         },
         "input_links": {
           "title": "Input Links",
