@@ -152,7 +152,7 @@ class FindLargestComponentsModule(KiaraModule):
             lg_component = max(undir_components, key=len)
             subgraph = input_graph.subgraph(lg_component)
 
-            outputs.set_value(largest_component=subgraph)
+            outputs.set_values(largest_component=subgraph)
 
         if self.get_config_value("number_of_components"):
             input_graph: Graph = inputs.get_value_data("graph")
