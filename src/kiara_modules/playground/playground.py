@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import typing
+import networkx as nx
 
 from kiara import KiaraModule
 from kiara.data.values import ValueSchema, ValueSet
