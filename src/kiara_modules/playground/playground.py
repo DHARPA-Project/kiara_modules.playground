@@ -153,7 +153,7 @@ class FindLargestComponentsModule(KiaraModule):
 
             outputs.set_value(largest_component=subgraph)
 
-        if self.get_config_value("number_of_nodes"):
+        if self.get_config_value("number_of_components"):
             input_graph: Graph = inputs.get_value_data("graph")
             undir_graph = nx.to_undirected(input_graph)
             number_of_components = nx.number_connected_components(undir_graph)
