@@ -52,7 +52,6 @@ repos:
   hooks:
   - id: trailing-whitespace
     exclude: 'setup.cfg'
-  - id: check-added-large-files
   - id: check-ast
   - id: check-json
   - id: check-merge-conflict
