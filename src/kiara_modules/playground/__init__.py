@@ -9,7 +9,7 @@ import os
 from kiara import (
     KiaraEntryPointItem,
     find_kiara_modules_under,
-    find_kiara_pipelines_under,
+    find_pipeline_base_path_for_module,
 )
 
 __author__ = """Markus Binsteiner"""
@@ -19,7 +19,7 @@ log = logging.getLogger("kiara_modules")
 
 modules: KiaraEntryPointItem = (find_kiara_modules_under, ["kiara_modules.playground"])
 pipelines: KiaraEntryPointItem = (
-    find_kiara_pipelines_under,
+    find_pipeline_base_path_for_module,
     ["kiara_modules.playground"],
 )
 
