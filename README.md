@@ -61,7 +61,7 @@ kiara --help  # or whatever, point is, kiara should be available for you now
 ### ``make`` targets
 
 - ``init``: init development project (install project & dev dependencies into virtualenv, as well as pre-commit git hook)
-- ``update-dependencies``: update development dependencies (mainly the core ``kiara`` package from git)
+- ``update-dependencies``: update development dependencies (mainly the core ``kiara`` package from git and the main kiara module packages)
 - ``flake``: run *flake8* tests
 - ``mypy``: run mypy tests
 - ``test``: run unit tests
