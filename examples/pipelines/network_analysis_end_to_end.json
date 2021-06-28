@@ -1,0 +1,74 @@
+{
+  "module_type_name": "network_analysis_end_to_end",
+  "doc": "End-to-end network analysis pipeline, incl. data onboarding.",
+  "steps": [
+    {
+      "module_type": "onboarding.file.import",
+      "step_id": "read_edges_file"
+    },
+    {
+      "module_type": "onboarding.file.import",
+      "step_id": "read_nodes_file"
+    },
+    {
+      "module_type": "table.from_file",
+      "step_id": "load_edges_table",
+      "input_links": {
+        "file": "read_edges_file.file"
+      }
+    },
+    {
+      "module_type": "table.from_file",
+      "step_id": "load_nodes_table",
+      "input_links": {
+        "file": "read_nodes_file.file"
+      }
+    },
+    {
+      "module_type":  "network.graph.from_edges_table",
+      "step_id": "create_graph",
+      "input_links": {
+        "edges_table": "load_edges_table.table"
+      }
+    },
+    {
+      "module_type": "network.graph.augment",
+      "step_id": "augment_graph",
+      "input_links": {
+        "graph": "create_graph.graph",
+        "node_attributes": "load_nodes_table.table"
+      }
+    },
+    {
+      "module_type": "network.graph.properties",
+      "step_id": "extract_graph_properties",
+      "input_links": {
+        "graph": "augment_graph.graph"
+      }
+    },
+    {
+      "module_type": "playground.lena.graph_components",
+      "step_id": "extract_largest_component",
+      "input_links": {
+        "graph": "augment_graph.graph"
+      }
+    }
+  ],
+  "input_aliases": {
+    "read_edges_file__path": "edges_path",
+    "read_nodes_file__path": "nodes_path",
+    "create_graph__source_column": "source_column",
+    "create_graph__target_column": "target_column",
+    "create_graph__weight_column": "weight_column",
+    "create_graph__graph_type": "graph_type",
+    "augment_graph__nodes_attributes": "nodes_attributes",
+    "augment_graph__index_column_name": "nodes_table_index"
+  },
+  "output_aliases": {
+    "extract_graph_properties__number_of_nodes": "number_of_nodes",
+    "extract_graph_properties__number_of_edges": "number_of_edges",
+    "extract_graph_properties__density": "density",
+    "extract_largest_component__largest_component": "largest_component",
+    "extract_largest_component__number_of_components": "number_of_components"
+  }
+}

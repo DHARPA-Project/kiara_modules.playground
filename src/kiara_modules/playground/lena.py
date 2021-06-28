@@ -26,10 +26,10 @@ class FindLargestComponentsModuleConfig(KiaraModuleConfig):
     )
 
 
-class FindLargestComponentsModule(KiaraModule):
+class GrpahComponentsModule(KiaraModule):
 
     _config_cls = FindLargestComponentsModuleConfig
-    _module_type_name = "find_largest_component"
+    _module_type_name = "graph_components"
 
     def create_input_schema(
         self,
@@ -37,7 +37,7 @@ class FindLargestComponentsModule(KiaraModule):
         str, typing.Union[ValueSchema, typing.Mapping[str, typing.Any]]
     ]:
 
-        return {"graph": {"type": "network_graph", "doc": "The network graph."}}
+        return {"graph": {"type": "network.graph", "doc": "The network graph."}}
 
     def create_output_schema(
         self,
@@ -48,7 +48,7 @@ class FindLargestComponentsModule(KiaraModule):
         result = {}
         if self.get_config_value("find_largest_component"):
             result["largest_component"] = {
-                "type": "network_graph",
+                "type": "network.graph",
                 "doc": "A sub-graph of the largest component of the graph.",
             }
 
