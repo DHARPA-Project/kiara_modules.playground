@@ -8,3 +8,10 @@ it is recommended to create a metadata model, because it is much easier overall.
 
 Metadata models must be a sub-class of [kiara.metadata.MetadataModel][kiara.metadata.MetadataModel].
 """
+from kiara import KiaraEntryPointItem
+from kiara.utils.class_loading import find_metadata_schemas_under
+
+metadata_schemas: KiaraEntryPointItem = (
+    find_metadata_schemas_under,
+    ["kiara_modules.playground.metadata_schemas"],
+)

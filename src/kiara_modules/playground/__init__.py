@@ -6,11 +6,7 @@
 import logging
 import os
 
-from kiara import (
-    KiaraEntryPointItem,
-    find_kiara_modules_under,
-    find_pipeline_base_path_for_module,
-)
+from kiara import KiaraEntryPointItem, find_kiara_modules_under
 
 __author__ = """Markus Binsteiner"""
 __email__ = "markus.binsteiner@uni.lu"
@@ -18,10 +14,23 @@ __email__ = "markus.binsteiner@uni.lu"
 log = logging.getLogger("kiara_modules")
 
 modules: KiaraEntryPointItem = (find_kiara_modules_under, ["kiara_modules.playground"])
-pipelines: KiaraEntryPointItem = (
-    find_pipeline_base_path_for_module,
-    ["kiara_modules.playground"],
-)
+
+KIARA_METADATA = {
+    "authors": [{"name": __author__, "email": __email__}],
+    "description": "Kiara modules for: playground",
+    "references": {
+        "source_repo": {
+            "desc": "The module package git repository.",
+            "url": "https://github.com/DHARPA-Project/kiara_modules.playground",
+        },
+        "documentation": {
+            "desc": "The url for the module package documentation.",
+            "url": "https://dharpa.org/kiara_modules.playground/",
+        },
+    },
+    "tags": ["playground"],
+    "labels": {"package": "kiara_modules.playground"},
+}
 
 
 def get_version():
