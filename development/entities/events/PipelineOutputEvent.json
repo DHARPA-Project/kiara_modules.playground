@@ -10,7 +10,9 @@
     "type": {
       "title": "Type",
       "default": "pipeline_output",
-      "const": "pipeline_output",
+      "enum": [
+        "pipeline_output"
+      ],
       "type": "string"
     },
     "updated_pipeline_outputs": {

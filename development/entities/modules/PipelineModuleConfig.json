@@ -51,14 +51,14 @@
         }
       ]
     },
-    "doc": {
-      "title": "Doc",
+    "documentation": {
+      "title": "Documentation",
       "description": "Documentation about what the pipeline does.",
       "default": "-- n/a --",
       "type": "string"
     },
-    "meta": {
-      "title": "Meta",
+    "context": {
+      "title": "Context",
       "description": "Metadata for this workflow.",
       "type": "object"
     }

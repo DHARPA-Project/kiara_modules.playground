@@ -10,7 +10,9 @@
     "type": {
       "title": "Type",
       "default": "step_input",
-      "const": "step_input",
+      "enum": [
+        "step_input"
+      ],
       "type": "string"
     },
     "updated_step_inputs": {

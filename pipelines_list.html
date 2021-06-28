@@ -12,7 +12,7 @@
       
       
       <link rel="icon" href="assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.2.1, mkdocs-material-7.1.8">
+      <meta name="generator" content="mkdocs-1.2.1, mkdocs-material-7.1.9">
     
     
       
@@ -298,27 +298,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#networkgraphfrom_csv" class="md-nav__link">
-    network.graph.from_csv
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#networkgraphload" class="md-nav__link">
-    network.graph.load
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#networknetwork_analysis" class="md-nav__link">
-    network.network_analysis
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#tablefilterby_date" class="md-nav__link">
     table.filter.by_date
   </a>
@@ -388,8 +367,32 @@
   
   
     <li class="md-nav__item">
-      <a href="api_reference/kiara_modules.playground.metadata_models.html" class="md-nav__link">
-        ➜ metadata_models
+      <a href="api_reference/kiara_modules.playground.markus.html" class="md-nav__link">
+        ➜ markus
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api_reference/kiara_modules.playground.metadata_schemas.html" class="md-nav__link">
+        ➜ metadata_schemas
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api_reference/kiara_modules.playground.pipelines.html" class="md-nav__link">
+        ➜ pipelines
       </a>
     </li>
   
@@ -479,27 +482,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#networkgraphfrom_csv" class="md-nav__link">
-    network.graph.from_csv
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#networkgraphload" class="md-nav__link">
-    network.graph.load
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#networknetwork_analysis" class="md-nav__link">
-    network.network_analysis
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#tablefilterby_date" class="md-nav__link">
     table.filter.by_date
   </a>
@@ -542,79 +524,61 @@
 <h2 id="arrayload"><code>array.load</code><a class="headerlink" href="#arrayload" title="Permanent link">&para;</a></h2>
 <div class="codehilite"><pre><span></span><code>╭─ Module: array.load ─────────────────────────────────────────────────────────╮
 │                                                                              │
-│   class          abc.array.Load                                              │
+│  Documentation                                                               │
+│                    Load a column from a table object, returning an array.    │
 │                                                                              │
-│   is pipeline    yes                                                         │
+│  Origin                                                                      │
+│                    Authors   Markus Binsteiner (markus.binsteiner@uni.lu)    │
 │                                                                              │
-│   doc            Load a column from a table object, returning an array.      │
+│  Context                                                                     │
+│                    Tags         pipeline, core, array                        │
+│                    Labels       package: kiara_modules.core                  │
+│                                 pipeline: yes                                │
+│                    References   source_repo:                                 │
+│                                 https://github.com/DHARPA-Project/kiara_…    │
+│                                 documentation:                               │
+│                                 https://dharpa.org/kiara_modules.core/       │
+│                                 module_doc:                                  │
+│                                 https://dharpa.org/kiara_modules.core/pi…    │
 │                                                                              │
-│   source repo    -- n/a --                                                   │
+│  Python class                                                                │
+│                    class_name    ArrayLoadPipelineModule                     │
+│                    module_name   kiara_modules.core.array                    │
+│                    full_name     kiara_modules.core.array.ArrayLoadPipel…    │
 │                                                                              │
-│   config class   kiara.module_config.PipelineModuleConfig                    │
-│                                                                              │
-│   config          ───────────────────────────────────────────────────────    │
-│                    constants        object      Value constants for this     │
-│                                                 module.                      │
-│                    defaults         object      Value defaults for this      │
-│                                                 module.                      │
-│                    steps            array       A list of steps/modules      │
-│                                                 of this pipeline, and        │
-│                                                 their connections.           │
-│                    input_aliases    -- n/a --   A map of input aliases,      │
-│                                                 with the calculated          │
-│                                                 (&lt;step_id&gt;__&lt;input_name&gt;     │
-│                                                 -- double underscore!)       │
-│                                                 name as key, and a           │
-│                                                 string (the resulting        │
-│                                                 workflow input alias) as     │
-│                                                 value. Check the             │
-│                                                 documentation for the        │
-│                                                 config class for which       │
-│                                                 marker strings can be        │
-│                                                 used to automatically        │
-│                                                 create this map if           │
-│                                                 possible.                    │
-│                    output_aliases   -- n/a --   A map of output aliases,     │
-│                                                 with the calculated          │
-│                                                 (&lt;step_id&gt;__&lt;output_nam…     │
-│                                                 -- double underscore!)       │
-│                                                 name as key, and a           │
-│                                                 string (the resulting        │
-│                                                 workflow output alias)       │
-│                                                 as value.  Check the         │
-│                                                 documentation for the        │
-│                                                 config class for which       │
-│                                                 marker strings can be        │
-│                                                 used to automatically        │
-│                                                 create this map if           │
-│                                                 possible.                    │
-│                    doc              string      Documentation about what     │
-│                                                 the pipeline does.           │
-│                    meta             object      Metadata for this            │
-│                                                 workflow.                    │
-│                   ───────────────────────────────────────────────────────    │
-│                                                                              │
-│   src            constants: {}                                               │
-│                  defaults: {}                                                │
-│                  steps:                                                      │
-│                  - module_type: table.load                                   │
-│                    module_config: {}                                         │
-│                    step_id: load_table                                       │
-│                    input_links: {}                                           │
-│                  - module_type: table.cut_column                             │
-│                    module_config: {}                                         │
-│                    step_id: cut_column                                       │
-│                    input_links:                                              │
-│                      table:                                                  │
-│                      - step_id: load_table                                   │
-│                        value_name: table                                     │
-│                        sub_value:                                            │
-│                  input_aliases: auto                                         │
-│                  output_aliases: auto                                        │
-│                  doc: Load a column from a table object, returning an arr…   │
-│                  meta: {}                                                    │
-│                  module_type_name: load                                      │
-│                                                                              │
+│  Pipeline config  ────────────────────────────────────────────────────────   │
+│                    {                                                         │
+│                      &quot;constants&quot;: {},                                        │
+│                      &quot;defaults&quot;: {},                                         │
+│                      &quot;steps&quot;: [                                              │
+│                        {                                                     │
+│                          &quot;module_type&quot;: &quot;table.load&quot;,                        │
+│                          &quot;module_config&quot;: {},                                │
+│                          &quot;step_id&quot;: &quot;load_table&quot;,                            │
+│                          &quot;input_links&quot;: {}                                   │
+│                        },                                                    │
+│                        {                                                     │
+│                          &quot;module_type&quot;: &quot;table.cut_column&quot;,                  │
+│                          &quot;module_config&quot;: {},                                │
+│                          &quot;step_id&quot;: &quot;cut_column&quot;,                            │
+│                          &quot;input_links&quot;: {                                    │
+│                            &quot;table&quot;: [                                        │
+│                              {                                               │
+│                                &quot;step_id&quot;: &quot;load_table&quot;,                      │
+│                                &quot;value_name&quot;: &quot;table&quot;,                        │
+│                                &quot;sub_value&quot;: null                             │
+│                              }                                               │
+│                            ]                                                 │
+│                          }                                                   │
+│                        }                                                     │
+│                      ],                                                      │
+│                      &quot;input_aliases&quot;: &quot;auto&quot;,                                │
+│                      &quot;output_aliases&quot;: &quot;auto&quot;,                               │
+│                      &quot;documentation&quot;: &quot;Load a column from a table object…    │
+│                      &quot;context&quot;: {},                                          │
+│                      &quot;module_type_name&quot;: &quot;load&quot;                              │
+│                    }                                                         │
+│                   ────────────────────────────────────────────────────────   │
 │                                                                              │
 ╰──────────────────────────────────────────────────────────────────────────────╯
 </code></pre></div>
@@ -622,82 +586,67 @@
 <h2 id="logicnand"><code>logic.nand</code><a class="headerlink" href="#logicnand" title="Permanent link">&para;</a></h2>
 <div class="codehilite"><pre><span></span><code>╭─ Module: logic.nand ─────────────────────────────────────────────────────────╮
 │                                                                              │
-│   class          abc.logic.Nand                                              │
+│  Documentation                                                               │
+│                    -- n/a --                                                 │
 │                                                                              │
-│   is pipeline    yes                                                         │
+│  Origin                                                                      │
+│                    Authors   Markus Binsteiner (markus.binsteiner@uni.lu)    │
 │                                                                              │
-│   doc            Returns &#39;False&#39; if both inputs are &#39;True&#39;.                  │
+│  Context                                                                     │
+│                    Tags         pipeline, core                               │
+│                    Labels       package: kiara_modules.core                  │
+│                                 pipeline: yes                                │
+│                    References   source_repo:                                 │
+│                                 https://github.com/DHARPA-Project/kiara_…    │
+│                                 documentation:                               │
+│                                 https://dharpa.org/kiara_modules.core/       │
+│                                 module_doc:                                  │
+│                                 https://dharpa.org/kiara_modules.core/pi…    │
 │                                                                              │
-│   source repo    -- n/a --                                                   │
+│  Python class                                                                │
+│                    class_name    LogicNandPipelineModule                     │
+│                    module_name   kiara_modules.core.logic                    │
+│                    full_name     kiara_modules.core.logic.LogicNandPipel…    │
 │                                                                              │
-│   config class   kiara.module_config.PipelineModuleConfig                    │
-│                                                                              │
-│   config          ───────────────────────────────────────────────────────    │
-│                    constants        object      Value constants for this     │
-│                                                 module.                      │
-│                    defaults         object      Value defaults for this      │
-│                                                 module.                      │
-│                    steps            array       A list of steps/modules      │
-│                                                 of this pipeline, and        │
-│                                                 their connections.           │
-│                    input_aliases    -- n/a --   A map of input aliases,      │
-│                                                 with the calculated          │
-│                                                 (&lt;step_id&gt;__&lt;input_name&gt;     │
-│                                                 -- double underscore!)       │
-│                                                 name as key, and a           │
-│                                                 string (the resulting        │
-│                                                 workflow input alias) as     │
-│                                                 value. Check the             │
-│                                                 documentation for the        │
-│                                                 config class for which       │
-│                                                 marker strings can be        │
-│                                                 used to automatically        │
-│                                                 create this map if           │
-│                                                 possible.                    │
-│                    output_aliases   -- n/a --   A map of output aliases,     │
-│                                                 with the calculated          │
-│                                                 (&lt;step_id&gt;__&lt;output_nam…     │
-│                                                 -- double underscore!)       │
-│                                                 name as key, and a           │
-│                                                 string (the resulting        │
-│                                                 workflow output alias)       │
-│                                                 as value.  Check the         │
-│                                                 documentation for the        │
-│                                                 config class for which       │
-│                                                 marker strings can be        │
-│                                                 used to automatically        │
-│                                                 create this map if           │
-│                                                 possible.                    │
-│                    doc              string      Documentation about what     │
-│                                                 the pipeline does.           │
-│                    meta             object      Metadata for this            │
-│                                                 workflow.                    │
-│                   ───────────────────────────────────────────────────────    │
-│                                                                              │
-│   src            constants: {}                                               │
-│                  defaults: {}                                                │
-│                  steps:                                                      │
-│                  - module_type: logic.and                                    │
-│                    module_config: {}                                         │
-│                    step_id: and                                              │
-│                    input_links: {}                                           │
-│                  - module_type: logic.not                                    │
-│                    module_config: {}                                         │
-│                    step_id: not                                              │
-│                    input_links:                                              │
-│                      a:                                                      │
-│                      - step_id: and                                          │
-│                        value_name: y                                         │
-│                        sub_value:                                            │
-│                  input_aliases:                                              │
-│                    and__a: a                                                 │
-│                    and__b: b                                                 │
-│                  output_aliases:                                             │
-│                    not__y: y                                                 │
-│                  doc: Returns &#39;False&#39; if both inputs are &#39;True&#39;.             │
-│                  meta: {}                                                    │
-│                  module_type_name: nand                                      │
-│                                                                              │
+│  Pipeline config  ────────────────────────────────────────────────────────   │
+│                    {                                                         │
+│                      &quot;constants&quot;: {},                                        │
+│                      &quot;defaults&quot;: {},                                         │
+│                      &quot;steps&quot;: [                                              │
+│                        {                                                     │
+│                          &quot;module_type&quot;: &quot;logic.and&quot;,                         │
+│                          &quot;module_config&quot;: {},                                │
+│                          &quot;step_id&quot;: &quot;and&quot;,                                   │
+│                          &quot;input_links&quot;: {}                                   │
+│                        },                                                    │
+│                        {                                                     │
+│                          &quot;module_type&quot;: &quot;logic.not&quot;,                         │
+│                          &quot;module_config&quot;: {},                                │
+│                          &quot;step_id&quot;: &quot;not&quot;,                                   │
+│                          &quot;input_links&quot;: {                                    │
+│                            &quot;a&quot;: [                                            │
+│                              {                                               │
+│                                &quot;step_id&quot;: &quot;and&quot;,                             │
+│                                &quot;value_name&quot;: &quot;y&quot;,                            │
+│                                &quot;sub_value&quot;: null                             │
+│                              }                                               │
+│                            ]                                                 │
+│                          }                                                   │
+│                        }                                                     │
+│                      ],                                                      │
+│                      &quot;input_aliases&quot;: {                                      │
+│                        &quot;and__a&quot;: &quot;a&quot;,                                        │
+│                        &quot;and__b&quot;: &quot;b&quot;                                         │
+│                      },                                                      │
+│                      &quot;output_aliases&quot;: {                                     │
+│                        &quot;not__y&quot;: &quot;y&quot;                                         │
+│                      },                                                      │
+│                      &quot;documentation&quot;: &quot;-- n/a --&quot;,                           │
+│                      &quot;context&quot;: {},                                          │
+│                      &quot;doc&quot;: &quot;Returns &#39;False&#39; if both inputs are &#39;True&#39;.&quot;,    │
+│                      &quot;module_type_name&quot;: &quot;nand&quot;                              │
+│                    }                                                         │
+│                   ────────────────────────────────────────────────────────   │
 │                                                                              │
 ╰──────────────────────────────────────────────────────────────────────────────╯
 </code></pre></div>
@@ -705,82 +654,67 @@
 <h2 id="logicnor"><code>logic.nor</code><a class="headerlink" href="#logicnor" title="Permanent link">&para;</a></h2>
 <div class="codehilite"><pre><span></span><code>╭─ Module: logic.nor ──────────────────────────────────────────────────────────╮
 │                                                                              │
-│   class          abc.logic.Nor                                               │
+│  Documentation                                                               │
+│                    -- n/a --                                                 │
 │                                                                              │
-│   is pipeline    yes                                                         │
+│  Origin                                                                      │
+│                    Authors   Markus Binsteiner (markus.binsteiner@uni.lu)    │
 │                                                                              │
-│   doc            Returns &#39;True&#39; if both inputs are &#39;False&#39;.                  │
+│  Context                                                                     │
+│                    Tags         pipeline, core                               │
+│                    Labels       package: kiara_modules.core                  │
+│                                 pipeline: yes                                │
+│                    References   source_repo:                                 │
+│                                 https://github.com/DHARPA-Project/kiara_…    │
+│                                 documentation:                               │
+│                                 https://dharpa.org/kiara_modules.core/       │
+│                                 module_doc:                                  │
+│                                 https://dharpa.org/kiara_modules.core/pi…    │
 │                                                                              │
-│   source repo    -- n/a --                                                   │
+│  Python class                                                                │
+│                    class_name    LogicNorPipelineModule                      │
+│                    module_name   kiara_modules.core.logic                    │
+│                    full_name     kiara_modules.core.logic.LogicNorPipeli…    │
 │                                                                              │
-│   config class   kiara.module_config.PipelineModuleConfig                    │
-│                                                                              │
-│   config          ───────────────────────────────────────────────────────    │
-│                    constants        object      Value constants for this     │
-│                                                 module.                      │
-│                    defaults         object      Value defaults for this      │
-│                                                 module.                      │
-│                    steps            array       A list of steps/modules      │
-│                                                 of this pipeline, and        │
-│                                                 their connections.           │
-│                    input_aliases    -- n/a --   A map of input aliases,      │
-│                                                 with the calculated          │
-│                                                 (&lt;step_id&gt;__&lt;input_name&gt;     │
-│                                                 -- double underscore!)       │
-│                                                 name as key, and a           │
-│                                                 string (the resulting        │
-│                                                 workflow input alias) as     │
-│                                                 value. Check the             │
-│                                                 documentation for the        │
-│                                                 config class for which       │
-│                                                 marker strings can be        │
-│                                                 used to automatically        │
-│                                                 create this map if           │
-│                                                 possible.                    │
-│                    output_aliases   -- n/a --   A map of output aliases,     │
-│                                                 with the calculated          │
-│                                                 (&lt;step_id&gt;__&lt;output_nam…     │
-│                                                 -- double underscore!)       │
-│                                                 name as key, and a           │
-│                                                 string (the resulting        │
-│                                                 workflow output alias)       │
-│                                                 as value.  Check the         │
-│                                                 documentation for the        │
-│                                                 config class for which       │
-│                                                 marker strings can be        │
-│                                                 used to automatically        │
-│                                                 create this map if           │
-│                                                 possible.                    │
-│                    doc              string      Documentation about what     │
-│                                                 the pipeline does.           │
-│                    meta             object      Metadata for this            │
-│                                                 workflow.                    │
-│                   ───────────────────────────────────────────────────────    │
-│                                                                              │
-│   src            constants: {}                                               │
-│                  defaults: {}                                                │
-│                  steps:                                                      │
-│                  - module_type: logic.or                                     │
-│                    module_config: {}                                         │
-│                    step_id: or                                               │
-│                    input_links: {}                                           │
-│                  - module_type: logic.not                                    │
-│                    module_config: {}                                         │
-│                    step_id: not                                              │
-│                    input_links:                                              │
-│                      a:                                                      │
-│                      - step_id: or                                           │
-│                        value_name: y                                         │
-│                        sub_value:                                            │
-│                  input_aliases:                                              │
-│                    or__a: a                                                  │
-│                    or__b: b                                                  │
-│                  output_aliases:                                             │
-│                    not__y: y                                                 │
-│                  doc: Returns &#39;True&#39; if both inputs are &#39;False&#39;.             │
-│                  meta: {}                                                    │
-│                  module_type_name: nor                                       │
-│                                                                              │
+│  Pipeline config  ────────────────────────────────────────────────────────   │
+│                    {                                                         │
+│                      &quot;constants&quot;: {},                                        │
+│                      &quot;defaults&quot;: {},                                         │
+│                      &quot;steps&quot;: [                                              │
+│                        {                                                     │
+│                          &quot;module_type&quot;: &quot;logic.or&quot;,                          │
+│                          &quot;module_config&quot;: {},                                │
+│                          &quot;step_id&quot;: &quot;or&quot;,                                    │
+│                          &quot;input_links&quot;: {}                                   │
+│                        },                                                    │
+│                        {                                                     │
+│                          &quot;module_type&quot;: &quot;logic.not&quot;,                         │
+│                          &quot;module_config&quot;: {},                                │
+│                          &quot;step_id&quot;: &quot;not&quot;,                                   │
+│                          &quot;input_links&quot;: {                                    │
+│                            &quot;a&quot;: [                                            │
+│                              {                                               │
+│                                &quot;step_id&quot;: &quot;or&quot;,                              │
+│                                &quot;value_name&quot;: &quot;y&quot;,                            │
+│                                &quot;sub_value&quot;: null                             │
+│                              }                                               │
+│                            ]                                                 │
+│                          }                                                   │
+│                        }                                                     │
+│                      ],                                                      │
+│                      &quot;input_aliases&quot;: {                                      │
+│                        &quot;or__a&quot;: &quot;a&quot;,                                         │
+│                        &quot;or__b&quot;: &quot;b&quot;                                          │
+│                      },                                                      │
+│                      &quot;output_aliases&quot;: {                                     │
+│                        &quot;not__y&quot;: &quot;y&quot;                                         │
+│                      },                                                      │
+│                      &quot;documentation&quot;: &quot;-- n/a --&quot;,                           │
+│                      &quot;context&quot;: {},                                          │
+│                      &quot;doc&quot;: &quot;Returns &#39;True&#39; if both inputs are &#39;False&#39;.&quot;,    │
+│                      &quot;module_type_name&quot;: &quot;nor&quot;                               │
+│                    }                                                         │
+│                   ────────────────────────────────────────────────────────   │
 │                                                                              │
 ╰──────────────────────────────────────────────────────────────────────────────╯
 </code></pre></div>
@@ -788,412 +722,82 @@
 <h2 id="logicxor"><code>logic.xor</code><a class="headerlink" href="#logicxor" title="Permanent link">&para;</a></h2>
 <div class="codehilite"><pre><span></span><code>╭─ Module: logic.xor ──────────────────────────────────────────────────────────╮
 │                                                                              │
-│   class          abc.logic.Xor                                               │
+│  Documentation                                                               │
+│                    -- n/a --                                                 │
 │                                                                              │
-│   is pipeline    yes                                                         │
+│  Origin                                                                      │
+│                    Authors   Markus Binsteiner (markus.binsteiner@uni.lu)    │
 │                                                                              │
-│   doc            Returns &#39;True&#39; if exactly one of it&#39;s two inputs is         │
-│                  &#39;True&#39;.                                                     │
+│  Context                                                                     │
+│                    Tags         pipeline, core                               │
+│                    Labels       package: kiara_modules.core                  │
+│                                 pipeline: yes                                │
+│                    References   source_repo:                                 │
+│                                 https://github.com/DHARPA-Project/kiara_…    │
+│                                 documentation:                               │
+│                                 https://dharpa.org/kiara_modules.core/       │
+│                                 module_doc:                                  │
+│                                 https://dharpa.org/kiara_modules.core/pi…    │
 │                                                                              │
-│   source repo    -- n/a --                                                   │
+│  Python class                                                                │
+│                    class_name    LogicXorPipelineModule                      │
+│                    module_name   kiara_modules.core.logic                    │
+│                    full_name     kiara_modules.core.logic.LogicXorPipeli…    │
 │                                                                              │
-│   config class   kiara.module_config.PipelineModuleConfig                    │
-│                                                                              │
-│   config          ───────────────────────────────────────────────────────    │
-│                    constants        object      Value constants for this     │
-│                                                 module.                      │
-│                    defaults         object      Value defaults for this      │
-│                                                 module.                      │
-│                    steps            array       A list of steps/modules      │
-│                                                 of this pipeline, and        │
-│                                                 their connections.           │
-│                    input_aliases    -- n/a --   A map of input aliases,      │
-│                                                 with the calculated          │
-│                                                 (&lt;step_id&gt;__&lt;input_name&gt;     │
-│                                                 -- double underscore!)       │
-│                                                 name as key, and a           │
-│                                                 string (the resulting        │
-│                                                 workflow input alias) as     │
-│                                                 value. Check the             │
-│                                                 documentation for the        │
-│                                                 config class for which       │
-│                                                 marker strings can be        │
-│                                                 used to automatically        │
-│                                                 create this map if           │
-│                                                 possible.                    │
-│                    output_aliases   -- n/a --   A map of output aliases,     │
-│                                                 with the calculated          │
-│                                                 (&lt;step_id&gt;__&lt;output_nam…     │
-│                                                 -- double underscore!)       │
-│                                                 name as key, and a           │
-│                                                 string (the resulting        │
-│                                                 workflow output alias)       │
-│                                                 as value.  Check the         │
-│                                                 documentation for the        │
-│                                                 config class for which       │
-│                                                 marker strings can be        │
-│                                                 used to automatically        │
-│                                                 create this map if           │
-│                                                 possible.                    │
-│                    doc              string      Documentation about what     │
-│                                                 the pipeline does.           │
-│                    meta             object      Metadata for this            │
-│                                                 workflow.                    │
-│                   ───────────────────────────────────────────────────────    │
-│                                                                              │
-│   src            constants: {}                                               │
-│                  defaults: {}                                                │
-│                  steps:                                                      │
-│                  - module_type: logic.or                                     │
-│                    module_config: {}                                         │
-│                    step_id: or                                               │
-│                    input_links: {}                                           │
-│                  - module_type: logic.nand                                   │
-│                    module_config: {}                                         │
-│                    step_id: nand                                             │
-│                    input_links: {}                                           │
-│                  - module_type: logic.and                                    │
-│                    module_config: {}                                         │
-│                    step_id: and                                              │
-│                    input_links:                                              │
-│                      a:                                                      │
-│                      - step_id: or                                           │
-│                        value_name: y                                         │
-│                        sub_value:                                            │
-│                      b:                                                      │
-│                      - step_id: nand                                         │
-│                        value_name: y                                         │
-│                        sub_value:                                            │
-│                  input_aliases:                                              │
-│                    or__a: a                                                  │
-│                    or__b: b                                                  │
-│                    nand__a: a                                                │
-│                    nand__b: b                                                │
-│                  output_aliases:                                             │
-│                    and__y: y                                                 │
-│                  doc: Returns &#39;True&#39; if exactly one of it&#39;s two inputs is…   │
-│                  meta: {}                                                    │
-│                  module_type_name: xor                                       │
-│                                                                              │
-│                                                                              │
-╰──────────────────────────────────────────────────────────────────────────────╯
-</code></pre></div>
-
-<h2 id="networkgraphfrom_csv"><code>network.graph.from_csv</code><a class="headerlink" href="#networkgraphfrom_csv" title="Permanent link">&para;</a></h2>
-<div class="codehilite"><pre><span></span><code>╭─ Module: network.graph.from_csv ─────────────────────────────────────────────╮
-│                                                                              │
-│   class          abc.network.graph.FromCsv                                   │
-│                                                                              │
-│   is pipeline    yes                                                         │
-│                                                                              │
-│   doc            Create a network graph from a a csv file that contains      │
-│                  edges. You can indicate another csv file if you have node   │
-│                  attributes.                                                 │
-│                                                                              │
-│   source repo    -- n/a --                                                   │
-│                                                                              │
-│   config class   kiara.module_config.PipelineModuleConfig                    │
-│                                                                              │
-│   config          ───────────────────────────────────────────────────────    │
-│                    constants        object      Value constants for this     │
-│                                                 module.                      │
-│                    defaults         object      Value defaults for this      │
-│                                                 module.                      │
-│                    steps            array       A list of steps/modules      │
-│                                                 of this pipeline, and        │
-│                                                 their connections.           │
-│                    input_aliases    -- n/a --   A map of input aliases,      │
-│                                                 with the calculated          │
-│                                                 (&lt;step_id&gt;__&lt;input_name&gt;     │
-│                                                 -- double underscore!)       │
-│                                                 name as key, and a           │
-│                                                 string (the resulting        │
-│                                                 workflow input alias) as     │
-│                                                 value. Check the             │
-│                                                 documentation for the        │
-│                                                 config class for which       │
-│                                                 marker strings can be        │
-│                                                 used to automatically        │
-│                                                 create this map if           │
-│                                                 possible.                    │
-│                    output_aliases   -- n/a --   A map of output aliases,     │
-│                                                 with the calculated          │
-│                                                 (&lt;step_id&gt;__&lt;output_nam…     │
-│                                                 -- double underscore!)       │
-│                                                 name as key, and a           │
-│                                                 string (the resulting        │
-│                                                 workflow output alias)       │
-│                                                 as value.  Check the         │
-│                                                 documentation for the        │
-│                                                 config class for which       │
-│                                                 marker strings can be        │
-│                                                 used to automatically        │
-│                                                 create this map if           │
-│                                                 possible.                    │
-│                    doc              string      Documentation about what     │
-│                                                 the pipeline does.           │
-│                    meta             object      Metadata for this            │
-│                                                 workflow.                    │
-│                   ───────────────────────────────────────────────────────    │
-│                                                                              │
-│   src            constants: {}                                               │
-│                  defaults: {}                                                │
-│                  steps:                                                      │
-│                  - module_type: onboarding.file.import                       │
-│                    module_config: {}                                         │
-│                    step_id: read_edges_file                                  │
-│                    input_links: {}                                           │
-│                  - module_type: onboarding.file.import                       │
-│                    module_config: {}                                         │
-│                    step_id: read_nodes_file                                  │
-│                    input_links: {}                                           │
-│                  - module_type: table.from_file                              │
-│                    module_config: {}                                         │
-│                    step_id: load_edges_table                                 │
-│                    input_links:                                              │
-│                      file:                                                   │
-│                      - step_id: read_edges_file                              │
-│                        value_name: file                                      │
-│                        sub_value:                                            │
-│                  - module_type: table.from_file                              │
-│                    module_config: {}                                         │
-│                    step_id: load_nodes_table                                 │
-│                    input_links:                                              │
-│                      file:                                                   │
-│                      - step_id: read_nodes_file                              │
-│                        value_name: file                                      │
-│                        sub_value:                                            │
-│                  - module_type: network.graph.from_edges_table               │
-│                    module_config: {}                                         │
-│                    step_id: create_graph                                     │
-│                    input_links:                                              │
-│                      edges_table:                                            │
-│                      - step_id: load_edges_table                             │
-│                        value_name: table                                     │
-│                        sub_value:                                            │
-│                  - module_type: network.graph.augment                        │
-│                    module_config: {}                                         │
-│                    step_id: augment_graph                                    │
-│                    input_links:                                              │
-│                      graph:                                                  │
-│                      - step_id: create_graph                                 │
-│                        value_name: graph                                     │
-│                        sub_value:                                            │
-│                      node_attributes:                                        │
-│                      - step_id: load_nodes_table                             │
-│                        value_name: table                                     │
-│                        sub_value:                                            │
-│                  input_aliases:                                              │
-│                    read_edges_file__path: edges_path                         │
-│                    read_nodes_file__path: nodes_path                         │
-│                    create_graph__source_column: source_column                │
-│                    create_graph__target_column: target_column                │
-│                    create_graph__weight_column: weight_column                │
-│                    create_graph__graph_type: graph_type                      │
-│                    augment_graph__nodes_attributes: nodes_attributes         │
-│                    augment_graph__index_column_name: nodes_table_index       │
-│                  output_aliases:                                             │
-│                    augment_graph__graph: graph                               │
-│                  doc: Create a network graph from a a csv file that conta…   │
-│                    another csv file if you have node attributes.             │
-│                  meta: {}                                                    │
-│                  module_type_name: from_csv                                  │
-│                                                                              │
-│                                                                              │
-╰──────────────────────────────────────────────────────────────────────────────╯
-</code></pre></div>
-
-<h2 id="networkgraphload"><code>network.graph.load</code><a class="headerlink" href="#networkgraphload" title="Permanent link">&para;</a></h2>
-<div class="codehilite"><pre><span></span><code>╭─ Module: network.graph.load ─────────────────────────────────────────────────╮
-│                                                                              │
-│   class          abc.network.graph.Load                                      │
-│                                                                              │
-│   is pipeline    yes                                                         │
-│                                                                              │
-│   doc            Load a network graph object.                                │
-│                                                                              │
-│   source repo    -- n/a --                                                   │
-│                                                                              │
-│   config class   kiara.module_config.PipelineModuleConfig                    │
-│                                                                              │
-│   config          ───────────────────────────────────────────────────────    │
-│                    constants        object      Value constants for this     │
-│                                                 module.                      │
-│                    defaults         object      Value defaults for this      │
-│                                                 module.                      │
-│                    steps            array       A list of steps/modules      │
-│                                                 of this pipeline, and        │
-│                                                 their connections.           │
-│                    input_aliases    -- n/a --   A map of input aliases,      │
-│                                                 with the calculated          │
-│                                                 (&lt;step_id&gt;__&lt;input_name&gt;     │
-│                                                 -- double underscore!)       │
-│                                                 name as key, and a           │
-│                                                 string (the resulting        │
-│                                                 workflow input alias) as     │
-│                                                 value. Check the             │
-│                                                 documentation for the        │
-│                                                 config class for which       │
-│                                                 marker strings can be        │
-│                                                 used to automatically        │
-│                                                 create this map if           │
-│                                                 possible.                    │
-│                    output_aliases   -- n/a --   A map of output aliases,     │
-│                                                 with the calculated          │
-│                                                 (&lt;step_id&gt;__&lt;output_nam…     │
-│                                                 -- double underscore!)       │
-│                                                 name as key, and a           │
-│                                                 string (the resulting        │
-│                                                 workflow output alias)       │
-│                                                 as value.  Check the         │
-│                                                 documentation for the        │
-│                                                 config class for which       │
-│                                                 marker strings can be        │
-│                                                 used to automatically        │
-│                                                 create this map if           │
-│                                                 possible.                    │
-│                    doc              string      Documentation about what     │
-│                                                 the pipeline does.           │
-│                    meta             object      Metadata for this            │
-│                                                 workflow.                    │
-│                   ───────────────────────────────────────────────────────    │
-│                                                                              │
-│   src            constants: {}                                               │
-│                  defaults: {}                                                │
-│                  steps:                                                      │
-│                  - module_type: table.load                                   │
-│                    module_config: {}                                         │
-│                    step_id: load_edges_table                                 │
-│                    input_links: {}                                           │
-│                  - module_type: table.load                                   │
-│                    module_config: {}                                         │
-│                    step_id: load_nodes_table                                 │
-│                    input_links: {}                                           │
-│                  - module_type: network.graph.from_edges_table               │
-│                    module_config: {}                                         │
-│                    step_id: create_graph                                     │
-│                    input_links:                                              │
-│                      edges_table:                                            │
-│                      - step_id: load_edges_table                             │
-│                        value_name: table                                     │
-│                        sub_value:                                            │
-│                  - module_type: network.graph.augment                        │
-│                    module_config: {}                                         │
-│                    step_id: augment_graph                                    │
-│                    input_links:                                              │
-│                      graph:                                                  │
-│                      - step_id: create_graph                                 │
-│                        value_name: graph                                     │
-│                        sub_value:                                            │
-│                      node_attributes:                                        │
-│                      - step_id: load_nodes_table                             │
-│                        value_name: table                                     │
-│                        sub_value:                                            │
-│                  input_aliases:                                              │
-│                    load_edges_table__path: edges_path                        │
-│                    load_edges_table__format: edges_file_format               │
-│                    load_nodes_table__path: nodes_path                        │
-│                    load_nodes_table__format: nodes_file_format               │
-│                    create_graph__source_column: source_column                │
-│                    create_graph__target_column: target_column                │
-│                    create_graph__weight_column: weight_column                │
-│                    create_graph__graph_type: graph_type                      │
-│                    augment_graph__nodes_attributes: nodes_attributes         │
-│                    augment_graph__index_column_name: nodes_table_index       │
-│                  output_aliases:                                             │
-│                    augment_graph__graph: graph                               │
-│                  doc: Load a network graph object.                           │
-│                  meta: {}                                                    │
-│                  module_type_name: load                                      │
-│                                                                              │
-│                                                                              │
-╰──────────────────────────────────────────────────────────────────────────────╯
-</code></pre></div>
-
-<h2 id="networknetwork_analysis"><code>network.network_analysis</code><a class="headerlink" href="#networknetwork_analysis" title="Permanent link">&para;</a></h2>
-<div class="codehilite"><pre><span></span><code>╭─ Module: network.network_analysis ───────────────────────────────────────────╮
-│                                                                              │
-│   class          abc.network.NetworkAnalysis                                 │
-│                                                                              │
-│   is pipeline    yes                                                         │
-│                                                                              │
-│   doc            First iteration of a network analysis pipeline. This        │
-│                  doesn&#39;t do much yet.                                        │
-│                                                                              │
-│   source repo    -- n/a --                                                   │
-│                                                                              │
-│   config class   kiara.module_config.PipelineModuleConfig                    │
-│                                                                              │
-│   config          ───────────────────────────────────────────────────────    │
-│                    constants        object      Value constants for this     │
-│                                                 module.                      │
-│                    defaults         object      Value defaults for this      │
-│                                                 module.                      │
-│                    steps            array       A list of steps/modules      │
-│                                                 of this pipeline, and        │
-│                                                 their connections.           │
-│                    input_aliases    -- n/a --   A map of input aliases,      │
-│                                                 with the calculated          │
-│                                                 (&lt;step_id&gt;__&lt;input_name&gt;     │
-│                                                 -- double underscore!)       │
-│                                                 name as key, and a           │
-│                                                 string (the resulting        │
-│                                                 workflow input alias) as     │
-│                                                 value. Check the             │
-│                                                 documentation for the        │
-│                                                 config class for which       │
-│                                                 marker strings can be        │
-│                                                 used to automatically        │
-│                                                 create this map if           │
-│                                                 possible.                    │
-│                    output_aliases   -- n/a --   A map of output aliases,     │
-│                                                 with the calculated          │
-│                                                 (&lt;step_id&gt;__&lt;output_nam…     │
-│                                                 -- double underscore!)       │
-│                                                 name as key, and a           │
-│                                                 string (the resulting        │
-│                                                 workflow output alias)       │
-│                                                 as value.  Check the         │
-│                                                 documentation for the        │
-│                                                 config class for which       │
-│                                                 marker strings can be        │
-│                                                 used to automatically        │
-│                                                 create this map if           │
-│                                                 possible.                    │
-│                    doc              string      Documentation about what     │
-│                                                 the pipeline does.           │
-│                    meta             object      Metadata for this            │
-│                                                 workflow.                    │
-│                   ───────────────────────────────────────────────────────    │
-│                                                                              │
-│   src            constants: {}                                               │
-│                  defaults: {}                                                │
-│                  steps:                                                      │
-│                  - module_type: network.graphs.find_shortest_path            │
-│                    module_config:                                            │
-│                      mode: single-pair                                       │
-│                    step_id: find_shortest_path                               │
-│                    input_links: {}                                           │
-│                  - module_type: network.graphs.graph_properties              │
-│                    module_config:                                            │
-│                      density: false                                          │
-│                    step_id: extract_properties                               │
-│                    input_links: {}                                           │
-│                  input_aliases:                                              │
-│                    find_shortest_path__graph: graph                          │
-│                    extract_properties__graph: graph                          │
-│                    find_shortest_path__source_node: shortest_path_source_…   │
-│                    find_shortest_path__target_node: shortest_path_target_…   │
-│                  output_aliases:                                             │
-│                    find_shortest_path__path: shortest_path                   │
-│                    extract_properties__largest_component: largest_compone…   │
-│                    extract_properties__density_largest_component: density…   │
-│                    extract_properties__number_of_nodes: number_of_nodes      │
-│                    extract_properties__number_of_edges: number_of_edges      │
-│                  doc: First iteration of a network analysis pipeline. Thi…   │
-│                  meta: {}                                                    │
-│                  module_type_name: network_analysis                          │
-│                                                                              │
+│  Pipeline config  ────────────────────────────────────────────────────────   │
+│                    {                                                         │
+│                      &quot;constants&quot;: {},                                        │
+│                      &quot;defaults&quot;: {},                                         │
+│                      &quot;steps&quot;: [                                              │
+│                        {                                                     │
+│                          &quot;module_type&quot;: &quot;logic.or&quot;,                          │
+│                          &quot;module_config&quot;: {},                                │
+│                          &quot;step_id&quot;: &quot;or&quot;,                                    │
+│                          &quot;input_links&quot;: {}                                   │
+│                        },                                                    │
+│                        {                                                     │
+│                          &quot;module_type&quot;: &quot;logic.nand&quot;,                        │
+│                          &quot;module_config&quot;: {},                                │
+│                          &quot;step_id&quot;: &quot;nand&quot;,                                  │
+│                          &quot;input_links&quot;: {}                                   │
+│                        },                                                    │
+│                        {                                                     │
+│                          &quot;module_type&quot;: &quot;logic.and&quot;,                         │
+│                          &quot;module_config&quot;: {},                                │
+│                          &quot;step_id&quot;: &quot;and&quot;,                                   │
+│                          &quot;input_links&quot;: {                                    │
+│                            &quot;a&quot;: [                                            │
+│                              {                                               │
+│                                &quot;step_id&quot;: &quot;or&quot;,                              │
+│                                &quot;value_name&quot;: &quot;y&quot;,                            │
+│                                &quot;sub_value&quot;: null                             │
+│                              }                                               │
+│                            ],                                                │
+│                            &quot;b&quot;: [                                            │
+│                              {                                               │
+│                                &quot;step_id&quot;: &quot;nand&quot;,                            │
+│                                &quot;value_name&quot;: &quot;y&quot;,                            │
+│                                &quot;sub_value&quot;: null                             │
+│                              }                                               │
+│                            ]                                                 │
+│                          }                                                   │
+│                        }                                                     │
+│                      ],                                                      │
+│                      &quot;input_aliases&quot;: {                                      │
+│                        &quot;or__a&quot;: &quot;a&quot;,                                         │
+│                        &quot;or__b&quot;: &quot;b&quot;,                                         │
+│                        &quot;nand__a&quot;: &quot;a&quot;,                                       │
+│                        &quot;nand__b&quot;: &quot;b&quot;                                        │
+│                      },                                                      │
+│                      &quot;output_aliases&quot;: {                                     │
+│                        &quot;and__y&quot;: &quot;y&quot;                                         │
+│                      },                                                      │
+│                      &quot;documentation&quot;: &quot;-- n/a --&quot;,                           │
+│                      &quot;context&quot;: {},                                          │
+│                      &quot;doc&quot;: &quot;Returns &#39;True&#39; if exactly one of it&#39;s two i…    │
+│                      &quot;module_type_name&quot;: &quot;xor&quot;                               │
+│                    }                                                         │
+│                   ────────────────────────────────────────────────────────   │
 │                                                                              │
 ╰──────────────────────────────────────────────────────────────────────────────╯
 </code></pre></div>
@@ -1201,86 +805,71 @@
 <h2 id="tablefilterby_date"><code>table.filter.by_date</code><a class="headerlink" href="#tablefilterby_date" title="Permanent link">&para;</a></h2>
 <div class="codehilite"><pre><span></span><code>╭─ Module: table.filter.by_date ───────────────────────────────────────────────╮
 │                                                                              │
-│   class          abc.table.filter.ByDate                                     │
+│  Documentation                                                               │
+│                    -- n/a --                                                 │
 │                                                                              │
-│   is pipeline    yes                                                         │
+│  Origin                                                                      │
+│                    Authors   Markus Binsteiner (markus.binsteiner@uni.lu)    │
 │                                                                              │
-│   doc            Filter a table by a date or date range.                     │
+│  Context                                                                     │
+│                    Tags         pipeline, core                               │
+│                    Labels       package: kiara_modules.core                  │
+│                                 pipeline: yes                                │
+│                    References   source_repo:                                 │
+│                                 https://github.com/DHARPA-Project/kiara_…    │
+│                                 documentation:                               │
+│                                 https://dharpa.org/kiara_modules.core/       │
+│                                 module_doc:                                  │
+│                                 https://dharpa.org/kiara_modules.core/pi…    │
 │                                                                              │
-│   source repo    -- n/a --                                                   │
+│  Python class                                                                │
+│                    class_name    TableFilterBy_datePipelineModule            │
+│                    module_name   kiara_modules.core.table                    │
+│                    full_name     kiara_modules.core.table.TableFilterBy_…    │
 │                                                                              │
-│   config class   kiara.module_config.PipelineModuleConfig                    │
-│                                                                              │
-│   config          ───────────────────────────────────────────────────────    │
-│                    constants        object      Value constants for this     │
-│                                                 module.                      │
-│                    defaults         object      Value defaults for this      │
-│                                                 module.                      │
-│                    steps            array       A list of steps/modules      │
-│                                                 of this pipeline, and        │
-│                                                 their connections.           │
-│                    input_aliases    -- n/a --   A map of input aliases,      │
-│                                                 with the calculated          │
-│                                                 (&lt;step_id&gt;__&lt;input_name&gt;     │
-│                                                 -- double underscore!)       │
-│                                                 name as key, and a           │
-│                                                 string (the resulting        │
-│                                                 workflow input alias) as     │
-│                                                 value. Check the             │
-│                                                 documentation for the        │
-│                                                 config class for which       │
-│                                                 marker strings can be        │
-│                                                 used to automatically        │
-│                                                 create this map if           │
-│                                                 possible.                    │
-│                    output_aliases   -- n/a --   A map of output aliases,     │
-│                                                 with the calculated          │
-│                                                 (&lt;step_id&gt;__&lt;output_nam…     │
-│                                                 -- double underscore!)       │
-│                                                 name as key, and a           │
-│                                                 string (the resulting        │
-│                                                 workflow output alias)       │
-│                                                 as value.  Check the         │
-│                                                 documentation for the        │
-│                                                 config class for which       │
-│                                                 marker strings can be        │
-│                                                 used to automatically        │
-│                                                 create this map if           │
-│                                                 possible.                    │
-│                    doc              string      Documentation about what     │
-│                                                 the pipeline does.           │
-│                    meta             object      Metadata for this            │
-│                                                 workflow.                    │
-│                   ───────────────────────────────────────────────────────    │
-│                                                                              │
-│   src            constants: {}                                               │
-│                  defaults: {}                                                │
-│                  steps:                                                      │
-│                  - module_type: table.map_column                             │
-│                    module_config:                                            │
-│                      module_type: date.range_check                           │
-│                      input_name: date                                        │
-│                    step_id: create_filter_mask                               │
-│                    input_links: {}                                           │
-│                  - module_type: table.filter.with_mask                       │
-│                    module_config: {}                                         │
-│                    step_id: filtered_table                                   │
-│                    input_links:                                              │
-│                      mask:                                                   │
-│                      - step_id: create_filter_mask                           │
-│                        value_name: array                                     │
-│                        sub_value:                                            │
-│                  input_aliases:                                              │
-│                    create_filter_mask__table: table                          │
-│                    create_filter_mask__column_name: column_name              │
-│                    create_filter_mask__earliest: earliest                    │
-│                    create_filter_mask__latest: latest                        │
-│                    filtered_table__table: table                              │
-│                  output_aliases: auto                                        │
-│                  doc: Filter a table by a date or date range.                │
-│                  meta: {}                                                    │
-│                  module_type_name: by_date                                   │
-│                                                                              │
+│  Pipeline config  ────────────────────────────────────────────────────────   │
+│                    {                                                         │
+│                      &quot;constants&quot;: {},                                        │
+│                      &quot;defaults&quot;: {},                                         │
+│                      &quot;steps&quot;: [                                              │
+│                        {                                                     │
+│                          &quot;module_type&quot;: &quot;table.map_column&quot;,                  │
+│                          &quot;module_config&quot;: {                                  │
+│                            &quot;module_type&quot;: &quot;date.range_check&quot;,                │
+│                            &quot;input_name&quot;: &quot;date&quot;                              │
+│                          },                                                  │
+│                          &quot;step_id&quot;: &quot;create_filter_mask&quot;,                    │
+│                          &quot;input_links&quot;: {}                                   │
+│                        },                                                    │
+│                        {                                                     │
+│                          &quot;module_type&quot;: &quot;table.filter.with_mask&quot;,            │
+│                          &quot;module_config&quot;: {},                                │
+│                          &quot;step_id&quot;: &quot;filtered_table&quot;,                        │
+│                          &quot;input_links&quot;: {                                    │
+│                            &quot;mask&quot;: [                                         │
+│                              {                                               │
+│                                &quot;step_id&quot;: &quot;create_filter_mask&quot;,              │
+│                                &quot;value_name&quot;: &quot;array&quot;,                        │
+│                                &quot;sub_value&quot;: null                             │
+│                              }                                               │
+│                            ]                                                 │
+│                          }                                                   │
+│                        }                                                     │
+│                      ],                                                      │
+│                      &quot;input_aliases&quot;: {                                      │
+│                        &quot;create_filter_mask__table&quot;: &quot;table&quot;,                 │
+│                        &quot;create_filter_mask__column_name&quot;: &quot;column_name&quot;,     │
+│                        &quot;create_filter_mask__earliest&quot;: &quot;earliest&quot;,           │
+│                        &quot;create_filter_mask__latest&quot;: &quot;latest&quot;,               │
+│                        &quot;filtered_table__table&quot;: &quot;table&quot;                      │
+│                      },                                                      │
+│                      &quot;output_aliases&quot;: &quot;auto&quot;,                               │
+│                      &quot;documentation&quot;: &quot;-- n/a --&quot;,                           │
+│                      &quot;context&quot;: {},                                          │
+│                      &quot;doc&quot;: &quot;Filter a table by a date or date range.&quot;,       │
+│                      &quot;module_type_name&quot;: &quot;by_date&quot;                           │
+│                    }                                                         │
+│                   ────────────────────────────────────────────────────────   │
 │                                                                              │
 ╰──────────────────────────────────────────────────────────────────────────────╯
 </code></pre></div>
@@ -1288,79 +877,62 @@
 <h2 id="tablefrom_csv"><code>table.from_csv</code><a class="headerlink" href="#tablefrom_csv" title="Permanent link">&para;</a></h2>
 <div class="codehilite"><pre><span></span><code>╭─ Module: table.from_csv ─────────────────────────────────────────────────────╮
 │                                                                              │
-│   class          abc.table.FromCsv                                           │
+│  Documentation                                                               │
+│                    -- n/a --                                                 │
 │                                                                              │
-│   is pipeline    yes                                                         │
+│  Origin                                                                      │
+│                    Authors   Markus Binsteiner (markus.binsteiner@uni.lu)    │
 │                                                                              │
-│   doc            Import a csv file and create a table from it.               │
+│  Context                                                                     │
+│                    Tags         pipeline, core                               │
+│                    Labels       package: kiara_modules.core                  │
+│                                 pipeline: yes                                │
+│                    References   source_repo:                                 │
+│                                 https://github.com/DHARPA-Project/kiara_…    │
+│                                 documentation:                               │
+│                                 https://dharpa.org/kiara_modules.core/       │
+│                                 module_doc:                                  │
+│                                 https://dharpa.org/kiara_modules.core/pi…    │
 │                                                                              │
-│   source repo    -- n/a --                                                   │
+│  Python class                                                                │
+│                    class_name    TableFrom_csvPipelineModule                 │
+│                    module_name   kiara_modules.core.table                    │
+│                    full_name     kiara_modules.core.table.TableFrom_csvP…    │
 │                                                                              │
-│   config class   kiara.module_config.PipelineModuleConfig                    │
-│                                                                              │
-│   config          ───────────────────────────────────────────────────────    │
-│                    constants        object      Value constants for this     │
-│                                                 module.                      │
-│                    defaults         object      Value defaults for this      │
-│                                                 module.                      │
-│                    steps            array       A list of steps/modules      │
-│                                                 of this pipeline, and        │
-│                                                 their connections.           │
-│                    input_aliases    -- n/a --   A map of input aliases,      │
-│                                                 with the calculated          │
-│                                                 (&lt;step_id&gt;__&lt;input_name&gt;     │
-│                                                 -- double underscore!)       │
-│                                                 name as key, and a           │
-│                                                 string (the resulting        │
-│                                                 workflow input alias) as     │
-│                                                 value. Check the             │
-│                                                 documentation for the        │
-│                                                 config class for which       │
-│                                                 marker strings can be        │
-│                                                 used to automatically        │
-│                                                 create this map if           │
-│                                                 possible.                    │
-│                    output_aliases   -- n/a --   A map of output aliases,     │
-│                                                 with the calculated          │
-│                                                 (&lt;step_id&gt;__&lt;output_nam…     │
-│                                                 -- double underscore!)       │
-│                                                 name as key, and a           │
-│                                                 string (the resulting        │
-│                                                 workflow output alias)       │
-│                                                 as value.  Check the         │
-│                                                 documentation for the        │
-│                                                 config class for which       │
-│                                                 marker strings can be        │
-│                                                 used to automatically        │
-│                                                 create this map if           │
-│                                                 possible.                    │
-│                    doc              string      Documentation about what     │
-│                                                 the pipeline does.           │
-│                    meta             object      Metadata for this            │
-│                                                 workflow.                    │
-│                   ───────────────────────────────────────────────────────    │
-│                                                                              │
-│   src            constants: {}                                               │
-│                  defaults: {}                                                │
-│                  steps:                                                      │
-│                  - module_type: onboarding.file.import                       │
-│                    module_config: {}                                         │
-│                    step_id: read_file                                        │
-│                    input_links: {}                                           │
-│                  - module_type: table.from_file                              │
-│                    module_config: {}                                         │
-│                    step_id: create_table_from_file                           │
-│                    input_links:                                              │
-│                      file:                                                   │
-│                      - step_id: read_file                                    │
-│                        value_name: file                                      │
-│                        sub_value:                                            │
-│                  input_aliases: auto                                         │
-│                  output_aliases: auto                                        │
-│                  doc: Import a csv file and create a table from it.          │
-│                  meta: {}                                                    │
-│                  module_type_name: from_csv                                  │
-│                                                                              │
+│  Pipeline config  ────────────────────────────────────────────────────────   │
+│                    {                                                         │
+│                      &quot;constants&quot;: {},                                        │
+│                      &quot;defaults&quot;: {},                                         │
+│                      &quot;steps&quot;: [                                              │
+│                        {                                                     │
+│                          &quot;module_type&quot;: &quot;onboarding.file.import&quot;,            │
+│                          &quot;module_config&quot;: {},                                │
+│                          &quot;step_id&quot;: &quot;read_file&quot;,                             │
+│                          &quot;input_links&quot;: {}                                   │
+│                        },                                                    │
+│                        {                                                     │
+│                          &quot;module_type&quot;: &quot;table.from_file&quot;,                   │
+│                          &quot;module_config&quot;: {},                                │
+│                          &quot;step_id&quot;: &quot;create_table_from_file&quot;,                │
+│                          &quot;input_links&quot;: {                                    │
+│                            &quot;file&quot;: [                                         │
+│                              {                                               │
+│                                &quot;step_id&quot;: &quot;read_file&quot;,                       │
+│                                &quot;value_name&quot;: &quot;file&quot;,                         │
+│                                &quot;sub_value&quot;: null                             │
+│                              }                                               │
+│                            ]                                                 │
+│                          }                                                   │
+│                        }                                                     │
+│                      ],                                                      │
+│                      &quot;input_aliases&quot;: &quot;auto&quot;,                                │
+│                      &quot;output_aliases&quot;: &quot;auto&quot;,                               │
+│                      &quot;documentation&quot;: &quot;-- n/a --&quot;,                           │
+│                      &quot;context&quot;: {},                                          │
+│                      &quot;doc&quot;: &quot;Import a csv file and create a table from i…    │
+│                      &quot;module_type_name&quot;: &quot;from_csv&quot;                          │
+│                    }                                                         │
+│                   ────────────────────────────────────────────────────────   │
 │                                                                              │
 ╰──────────────────────────────────────────────────────────────────────────────╯
 </code></pre></div>
@@ -1368,85 +940,69 @@
 <h2 id="tablefrom_folder"><code>table.from_folder</code><a class="headerlink" href="#tablefrom_folder" title="Permanent link">&para;</a></h2>
 <div class="codehilite"><pre><span></span><code>╭─ Module: table.from_folder ──────────────────────────────────────────────────╮
 │                                                                              │
-│   class          abc.table.FromFolder                                        │
+│  Documentation                                                               │
+│                    -- n/a --                                                 │
 │                                                                              │
-│   is pipeline    yes                                                         │
+│  Origin                                                                      │
+│                    Authors   Markus Binsteiner (markus.binsteiner@uni.lu)    │
 │                                                                              │
-│   doc            Import a folder of text files and create a table from       │
-│                  file metadata and content.                                  │
+│  Context                                                                     │
+│                    Tags         pipeline, core                               │
+│                    Labels       package: kiara_modules.core                  │
+│                                 pipeline: yes                                │
+│                    References   source_repo:                                 │
+│                                 https://github.com/DHARPA-Project/kiara_…    │
+│                                 documentation:                               │
+│                                 https://dharpa.org/kiara_modules.core/       │
+│                                 module_doc:                                  │
+│                                 https://dharpa.org/kiara_modules.core/pi…    │
 │                                                                              │
-│   source repo    -- n/a --                                                   │
+│  Python class                                                                │
+│                    class_name    TableFrom_folderPipelineModule              │
+│                    module_name   kiara_modules.core.table                    │
+│                    full_name     kiara_modules.core.table.TableFrom_fold…    │
 │                                                                              │
-│   config class   kiara.module_config.PipelineModuleConfig                    │
-│                                                                              │
-│   config          ───────────────────────────────────────────────────────    │
-│                    constants        object      Value constants for this     │
-│                                                 module.                      │
-│                    defaults         object      Value defaults for this      │
-│                                                 module.                      │
-│                    steps            array       A list of steps/modules      │
-│                                                 of this pipeline, and        │
-│                                                 their connections.           │
-│                    input_aliases    -- n/a --   A map of input aliases,      │
-│                                                 with the calculated          │
-│                                                 (&lt;step_id&gt;__&lt;input_name&gt;     │
-│                                                 -- double underscore!)       │
-│                                                 name as key, and a           │
-│                                                 string (the resulting        │
-│                                                 workflow input alias) as     │
-│                                                 value. Check the             │
-│                                                 documentation for the        │
-│                                                 config class for which       │
-│                                                 marker strings can be        │
-│                                                 used to automatically        │
-│                                                 create this map if           │
-│                                                 possible.                    │
-│                    output_aliases   -- n/a --   A map of output aliases,     │
-│                                                 with the calculated          │
-│                                                 (&lt;step_id&gt;__&lt;output_nam…     │
-│                                                 -- double underscore!)       │
-│                                                 name as key, and a           │
-│                                                 string (the resulting        │
-│                                                 workflow output alias)       │
-│                                                 as value.  Check the         │
-│                                                 documentation for the        │
-│                                                 config class for which       │
-│                                                 marker strings can be        │
-│                                                 used to automatically        │
-│                                                 create this map if           │
-│                                                 possible.                    │
-│                    doc              string      Documentation about what     │
-│                                                 the pipeline does.           │
-│                    meta             object      Metadata for this            │
-│                                                 workflow.                    │
-│                   ───────────────────────────────────────────────────────    │
-│                                                                              │
-│   src            constants: {}                                               │
-│                  defaults: {}                                                │
-│                  steps:                                                      │
-│                  - module_type: onboarding.folder.import                     │
-│                    module_config: {}                                         │
-│                    step_id: read_files_in_folder                             │
-│                    input_links: {}                                           │
-│                  - module_type: table.from_file_bundle                       │
-│                    module_config:                                            │
-│                      columns:                                                │
-│                      - id                                                    │
-│                      - rel_path                                              │
-│                      - file_name                                             │
-│                      - content                                               │
-│                    step_id: create_table_from_files                          │
-│                    input_links:                                              │
-│                      files:                                                  │
-│                      - step_id: read_files_in_folder                         │
-│                        value_name: file_bundle                               │
-│                        sub_value:                                            │
-│                  input_aliases: auto                                         │
-│                  output_aliases: auto                                        │
-│                  doc: Import a folder of text files and create a table fr…   │
-│                  meta: {}                                                    │
-│                  module_type_name: from_folder                               │
-│                                                                              │
+│  Pipeline config  ────────────────────────────────────────────────────────   │
+│                    {                                                         │
+│                      &quot;constants&quot;: {},                                        │
+│                      &quot;defaults&quot;: {},                                         │
+│                      &quot;steps&quot;: [                                              │
+│                        {                                                     │
+│                          &quot;module_type&quot;: &quot;onboarding.folder.import&quot;,          │
+│                          &quot;module_config&quot;: {},                                │
+│                          &quot;step_id&quot;: &quot;read_files_in_folder&quot;,                  │
+│                          &quot;input_links&quot;: {}                                   │
+│                        },                                                    │
+│                        {                                                     │
+│                          &quot;module_type&quot;: &quot;table.from_file_bundle&quot;,            │
+│                          &quot;module_config&quot;: {                                  │
+│                            &quot;columns&quot;: [                                      │
+│                              &quot;id&quot;,                                           │
+│                              &quot;rel_path&quot;,                                     │
+│                              &quot;file_name&quot;,                                    │
+│                              &quot;content&quot;                                       │
+│                            ]                                                 │
+│                          },                                                  │
+│                          &quot;step_id&quot;: &quot;create_table_from_files&quot;,               │
+│                          &quot;input_links&quot;: {                                    │
+│                            &quot;files&quot;: [                                        │
+│                              {                                               │
+│                                &quot;step_id&quot;: &quot;read_files_in_folder&quot;,            │
+│                                &quot;value_name&quot;: &quot;file_bundle&quot;,                  │
+│                                &quot;sub_value&quot;: null                             │
+│                              }                                               │
+│                            ]                                                 │
+│                          }                                                   │
+│                        }                                                     │
+│                      ],                                                      │
+│                      &quot;input_aliases&quot;: &quot;auto&quot;,                                │
+│                      &quot;output_aliases&quot;: &quot;auto&quot;,                               │
+│                      &quot;documentation&quot;: &quot;-- n/a --&quot;,                           │
+│                      &quot;context&quot;: {},                                          │
+│                      &quot;doc&quot;: &quot;Import a folder of text files and create a …    │
+│                      &quot;module_type_name&quot;: &quot;from_folder&quot;                       │
+│                    }                                                         │
+│                   ────────────────────────────────────────────────────────   │
 │                                                                              │
 ╰──────────────────────────────────────────────────────────────────────────────╯
 </code></pre></div>
@@ -1520,10 +1076,10 @@
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.instant", "navigation.tracking"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "assets/javascripts/workers/search.b0710199.min.js", "version": null}</script>
+    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.instant", "navigation.tracking"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "assets/javascripts/workers/search.477d984a.min.js", "version": null}</script>
     
     
-      <script src="assets/javascripts/bundle.76f349be.min.js"></script>
+      <script src="assets/javascripts/bundle.82b56eb2.min.js"></script>
       
     
   </body>

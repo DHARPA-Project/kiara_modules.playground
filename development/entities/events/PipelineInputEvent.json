@@ -10,7 +10,9 @@
     "type": {
       "title": "Type",
       "default": "pipeline_input",
-      "const": "pipeline_input",
+      "enum": [
+        "pipeline_input"
+      ],
       "type": "string"
     },
     "updated_pipeline_inputs": {
