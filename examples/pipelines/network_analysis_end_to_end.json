@@ -46,8 +46,8 @@
       }
     },
     {
-      "module_type": "playground.lena.graph_components",
-      "step_id": "extract_largest_component",
+      "module_type": "network.graph.components",
+      "step_id": "analyse_graph_components",
       "input_links": {
         "graph": "augment_graph.graph"
       }
