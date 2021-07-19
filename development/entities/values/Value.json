@@ -55,19 +55,6 @@
       "default": true,
       "type": "boolean"
     },
-    "value_hash": {
-      "title": "Value Hash",
-      "description": "The hash of the current value.",
-      "default": "-- no_value --",
-      "anyOf": [
-        {
-          "type": "integer"
-        },
-        {
-          "$ref": "#/definitions/ValueHashMarker"
-        }
-      ]
-    },
     "value_metadata": {
       "title": "Value Metadata",
       "description": "Base value metadata.",
@@ -127,15 +114,6 @@
       },
       "required": [
         "type"
-      ]
-    },
-    "ValueHashMarker": {
-      "title": "ValueHashMarker",
-      "description": "An enumeration.",
-      "enum": [
-        "-- no_value --",
-        "-- deferred --",
-        "-- no_hash --"
       ]
     },
     "ValueMetadata": {
