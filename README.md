@@ -42,7 +42,7 @@ make init
 After this is done, you should be able to run the included example module via:
 
 ```console
-kiara run playground_example text_1="xxx" text_2="yyy"
+kiara run playground.sandbox.example text_1="xxx" text_2="yyy"
 ...
 ...
 ```

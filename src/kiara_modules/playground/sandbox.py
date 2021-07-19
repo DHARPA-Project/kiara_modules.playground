@@ -40,13 +40,13 @@ class ExampleModule(KiaraModule):
 
         This example module can be tested on the commandline with one of the relevant ``kiara`` commands:
 
-            kiara module explain-type playground.playground.example
-            kiara module explain-instance playground.playground.example
-            kiara run playground.playground.example text_1="xxx" text_2="yyy"
+            kiara module explain-type playground.sandbox.example
+            kiara module explain-instance playground.sandbox.example
+            kiara run playground.sandbox.example text_1="xxx" text_2="yyy"
 
         To set a different separator in the config for this module, and use that via the cli, you could do:
 
-            kiara run playground.playground.example --module-config separator="." text_1="xxx" text_2="yyy"
+            kiara run playground.sandbox.example --module-config separator="." text_1="xxx" text_2="yyy"
 
     """
 
