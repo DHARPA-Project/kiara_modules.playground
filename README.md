@@ -58,6 +58,24 @@ source .venv/bin/activate
 kiara --help  # or whatever, point is, kiara should be available for you now,
 ```
 
+### Update dependencies
+
+In some cases the dependency *kiara* library or any of the packages that contain modules might have been updated, in which
+case it is advisable to update the playground virtual-env. This can be done using:
+
+```console
+make update-dependencies
+```
+
+If you want to track the latest development version of those libraries, use the following instead:
+
+```console
+make update-dependencies-dev
+```
+
+*Note*: in order to revert back to a non-development version of the libraries, you'll have to remove the dependencies manually, and then re-install.
+
+
 ### ``make`` targets
 
 - ``init``: init development project (install project & dev dependencies into virtualenv, as well as pre-commit git hook)

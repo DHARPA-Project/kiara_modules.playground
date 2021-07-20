@@ -35,9 +35,10 @@ init: clean ## initialize a development environment (to be run in virtualenv)
 	git init
 	git checkout -b develop || true
 	pip install -U pip
-	pip install --extra-index-url https://pypi.fury.io/dharpa/ --extra-index-url https://gitlab.com/api/v4/projects/25344049/packages/pypi/simple -U -e '.[all_dev]'
-	pip install --extra-index-url https://pypi.fury.io/dharpa/ --extra-index-url https://gitlab.com/api/v4/projects/25344049/packages/pypi/simple -U 'kiara_modules.language_processing[all]'
-	pip install --extra-index-url https://pypi.fury.io/dharpa/ --extra-index-url https://gitlab.com/api/v4/projects/25344049/packages/pypi/simple -U 'kiara_modules.network_analysis[all]'
+	pip install --extra-index-url https://pypi.fury.io/dharpa/ -U -e '.[all_dev]'
+	pip install  --extra-index-url https://pypi.fury.io/dharpa/ -U 'kiara_modules.core[all]'
+	pip install --extra-index-url https://pypi.fury.io/dharpa/ -U 'kiara_modules.language_processing[all]'
+	pip install --extra-index-url https://pypi.fury.io/dharpa/ -U 'kiara_modules.network_analysis[all]'
 #	pre-commit install
 #	pre-commit install --hook-type commit-msg
 	setup-cfg-fmt setup.cfg || true
@@ -46,11 +47,16 @@ init: clean ## initialize a development environment (to be run in virtualenv)
 	git add "*" ".*"
 
 update-dependencies:  ## update all development dependencies
-	pip install -U pip
-	pip install --extra-index-url https://pypi.fury.io/dharpa/ --extra-index-url https://gitlab.com/api/v4/projects/25344049/packages/pypi/simple -U -e '.[all]'
-	pip install  --extra-index-url https://pypi.fury.io/dharpa/ --extra-index-url https://gitlab.com/api/v4/projects/25344049/packages/pypi/simple -U 'kiara_modules.language_processing[all]'
-	pip install  --extra-index-url https://pypi.fury.io/dharpa/ --extra-index-url https://gitlab.com/api/v4/projects/25344049/packages/pypi/simple -U 'kiara_modules.network_analysis[all]'
+	pip install --extra-index-url https://pypi.fury.io/dharpa/ -U 'kiara[all]'
+	pip install --extra-index-url https://pypi.fury.io/dharpa/ -U 'kiara_modules.core[all]'
+	pip install --extra-index-url https://pypi.fury.io/dharpa/ -U 'kiara_modules.language_processing[all]'
+	pip install --extra-index-url https://pypi.fury.io/dharpa/ -U 'kiara_modules.network_analysis[all]'
 
+update-dependencies-dev:  ## update all development dependencies
+	pip install --extra-index-url https://pypi.fury.io/dharpa/ -U 'git+https://github.com/DHARPA-Project/kiara.git@develop#egg=kiara[all]'
+	pip install --extra-index-url https://pypi.fury.io/dharpa/ -U 'git+https://github.com/DHARPA-Project/kiara_modules.core.git@develop#egg=kiara_modules.core[all]'
+	pip install --extra-index-url https://pypi.fury.io/dharpa/ -U 'git+https://github.com/DHARPA-Project/kiara_modules.language_processing.git@develop#egg=kiara_modules.language_processing[all]'
+	pip install --extra-index-url https://pypi.fury.io/dharpa/ -U 'git+https://github.com/DHARPA-Project/kiara_modules.network_analysis.git@develop#egg=kiara_modules.network_analysis[all]'
 
 setup-cfg-fmt: # format setup.cfg
 	setup-cfg-fmt setup.cfg || true

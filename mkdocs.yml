@@ -23,6 +23,7 @@ markdown_extensions:
 nav:
 - Home: index.md
 - Usage: usage.md
+- Examples: examples.md
 - Included modules: modules_list.md
 - Included pipelines: pipelines_list.md
 

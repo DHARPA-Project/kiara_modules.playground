@@ -1,0 +1,7 @@
+# Examples
+
+## Command-line
+
+```
+kiara
+```
