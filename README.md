@@ -58,6 +58,25 @@ source .venv/bin/activate
 kiara --help  # or whatever, point is, kiara should be available for you now,
 ```
 
+### Enable development mode
+
+*kiara* has a hidden mode that is designed to enable some convenience sub-commands that help when developing.
+
+You can enable this mode by setting the ``DEVELOP`` environment variable to 'true':
+
+```
+export DEVELOP=true
+```
+
+Once this is done, *kiara* will display additional sub-commands when you use the ``--help`` flag. Currently, the only such
+sub-command that is implemented is:
+
+```
+kiara data clear-data-store
+```
+
+This will delete all imported and generated data from the internal *kiara* data store.
+
 ### Update dependencies
 
 In some cases the dependency *kiara* library or any of the packages that contain modules might have been updated, in which
