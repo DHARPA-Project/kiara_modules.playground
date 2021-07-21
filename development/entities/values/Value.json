@@ -8,14 +8,6 @@
       "description": "A unique id for this value.",
       "type": "string"
     },
-    "aliases": {
-      "title": "Aliases",
-      "description": "Aliases for this value",
-      "type": "array",
-      "items": {
-        "type": "string"
-      }
-    },
     "value_schema": {
       "title": "Value Schema",
       "description": "The schema of this value.",

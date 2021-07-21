@@ -110,14 +110,6 @@
             }
           ]
         },
-        "aliases": {
-          "title": "Aliases",
-          "description": "Aliases for this value.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
         "last_update": {
           "title": "Last Update",
           "description": "The time the last update to this value happened.",
@@ -140,8 +132,7 @@
         "id",
         "is_set",
         "value_schema",
-        "value_metadata",
-        "aliases"
+        "value_metadata"
       ],
       "additionalProperties": false
     }
