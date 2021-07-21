@@ -2,7 +2,7 @@
 
 ## Command-line
 
-### Import ('onboard') a csv file
+### Import ('onboard') a file
 
 The ``import.local_file`` module can be used to import any file. Internally, it will extract some metadata (file size, hash, original name, ...)
 and copy the file into the internal kiara data store, where it should be safe from external (or any, really) modification.
