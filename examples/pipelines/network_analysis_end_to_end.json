@@ -2,22 +2,22 @@
   "module_type_name": "network_analysis_end_to_end",
   "steps": [
     {
-      "module_type": "onboarding.file.import",
+      "module_type": "import.local_file",
       "step_id": "read_edges_file"
     },
     {
-      "module_type": "onboarding.file.import",
+      "module_type": "import.local_file",
       "step_id": "read_nodes_file"
     },
     {
-      "module_type": "table.from_file",
+      "module_type": "table.create.from_file",
       "step_id": "load_edges_table",
       "input_links": {
         "file": "read_edges_file.file"
       }
     },
     {
-      "module_type": "table.from_file",
+      "module_type": "table.create.from_file",
       "step_id": "load_nodes_table",
       "input_links": {
         "file": "read_nodes_file.file"
