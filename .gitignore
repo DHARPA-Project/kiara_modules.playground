@@ -58,3 +58,4 @@ site
 docs/api-documentation.md
 .envrc
 data/
+query.sql
