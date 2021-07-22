@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import json
 
+import pandas as pd
 import pyarrow as pa
 import streamlit as st
 from kiara import Kiara
@@ -35,10 +36,10 @@ observers = observable(
     "Test",
     notebook="d/50b89c7d50524163",
     targets=["viewof chart", "style"],
-    # observe=["corpus_agg"],
+    observe=["corpus_agg"],
     redefine={"timeSelected": timeSelected, "corpus": cleaned_data},
 )
 
-# data = observers.get("corpus_agg")
-# df = pd.DataFrame(data)
-# st.dataframe(df)
+data = observers.get("corpus_agg")
+df = pd.DataFrame(data)
+st.dataframe(df)
