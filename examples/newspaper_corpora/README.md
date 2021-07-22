@@ -4,6 +4,7 @@
 
 ### Preparation
 - activate the playground virtual env
+- currently, this only works with the development version of kiara, so you need to update the dependencies in the virtual env. Do that by executing ``make update-dependencies dev`` in the root folder of this repo
 - change into this folder: ``cd examples/newspaper_corpora``
 - download and unzip the ``ChroniclItaly_3.0_original.zip`` file from: https://zenodo.org/record/4596345#.YPki35MzbvW (this part will be done by *kiara* at some stage too, just not right now)
 
