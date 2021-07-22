@@ -1,0 +1,75 @@
+{
+  "module_type_name": "corpus_table_augment",
+  "documentation": "Create augmented corpus table.",
+  "steps": [
+    {
+      "module_type": "value.load",
+      "step_id": "table_load",
+      "module_config": {
+        "value_type": "table"
+      }
+    },
+    {
+      "module_type": "array.map",
+      "module_config": {
+        "module_type": "date.extract_from_string"
+      },
+      "step_id": "date",
+      "input_links": {
+        "array": "table_load.value_item.file_name"
+      }
+    },
+    {
+      "module_type": "array.map",
+      "module_config": {
+        "module_type": "string.match_regex",
+        "module_config": {
+          "regex": "(\\w+\\d+)_\\d{4}-\\d{2}-\\d{2}_",
+          "only_first_match": true
+        }
+      },
+      "step_id": "pub_ref",
+      "input_links": {
+        "array": "table_load.value_item.file_name"
+      }
+    },
+    {
+      "module_type": "array.map",
+      "module_config": {
+        "module_type": "string.replace",
+        "module_config": {
+          "replacement_map": {
+            "sn85066408": "L\\'Italia",
+            "2012271201": "Cronaca Sovversiva",
+            "sn84020351": "La Sentinella",
+            "sn85054967": "Il Patriota",
+            "sn84037024": "La Ragione",
+            "sn84037025": "La Rassegna",
+            "sn85055164": "La Libera Parola",
+            "sn86092310": "La Sentinella del West",
+            "sn92051386": "La Tribuna del Connecticut",
+            "sn93053873": "L\\'Indipendente"
+          }
+        }
+      },
+      "step_id": "pub_name",
+      "input_links": {
+        "array": "pub_ref.array"
+      }
+    },
+    {
+      "module_type": "table.merge",
+      "step_id": "merged_table",
+      "input_links": {
+        "sources": [
+          "table_load.value_item",
+          "date.array",
+          "pub_ref.array",
+          "pub_name.array"
+        ]
+      }
+    }
+  ],
+  "input_aliases": "auto",
+  "output_aliases": "auto"
+}
