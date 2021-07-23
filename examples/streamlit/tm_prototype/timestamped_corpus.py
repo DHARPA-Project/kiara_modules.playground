@@ -36,12 +36,16 @@ scaleType = st.sidebar.radio(
     label="Select scale type", index=0, options=["color", "height"]
 )
 
+axisLabel = st.sidebar.radio(
+    label="Select axis label", index=0, options=["5-year", "year", "month", "week", "day"]
+)
+
 observers = observable(
     "Test",
     notebook="d/50b89c7d50524163",
     targets=["viewof chart", "style"],
     observe=["corpus_agg"],
-    redefine={"timeSelected": timeSelected, "corpus": cleaned_data, "scaleType": scaleType},
+    redefine={"timeSelected": timeSelected, "corpus": cleaned_data, "scaleType": scaleType, "axisLabel": axisLabel},
 )
 
 data = observers.get("corpus_agg")
