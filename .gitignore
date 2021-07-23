@@ -45,6 +45,7 @@ MANIFEST
 
 # Per-project virtualenvs
 .venv*/
+venv
 pip-wheel-metadata/
 .python-version
 src/kiara_modules/playground/version.txt
