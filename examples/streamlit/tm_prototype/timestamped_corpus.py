@@ -28,15 +28,15 @@ data = list(df.to_dict(orient="index").values())
 data_json = json.dumps(data, default=str)
 cleaned_data = json.loads(data_json)
 
-timeSelected = st.sidebar.radio(
+timeSelected = st.sidebar.selectbox(
     label="Select time span", index=3, options=["day", "week", "month", "year"]
 )
 
-scaleType = st.sidebar.radio(
+scaleType = st.sidebar.selectbox(
     label="Select scale type", index=0, options=["color", "height"]
 )
 
-axisLabel = st.sidebar.radio(
+axisLabel = st.sidebar.selectbox(
     label="Select axis label", index=0, options=["5-year", "year", "month", "week", "day"]
 )
 
