@@ -1,0 +1,20 @@
+{
+  "title": "ModuleInstanceConfig",
+  "type": "object",
+  "properties": {
+    "module_type": {
+      "title": "Module Type",
+      "description": "The module type.",
+      "type": "string"
+    },
+    "module_config": {
+      "title": "Module Config",
+      "description": "The configuration for the module.",
+      "type": "object"
+    }
+  },
+  "required": [
+    "module_type"
+  ],
+  "additionalProperties": false
+}

@@ -12,7 +12,7 @@
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.2.0">
+      <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.2.1">
     
     
       
@@ -20,7 +20,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.fe914879.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.1118c9be.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.ba0d045b.min.css">
@@ -430,13 +430,6 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#kiara_modules.playground.sandbox.ExampleModule.process" class="md-nav__link">
-    process()
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -542,13 +535,6 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#kiara_modules.playground.sandbox.ExampleModule.process" class="md-nav__link">
-    process()
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -626,7 +612,7 @@
       <p>A very simple example module; concatenate two strings.</p>
 <p>The purpose of this module is to show the main elements of a <code>KiaraModule</code>:</p>
 <p>the (optional) configuration
-:    must inherit from <code>KiaraModuleConfig</code>, and the config class must be set as the "_config_cls" attribute
+:    must inherit from <code>ModuleTypeConfig</code>, and the config class must be set as the "_config_cls" attribute
      on the <code>KiaraModule</code> class. Configuration values can be retrieved via the <code>self.get_config_value(key)</code>
      method</p>
 <p>the inputs description
@@ -676,6 +662,16 @@ kiara run playground.sandbox.example text_1=&quot;xxx&quot; text_2=&quot;yyy&quo
     <div class="doc doc-contents ">
 
       <p>Abstract method to implement by child classes, returns a description of the input schema of this module.</p>
+<p>If returning a dictionary of dictionaries, the format of the return value is as follows (items with '*' are optional):</p>
+<p>{
+  "[input_field_name]: {
+      "type": "[value_type]",
+      "doc<em>": "[a description of this input]",
+      "optional</em>': [boolean whether this input is optional or required (defaults to 'False')]
+  "[other_input_field_name]: {
+      "type: ...
+      ...
+  }</p>
 
         <details class="quote">
           <summary>Source code in <code>playground/sandbox.py</code></summary>
@@ -712,6 +708,15 @@ kiara run playground.sandbox.example text_1=&quot;xxx&quot; text_2=&quot;yyy&quo
     <div class="doc doc-contents ">
 
       <p>Abstract method to implement by child classes, returns a description of the output schema of this module.</p>
+<p>If returning a dictionary of dictionaries, the format of the return value is as follows (items with '*' are optional):</p>
+<p>{
+  "[output_field_name]: {
+      "type": "[value_type]",
+      "doc*": "[a description of this output]"
+  "[other_input_field_name]: {
+      "type: ...
+      ...
+  }</p>
 
         <details class="quote">
           <summary>Source code in <code>playground/sandbox.py</code></summary>
@@ -734,63 +739,6 @@ kiara run playground.sandbox.example text_1=&quot;xxx&quot; text_2=&quot;yyy&quo
 
   </div>
 
-
-
-  <div class="doc doc-object doc-method">
-
-
-
-<h3 id="kiara_modules.playground.sandbox.ExampleModule.process" class="doc doc-heading">
-<code class="codehilite language-python"><span class="n">process</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inputs</span><span class="p">,</span> <span class="n">outputs</span><span class="p">)</span></code>
-
-
-<a href="#kiara_modules.playground.sandbox.ExampleModule.process" class="headerlink" title="Permanent link">&para;</a></h3>
-
-    <div class="doc doc-contents ">
-
-      <p>Abstract method to implement by child classes, should be a pure, idempotent function that uses the values from <code>inputs</code>, and stores results in the provided <code>outputs</code> object.</p>
-
-<p><strong>Parameters:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-      <th>Default</th>
-    </tr>
-  </thead>
-  <tbody>
-      <tr>
-        <td><code>inputs</code></td>
-        <td><code>ValueSet</code></td>
-        <td><p>the input value set</p></td>
-        <td><em>required</em></td>
-      </tr>
-      <tr>
-        <td><code>outputs</code></td>
-        <td><code>ValueSet</code></td>
-        <td><p>the output value set</p></td>
-        <td><em>required</em></td>
-      </tr>
-  </tbody>
-</table>
-        <details class="quote">
-          <summary>Source code in <code>playground/sandbox.py</code></summary>
-          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">process</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inputs</span><span class="p">:</span> <span class="n">ValueSet</span><span class="p">,</span> <span class="n">outputs</span><span class="p">:</span> <span class="n">ValueSet</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-
-    <span class="n">separator</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_config_value</span><span class="p">(</span><span class="s2">&quot;separator&quot;</span><span class="p">)</span>
-
-    <span class="n">text_1</span> <span class="o">=</span> <span class="n">inputs</span><span class="o">.</span><span class="n">get_value_data</span><span class="p">(</span><span class="s2">&quot;text_1&quot;</span><span class="p">)</span>
-    <span class="n">text_2</span> <span class="o">=</span> <span class="n">inputs</span><span class="o">.</span><span class="n">get_value_data</span><span class="p">(</span><span class="s2">&quot;text_2&quot;</span><span class="p">)</span>
-
-    <span class="n">result</span> <span class="o">=</span> <span class="n">text_1</span> <span class="o">+</span> <span class="n">separator</span> <span class="o">+</span> <span class="n">text_2</span>
-    <span class="n">outputs</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="s2">&quot;text&quot;</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span>
-</code></pre></div>
-        </details>
-    </div>
-
-  </div>
 
 
 

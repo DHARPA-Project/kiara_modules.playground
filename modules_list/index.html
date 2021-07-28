@@ -12,7 +12,7 @@
       
       
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.2.0">
+      <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.2.1">
     
     
       
@@ -20,7 +20,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.fe914879.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.1118c9be.min.css">
       
         
         <link rel="stylesheet" href="../assets/stylesheets/palette.ba0d045b.min.css">
@@ -296,6 +296,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#playgroundmarkusfilter_table_by_date" class="md-nav__link">
+    playground.markus.filter_table_by_date
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#playgroundmarkusfrom_file" class="md-nav__link">
     playground.markus.from_file
   </a>
@@ -479,6 +486,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#playgroundmarkusfilter_table_by_date" class="md-nav__link">
+    playground.markus.filter_table_by_date
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#playgroundmarkusfrom_file" class="md-nav__link">
     playground.markus.from_file
   </a>
@@ -518,8 +532,7 @@
 │                           -- n/a --                                          │
 │                                                                              │
 │  Origin                                                                      │
-│                           Authors   Markus Binsteiner                        │
-│                                     (markus.binsteiner@uni.lu)               │
+│                           Authors   Markus Binsteiner (markus@frkl.io)       │
 │                                     Lena Jaskov (helena.jaskov@uni.lu)       │
 │                                                                              │
 │  Context                                                                     │
@@ -533,6 +546,14 @@
 │                                        https://dharpa.org/kiara_modules.…    │
 │                                        source_url:                           │
 │                                        https://github.com/DHARPA-Project…    │
+│                                                                              │
+│  Module config                                                               │
+│                           Field                    Type      Required        │
+│                          ─────────────────────────────────────────────       │
+│                           constants                object    no              │
+│                           defaults                 object    no              │
+│                           find_largest_component   boolean   no              │
+│                           number_of_components     boolean   no              │
 │                                                                              │
 │  Python class                                                                │
 │                           class_name    GrpahComponentsModule                │
@@ -563,16 +584,14 @@
 ╰──────────────────────────────────────────────────────────────────────────────╯
 </code></pre></div>
 
-<h2 id="playgroundmarkusfrom_file"><code>playground.markus.from_file</code><a class="headerlink" href="#playgroundmarkusfrom_file" title="Permanent link">&para;</a></h2>
-<div class="codehilite"><pre><span></span><code>╭─ Module: from_file ──────────────────────────────────────────────────────────╮
+<h2 id="playgroundmarkusfilter_table_by_date"><code>playground.markus.filter_table_by_date</code><a class="headerlink" href="#playgroundmarkusfilter_table_by_date" title="Permanent link">&para;</a></h2>
+<div class="codehilite"><pre><span></span><code>╭─ Module: filter_table_by_date ───────────────────────────────────────────────╮
 │                                                                              │
 │  Documentation                                                               │
-│                           Load table-like data from a kiara file object      │
-│                           (not a path!).                                     │
+│                           -- n/a --                                          │
 │                                                                              │
 │  Origin                                                                      │
-│                           Authors   Markus Binsteiner                        │
-│                                     (markus.binsteiner@uni.lu)               │
+│                           Authors   Markus Binsteiner (markus@frkl.io)       │
 │                                                                              │
 │  Context                                                                     │
 │                           Tags         playground                            │
@@ -585,6 +604,66 @@
 │                                        https://dharpa.org/kiara_modules.…    │
 │                                        source_url:                           │
 │                                        https://github.com/DHARPA-Project…    │
+│                                                                              │
+│  Module config                                                               │
+│                           Field       Type     Required                      │
+│                          ───────────────────────────────                     │
+│                           constants   object   no                            │
+│                           defaults    object   no                            │
+│                                                                              │
+│  Python class                                                                │
+│                           class_name    MyFirstModule                        │
+│                           module_name   kiara_modules.playground.markus      │
+│                           full_name     kiara_modules.playground.markus.…    │
+│                                                                              │
+│  Processing source code  ─────────────────────────────────────────────────   │
+│                           def process(self, inputs, outputs):                │
+│                                                                              │
+│                               table_obj = inputs.get_value_data(&quot;table_i…    │
+│                               date_input = inputs.get_value_data(&quot;date&quot;)     │
+│                                                                              │
+│                               df: DataFrame = table_obj.to_pandas()          │
+│                                                                              │
+│                               after_date = df[df[&quot;birthday&quot;] &gt;= date_inp…    │
+│                                                                              │
+│                               import pyarrow as pa                           │
+│                                                                              │
+│                               result_table = pa.Table.from_pandas(after_…    │
+│                                                                              │
+│                               outputs.set_value(&quot;table_output&quot;, result_t…    │
+│                                                                              │
+│                          ─────────────────────────────────────────────────   │
+│                                                                              │
+╰──────────────────────────────────────────────────────────────────────────────╯
+</code></pre></div>
+
+<h2 id="playgroundmarkusfrom_file"><code>playground.markus.from_file</code><a class="headerlink" href="#playgroundmarkusfrom_file" title="Permanent link">&para;</a></h2>
+<div class="codehilite"><pre><span></span><code>╭─ Module: from_file ──────────────────────────────────────────────────────────╮
+│                                                                              │
+│  Documentation                                                               │
+│                           Load table-like data from a kiara file object      │
+│                           (not a path!).                                     │
+│                                                                              │
+│  Origin                                                                      │
+│                           Authors   Markus Binsteiner (markus@frkl.io)       │
+│                                                                              │
+│  Context                                                                     │
+│                           Tags         playground                            │
+│                           Labels       package: kiara_modules.playground     │
+│                           References   source_repo:                          │
+│                                        https://github.com/DHARPA-Project…    │
+│                                        documentation:                        │
+│                                        https://dharpa.org/kiara_modules.…    │
+│                                        module_doc:                           │
+│                                        https://dharpa.org/kiara_modules.…    │
+│                                        source_url:                           │
+│                                        https://github.com/DHARPA-Project…    │
+│                                                                              │
+│  Module config                                                               │
+│                           Field       Type     Required                      │
+│                          ───────────────────────────────                     │
+│                           constants   object   no                            │
+│                           defaults    object   no                            │
 │                                                                              │
 │  Python class                                                                │
 │                           class_name    CreateGraphFromFileModule            │
@@ -621,7 +700,7 @@
 │                           elements of a KiaraModule:                         │
 │                                                                              │
 │                           the (optional) configuration :    must inherit     │
-│                           from KiaraModuleConfig, and the config class       │
+│                           from ModuleTypeConfig, and the config class        │
 │                           must be set as the &quot;_config_cls&quot; attribute on      │
 │                           the KiaraModule class. Configuration values can    │
 │                           be retrieved via the self.get_config_value(key)    │
@@ -660,8 +739,7 @@
 │                           └─────────────────────────────────────────────┘    │
 │                                                                              │
 │  Origin                                                                      │
-│                           Authors   Markus Binsteiner                        │
-│                                     (markus.binsteiner@uni.lu)               │
+│                           Authors   Markus Binsteiner (markus@frkl.io)       │
 │                                                                              │
 │  Context                                                                     │
 │                           Tags         playground                            │
@@ -674,6 +752,13 @@
 │                                        https://dharpa.org/kiara_modules.…    │
 │                                        source_url:                           │
 │                                        https://github.com/DHARPA-Project…    │
+│                                                                              │
+│  Module config                                                               │
+│                           Field       Type     Required                      │
+│                          ───────────────────────────────                     │
+│                           constants   object   no                            │
+│                           defaults    object   no                            │
+│                           separator   string   no                            │
 │                                                                              │
 │  Python class                                                                │
 │                           class_name    ExampleModule                        │

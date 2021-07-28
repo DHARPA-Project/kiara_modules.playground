@@ -12,7 +12,7 @@
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.2.0">
+      <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.2.1">
     
     
       
@@ -20,7 +20,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.fe914879.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.1118c9be.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.ba0d045b.min.css">
@@ -394,9 +394,29 @@
   
 </li>
         
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kiara_modules.playground.markus.__init__.MyFirstModule" class="md-nav__link">
+    MyFirstModule
+  </a>
+  
+    <nav class="md-nav" aria-label="MyFirstModule">
+      <ul class="md-nav__list">
+        
           <li class="md-nav__item">
-  <a href="#kiara_modules.playground.markus.__init__.CreateGraphFromFileModule.process" class="md-nav__link">
-    process()
+  <a href="#kiara_modules.playground.markus.__init__.MyFirstModule.create_input_schema" class="md-nav__link">
+    create_input_schema()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kiara_modules.playground.markus.__init__.MyFirstModule.create_output_schema" class="md-nav__link">
+    create_output_schema()
   </a>
   
 </li>
@@ -522,9 +542,29 @@
   
 </li>
         
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kiara_modules.playground.markus.__init__.MyFirstModule" class="md-nav__link">
+    MyFirstModule
+  </a>
+  
+    <nav class="md-nav" aria-label="MyFirstModule">
+      <ul class="md-nav__list">
+        
           <li class="md-nav__item">
-  <a href="#kiara_modules.playground.markus.__init__.CreateGraphFromFileModule.process" class="md-nav__link">
-    process()
+  <a href="#kiara_modules.playground.markus.__init__.MyFirstModule.create_input_schema" class="md-nav__link">
+    create_input_schema()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kiara_modules.playground.markus.__init__.MyFirstModule.create_output_schema" class="md-nav__link">
+    create_output_schema()
   </a>
   
 </li>
@@ -611,6 +651,16 @@
     <div class="doc doc-contents ">
 
       <p>Abstract method to implement by child classes, returns a description of the input schema of this module.</p>
+<p>If returning a dictionary of dictionaries, the format of the return value is as follows (items with '*' are optional):</p>
+<p>{
+  "[input_field_name]: {
+      "type": "[value_type]",
+      "doc<em>": "[a description of this input]",
+      "optional</em>': [boolean whether this input is optional or required (defaults to 'False')]
+  "[other_input_field_name]: {
+      "type: ...
+      ...
+  }</p>
 
         <details class="quote">
           <summary>Source code in <code>playground/markus/__init__.py</code></summary>
@@ -658,6 +708,15 @@
     <div class="doc doc-contents ">
 
       <p>Abstract method to implement by child classes, returns a description of the output schema of this module.</p>
+<p>If returning a dictionary of dictionaries, the format of the return value is as follows (items with '*' are optional):</p>
+<p>{
+  "[output_field_name]: {
+      "type": "[value_type]",
+      "doc*": "[a description of this output]"
+  "[other_input_field_name]: {
+      "type: ...
+      ...
+  }</p>
 
         <details class="quote">
           <summary>Source code in <code>playground/markus/__init__.py</code></summary>
@@ -675,64 +734,119 @@
 
 
 
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h2 id="kiara_modules.playground.markus.__init__.MyFirstModule" class="doc doc-heading">
+        <code>MyFirstModule</code>
+
+
+
+<a href="#kiara_modules.playground.markus.__init__.MyFirstModule" class="headerlink" title="Permanent link">&para;</a></h2>
+
+    <div class="doc doc-contents ">
+
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
   <div class="doc doc-object doc-method">
 
 
 
-<h3 id="kiara_modules.playground.markus.__init__.CreateGraphFromFileModule.process" class="doc doc-heading">
-<code class="codehilite language-python"><span class="n">process</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inputs</span><span class="p">,</span> <span class="n">outputs</span><span class="p">)</span></code>
+<h3 id="kiara_modules.playground.markus.__init__.MyFirstModule.create_input_schema" class="doc doc-heading">
+<code class="codehilite language-python"><span class="n">create_input_schema</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
 
 
-<a href="#kiara_modules.playground.markus.__init__.CreateGraphFromFileModule.process" class="headerlink" title="Permanent link">&para;</a></h3>
+<a href="#kiara_modules.playground.markus.__init__.MyFirstModule.create_input_schema" class="headerlink" title="Permanent link">&para;</a></h3>
 
     <div class="doc doc-contents ">
 
-      <p>Abstract method to implement by child classes, should be a pure, idempotent function that uses the values from <code>inputs</code>, and stores results in the provided <code>outputs</code> object.</p>
+      <p>Abstract method to implement by child classes, returns a description of the input schema of this module.</p>
+<p>If returning a dictionary of dictionaries, the format of the return value is as follows (items with '*' are optional):</p>
+<p>{
+  "[input_field_name]: {
+      "type": "[value_type]",
+      "doc<em>": "[a description of this input]",
+      "optional</em>': [boolean whether this input is optional or required (defaults to 'False')]
+  "[other_input_field_name]: {
+      "type: ...
+      ...
+  }</p>
 
-<p><strong>Parameters:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-      <th>Default</th>
-    </tr>
-  </thead>
-  <tbody>
-      <tr>
-        <td><code>inputs</code></td>
-        <td><code>ValueSet</code></td>
-        <td><p>the input value set</p></td>
-        <td><em>required</em></td>
-      </tr>
-      <tr>
-        <td><code>outputs</code></td>
-        <td><code>ValueSet</code></td>
-        <td><p>the output value set</p></td>
-        <td><em>required</em></td>
-      </tr>
-  </tbody>
-</table>
         <details class="quote">
           <summary>Source code in <code>playground/markus/__init__.py</code></summary>
-          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">process</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inputs</span><span class="p">:</span> <span class="n">ValueSet</span><span class="p">,</span> <span class="n">outputs</span><span class="p">:</span> <span class="n">ValueSet</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-
-    <span class="n">input_file</span><span class="p">:</span> <span class="n">FileMetadata</span> <span class="o">=</span> <span class="n">inputs</span><span class="o">.</span><span class="n">get_value_data</span><span class="p">(</span><span class="s2">&quot;file&quot;</span><span class="p">)</span>
-    <span class="n">imported_data</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">input_file</span><span class="o">.</span><span class="n">path</span><span class="p">)</span>
-
-    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_config_value</span><span class="p">(</span><span class="s2">&quot;allow_column_filter&quot;</span><span class="p">):</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_config_value</span><span class="p">(</span><span class="s2">&quot;columns&quot;</span><span class="p">):</span>
-            <span class="n">imported_data</span> <span class="o">=</span> <span class="n">imported_data</span><span class="o">.</span><span class="n">select</span><span class="p">(</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">get_config_value</span><span class="p">(</span><span class="s2">&quot;only_columns&quot;</span><span class="p">)</span>
-            <span class="p">)</span>
-
-    <span class="n">outputs</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="s2">&quot;table&quot;</span><span class="p">,</span> <span class="n">imported_data</span><span class="p">)</span>
+          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">create_input_schema</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s2">&quot;table_input&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;table&quot;</span><span class="p">,</span> <span class="s2">&quot;doc&quot;</span><span class="p">:</span> <span class="s2">&quot;The table that will be filtered.&quot;</span><span class="p">},</span>
+        <span class="s2">&quot;date&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;date&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;doc&quot;</span><span class="p">:</span> <span class="s2">&quot;The minimum date, earlier dates will be filtered out.&quot;</span><span class="p">,</span>
+        <span class="p">},</span>
+    <span class="p">}</span>
 </code></pre></div>
         </details>
     </div>
 
   </div>
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h3 id="kiara_modules.playground.markus.__init__.MyFirstModule.create_output_schema" class="doc doc-heading">
+<code class="codehilite language-python"><span class="n">create_output_schema</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+
+
+<a href="#kiara_modules.playground.markus.__init__.MyFirstModule.create_output_schema" class="headerlink" title="Permanent link">&para;</a></h3>
+
+    <div class="doc doc-contents ">
+
+      <p>Abstract method to implement by child classes, returns a description of the output schema of this module.</p>
+<p>If returning a dictionary of dictionaries, the format of the return value is as follows (items with '*' are optional):</p>
+<p>{
+  "[output_field_name]: {
+      "type": "[value_type]",
+      "doc*": "[a description of this output]"
+  "[other_input_field_name]: {
+      "type: ...
+      ...
+  }</p>
+
+        <details class="quote">
+          <summary>Source code in <code>playground/markus/__init__.py</code></summary>
+          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">create_output_schema</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;table_output&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;table&quot;</span><span class="p">,</span> <span class="s2">&quot;doc&quot;</span><span class="p">:</span> <span class="s2">&quot;The filtered table.&quot;</span><span class="p">}}</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
 
 
 

@@ -12,7 +12,7 @@
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.2.0">
+      <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.2.1">
     
     
       
@@ -20,7 +20,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.fe914879.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.1118c9be.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.ba0d045b.min.css">
@@ -409,13 +409,6 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#kiara_modules.playground.lena.__init__.GrpahComponentsModule.process" class="md-nav__link">
-    process()
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -572,13 +565,6 @@
           <li class="md-nav__item">
   <a href="#kiara_modules.playground.lena.__init__.GrpahComponentsModule.create_output_schema" class="md-nav__link">
     create_output_schema()
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#kiara_modules.playground.lena.__init__.GrpahComponentsModule.process" class="md-nav__link">
-    process()
   </a>
   
 </li>
@@ -752,6 +738,16 @@
     <div class="doc doc-contents ">
 
       <p>Abstract method to implement by child classes, returns a description of the input schema of this module.</p>
+<p>If returning a dictionary of dictionaries, the format of the return value is as follows (items with '*' are optional):</p>
+<p>{
+  "[input_field_name]: {
+      "type": "[value_type]",
+      "doc<em>": "[a description of this input]",
+      "optional</em>': [boolean whether this input is optional or required (defaults to 'False')]
+  "[other_input_field_name]: {
+      "type: ...
+      ...
+  }</p>
 
         <details class="quote">
           <summary>Source code in <code>playground/lena/__init__.py</code></summary>
@@ -783,6 +779,15 @@
     <div class="doc doc-contents ">
 
       <p>Abstract method to implement by child classes, returns a description of the output schema of this module.</p>
+<p>If returning a dictionary of dictionaries, the format of the return value is as follows (items with '*' are optional):</p>
+<p>{
+  "[output_field_name]: {
+      "type": "[value_type]",
+      "doc*": "[a description of this output]"
+  "[other_input_field_name]: {
+      "type: ...
+      ...
+  }</p>
 
         <details class="quote">
           <summary>Source code in <code>playground/lena/__init__.py</code></summary>
@@ -812,71 +817,6 @@
 
   </div>
 
-
-
-  <div class="doc doc-object doc-method">
-
-
-
-<h3 id="kiara_modules.playground.lena.__init__.GrpahComponentsModule.process" class="doc doc-heading">
-<code class="codehilite language-python"><span class="n">process</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inputs</span><span class="p">,</span> <span class="n">outputs</span><span class="p">)</span></code>
-
-
-<a href="#kiara_modules.playground.lena.__init__.GrpahComponentsModule.process" class="headerlink" title="Permanent link">&para;</a></h3>
-
-    <div class="doc doc-contents ">
-
-      <p>Abstract method to implement by child classes, should be a pure, idempotent function that uses the values from <code>inputs</code>, and stores results in the provided <code>outputs</code> object.</p>
-
-<p><strong>Parameters:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-      <th>Default</th>
-    </tr>
-  </thead>
-  <tbody>
-      <tr>
-        <td><code>inputs</code></td>
-        <td><code>ValueSet</code></td>
-        <td><p>the input value set</p></td>
-        <td><em>required</em></td>
-      </tr>
-      <tr>
-        <td><code>outputs</code></td>
-        <td><code>ValueSet</code></td>
-        <td><p>the output value set</p></td>
-        <td><em>required</em></td>
-      </tr>
-  </tbody>
-</table>
-        <details class="quote">
-          <summary>Source code in <code>playground/lena/__init__.py</code></summary>
-          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">process</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inputs</span><span class="p">:</span> <span class="n">ValueSet</span><span class="p">,</span> <span class="n">outputs</span><span class="p">:</span> <span class="n">ValueSet</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-
-    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_config_value</span><span class="p">(</span><span class="s2">&quot;find_largest_component&quot;</span><span class="p">):</span>
-        <span class="n">input_graph</span><span class="p">:</span> <span class="n">Graph</span> <span class="o">=</span> <span class="n">inputs</span><span class="o">.</span><span class="n">get_value_data</span><span class="p">(</span><span class="s2">&quot;graph&quot;</span><span class="p">)</span>
-        <span class="n">undir_graph</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">to_undirected</span><span class="p">(</span><span class="n">input_graph</span><span class="p">)</span>
-        <span class="n">undir_components</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">connected_components</span><span class="p">(</span><span class="n">undir_graph</span><span class="p">)</span>
-        <span class="n">lg_component</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">undir_components</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="nb">len</span><span class="p">)</span>
-        <span class="n">subgraph</span> <span class="o">=</span> <span class="n">input_graph</span><span class="o">.</span><span class="n">subgraph</span><span class="p">(</span><span class="n">lg_component</span><span class="p">)</span>
-
-        <span class="n">outputs</span><span class="o">.</span><span class="n">set_values</span><span class="p">(</span><span class="n">largest_component</span><span class="o">=</span><span class="n">subgraph</span><span class="p">)</span>
-
-    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_config_value</span><span class="p">(</span><span class="s2">&quot;number_of_components&quot;</span><span class="p">):</span>
-        <span class="n">input_graph</span> <span class="o">=</span> <span class="n">inputs</span><span class="o">.</span><span class="n">get_value_data</span><span class="p">(</span><span class="s2">&quot;graph&quot;</span><span class="p">)</span>
-        <span class="n">undir_graph</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">to_undirected</span><span class="p">(</span><span class="n">input_graph</span><span class="p">)</span>
-        <span class="n">number_of_components</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">number_connected_components</span><span class="p">(</span><span class="n">undir_graph</span><span class="p">)</span>
-
-        <span class="n">outputs</span><span class="o">.</span><span class="n">set_values</span><span class="p">(</span><span class="n">number_of_components</span><span class="o">=</span><span class="n">number_of_components</span><span class="p">)</span>
-</code></pre></div>
-        </details>
-    </div>
-
-  </div>
 
 
 
