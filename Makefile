@@ -46,6 +46,11 @@ init: clean ## initialize a development environment (to be run in virtualenv)
 	#pre-commit run --all-files || true
 	git add "*" ".*"
 
+update:
+	git pull
+	pip install --extra-index-url https://pypi.fury.io/dharpa/ -e '.[all_dev]'
+	pip install --extra-index-url https://pypi.fury.io/dharpa/ -U 'kiara[all]' 'kiara_modules.core[all]' 'kiara_modules.language_processing[all]' 'kiara_modules.network_analysis[all]'
+
 update-dependencies:  ## update all development dependencies
 	pip install --extra-index-url https://pypi.fury.io/dharpa/ -e '.[all_dev]'
 	pip install --extra-index-url https://pypi.fury.io/dharpa/ -U 'kiara[all]' 'kiara_modules.core[all]' 'kiara_modules.language_processing[all]' 'kiara_modules.network_analysis[all]'
