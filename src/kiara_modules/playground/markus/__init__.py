@@ -55,3 +55,35 @@ class CreateGraphFromFileModule(KiaraModule):
                 )
 
         outputs.set_value("table", imported_data)
+
+
+class MyFirstModule(KiaraModule):
+
+    _module_type_name = "filter_table_by_date"
+
+    def create_input_schema(self):
+        return {
+            "table_input": {"type": "table", "doc": "The table that will be filtered."},
+            "date": {
+                "type": "date",
+                "doc": "The minimum date, earlier dates will be filtered out.",
+            },
+        }
+
+    def create_output_schema(self):
+        return {"table_output": {"type": "table", "doc": "The filtered table."}}
+
+    def process(self, inputs, outputs):
+
+        table_obj = inputs.get_value_data("table_input")
+        date_input = inputs.get_value_data("date")
+
+        df: DataFrame = table_obj.to_pandas()
+
+        after_date = df[df["birthday"] >= date_input.date()]
+
+        import pyarrow as pa
+
+        result_table = pa.Table.from_pandas(after_date, preserve_index=False)
+
+        outputs.set_value("table_output", result_table)
