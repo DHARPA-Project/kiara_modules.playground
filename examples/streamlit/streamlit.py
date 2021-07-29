@@ -35,7 +35,6 @@ st.write(f"## Table: *{selected_alias}*")
 st.dataframe(data.to_pandas())
 
 
-
 with st.form(key="sql_query"):
     query = st.text_input("SQL Query")
     submit_button = st.form_submit_button(label="Submit")
@@ -44,7 +43,7 @@ with st.form(key="sql_query"):
 workflow.inputs.set_value("query", query)
 
 result = workflow.outputs.get_value_data("query_result")
-
+st.dataframe(result.to_pandas())
 
 
 
