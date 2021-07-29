@@ -24,12 +24,15 @@ table_value: Value = kiara.data_store.load_value("df_distrib")
 table: pa.Table = table_value.get_value_data()
 df: DataFrame = table.to_pandas()
 
+
 data = list(df.to_dict(orient="index").values())
 data_json = json.dumps(data, default=str)
 cleaned_data = json.loads(data_json)
 
+# print(cleaned_data)
+
 timeSelected = st.sidebar.selectbox(
-    label="Select time span", index=3, options=["day", "week", "month", "year"]
+    label="Select time span", index=0, options=["year", "month", "day"]
 )
 
 scaleType = st.sidebar.selectbox(
@@ -40,14 +43,20 @@ axisLabel = st.sidebar.selectbox(
     label="Select axis label", index=0, options=["5-year", "year", "month", "week", "day"]
 )
 
+dataView = st.sidebar.selectbox(
+    label="Data view", index=0, options=["Aggregated data", "Sources"]
+)
+
+# print(table)
+
+#kiara run table.query.sql --output=silent --save query_result=my_result table=value:table_value query="select * from data where corpus='timeSelected'"
+#print(query_result)
+
 observers = observable(
     "Test",
     notebook="d/50b89c7d50524163",
     targets=["viewof chart", "style"],
-    observe=["corpus_agg"],
     redefine={"timeSelected": timeSelected, "corpus": cleaned_data, "scaleType": scaleType, "axisLabel": axisLabel},
 )
 
-data = observers.get("corpus_agg")
-df = pd.DataFrame(data)
-st.dataframe(df)
+st.dataframe(df[df['agg'] == timeSelected])
