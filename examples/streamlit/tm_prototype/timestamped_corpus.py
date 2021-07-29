@@ -8,7 +8,7 @@ from kiara import Kiara
 
 # before running this, the dataset must be imported into the local kiara data store, with the alias 'df_distrib':
 #
-# kiara run table.import.from_local_file path=/home/markus/projects/dharpa/kiara_modules.playground/data/mariella/v2/df_distrib-3.csv aliases=df_distrib
+# kiara run table.import.from_local_file path=/Users/mariella.decrouychan/Documents/kiara/kiara_modules.playground/examples/data/tm/df_distrib-3.csv aliases=df_distrib
 from kiara.data import Value
 from pandas import DataFrame
 from streamlit_observable import observable
@@ -32,25 +32,28 @@ cleaned_data = json.loads(data_json)
 # print(cleaned_data)
 
 timeSelected = st.sidebar.selectbox(
-    label="Select time span", index=0, options=["year", "month", "day"]
+    label="Select time span", index=0, key="0", options=["year", "month", "day"]
 )
 
 scaleType = st.sidebar.selectbox(
-    label="Select scale type", index=0, options=["color", "height"]
+    label="Select scale type", index=0, key="1", options=["color", "height"]
 )
 
 axisLabel = st.sidebar.selectbox(
-    label="Select axis label", index=0, options=["5-year", "year", "month", "week", "day"]
+    label="Select axis label", index=0, key="2", options=["5-year", "year", "month", "week", "day"]
 )
 
 dataView = st.sidebar.selectbox(
-    label="Data view", index=0, options=["Aggregated data", "Sources"]
+    label="Data view", index=0, key="3", options=["Aggregated data", "Sources"]
 )
 
-# print(table)
+# we need to assemble the sql query with the column value to filter on
+query = f"select * from data where agg='{timeSelected}'"
+# now we run the 'table.query.sql' kiara module with our table and query
+result = kiara.run("table.query.sql", inputs={"table": table_value, "query":query})
+# here we extract the result table
+query_result_table = result.get_value_data("query_result")
 
-#kiara run table.query.sql --output=silent --save query_result=my_result table=value:table_value query="select * from data where corpus='timeSelected'"
-#print(query_result)
 
 observers = observable(
     "Test",
@@ -59,4 +62,15 @@ observers = observable(
     redefine={"timeSelected": timeSelected, "corpus": cleaned_data, "scaleType": scaleType, "axisLabel": axisLabel},
 )
 
-st.dataframe(df[df['agg'] == timeSelected])
+# old version with pandas filtering
+# st.dataframe(df[df['agg'] == timeSelected])
+
+# here we convert the result table to a pandas data frame
+df_result = query_result_table.to_pandas()
+st.dataframe(df_result)
+
+dataView = st.sidebar.selectbox(
+    label="Data view", index=0, key="4", options=["Aggregated data", "Sources"]
+)
+
+
