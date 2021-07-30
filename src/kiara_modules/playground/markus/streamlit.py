@@ -1,16 +1,21 @@
+# -*- coding: utf-8 -*-
 import os
 import tempfile
 import typing
 
-from streamlit.uploaded_file_manager import UploadedFile
-
 from kiara import Kiara
 from kiara.data import Value, ValueSet
-from kiara.pipeline.controller.batch import BatchController, BatchControllerManual
+from kiara.pipeline.controller.batch import BatchControllerManual
+from kiara.processing import JobStatus
 from kiara.workflow.kiara_workflow import KiaraWorkflow
+from streamlit.uploaded_file_manager import UploadedFile
 
 
-def init_session(st, module_type: str, module_config: typing.Optional[typing.Mapping[str, typing.Any]]=None):
+def init_session(
+    st,
+    module_type: str,
+    module_config: typing.Optional[typing.Mapping[str, typing.Any]] = None,
+):
 
     if "kiara" not in st.session_state:
         print("Create kiara object.")
@@ -23,12 +28,18 @@ def init_session(st, module_type: str, module_config: typing.Optional[typing.Map
         print(f"Create workflow in session: {module_type}")
 
         controller = BatchControllerManual()
-        workflow: KiaraWorkflow = kiara.create_workflow(module_type, module_config=module_config, controller=controller)
+        workflow: KiaraWorkflow = kiara.create_workflow(
+            module_type, module_config=module_config, controller=controller
+        )
         st.session_state["workflow"] = workflow
     else:
         workflow = st.session_state["workflow"]
 
-    return (kiara, workflow,)
+    return (
+        kiara,
+        workflow,
+    )
+
 
 def set_workflow_input(workflow: KiaraWorkflow, process: bool = False, **inputs):
 
@@ -53,12 +64,14 @@ def process_to_stage(workflow: KiaraWorkflow, stage_nr: int):
     controller: BatchControllerManual = workflow.pipeline.controller
     controller.process_stage(stage_nr=stage_nr)
 
+
 def get_step_output(workflow, step_id: str, output_name: str) -> Value:
 
     values: ValueSet = workflow.pipeline.get_step_outputs(step_id=step_id)
     value = values.get_value_obj(output_name)
 
     return value
+
 
 def find_all_aliases_of_type(kiara: Kiara, value_type: str) -> typing.List[str]:
 
@@ -70,17 +83,29 @@ def find_all_aliases_of_type(kiara: Kiara, value_type: str) -> typing.List[str]:
 
     return result
 
+
 def import_bytes(kiara: Kiara, uploaded_file: UploadedFile):
 
     with tempfile.TemporaryDirectory() as tmpdirname:
         path = os.path.join(tmpdirname, uploaded_file.name)
-        with open(path, 'wb') as f:
+        with open(path, "wb") as f:
             f.write(uploaded_file.getbuffer())
 
         if uploaded_file.name.endswith(".csv"):
-            kiara.run("table.import.from_local_file", inputs={"path": path, "aliases": [uploaded_file.name[0:-4]], "file_aliases": [uploaded_file.name]})
+            kiara.run(
+                "table.import.from_local_file",
+                inputs={
+                    "path": path,
+                    "aliases": [uploaded_file.name[0:-4]],
+                    "file_aliases": [uploaded_file.name],
+                },
+            )
         else:
-            kiara.run("import.local_file", inputs={"path": path, "aliases": [uploaded_file.name]})
+            kiara.run(
+                "import.local_file",
+                inputs={"path": path, "aliases": [uploaded_file.name]},
+            )
+
 
 def onboard_file(kiara: Kiara, st, uploaded_file):
 
@@ -108,15 +133,24 @@ def check_workflow_status(workflow: KiaraWorkflow):
 
     print()
     if failed:
-        status.append(
-            "Error: One or several workflow steps failed!\n"
-        )
+        status.append("Error: One or several workflow steps failed!\n")
         for s_id, msg in failed.items():
             status.append(f" - {s_id}: {msg}")
 
         return (False, status)
     else:
-        status.append(
-            "No errors."
-        )
+        status.append("No errors.")
         return (True, status)
+
+
+class MultiPageApp(object):
+    def __init__(self):
+
+        self._pages = {}
+
+    def add_page(self, title: str, func: typing.Callable):
+
+        if title in self._pages.keys():
+            raise Exception(f"Duplicate page: {title}")
+
+        self._pages[title] = func

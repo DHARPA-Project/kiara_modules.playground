@@ -1,11 +1,10 @@
 # -*- coding: utf-8 -*-
 import typing
 
-from pandas import DataFrame
-
 from kiara import KiaraModule
 from kiara.data.values import ValueSchema, ValueSet
 from kiara_modules.core.metadata_schemas import FileMetadata
+from pandas import DataFrame
 from pyarrow import csv
 
 

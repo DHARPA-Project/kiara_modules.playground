@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 import json
 
-import pandas as pd
 import pyarrow as pa
 import streamlit as st
 from kiara import Kiara
@@ -40,7 +39,10 @@ scaleType = st.sidebar.selectbox(
 )
 
 axisLabel = st.sidebar.selectbox(
-    label="Select axis label", index=0, key="2", options=["5-year", "year", "month", "week", "day"]
+    label="Select axis label",
+    index=0,
+    key="2",
+    options=["5-year", "year", "month", "week", "day"],
 )
 
 dataView = st.sidebar.selectbox(
@@ -50,7 +52,7 @@ dataView = st.sidebar.selectbox(
 # we need to assemble the sql query with the column value to filter on
 query = f"select * from data where agg='{timeSelected}'"
 # now we run the 'table.query.sql' kiara module with our table and query
-result = kiara.run("table.query.sql", inputs={"table": table_value, "query":query})
+result = kiara.run("table.query.sql", inputs={"table": table_value, "query": query})
 # here we extract the result table
 query_result_table = result.get_value_data("query_result")
 
@@ -59,7 +61,12 @@ observers = observable(
     "Test",
     notebook="d/50b89c7d50524163",
     targets=["viewof chart", "style"],
-    redefine={"timeSelected": timeSelected, "corpus": cleaned_data, "scaleType": scaleType, "axisLabel": axisLabel},
+    redefine={
+        "timeSelected": timeSelected,
+        "corpus": cleaned_data,
+        "scaleType": scaleType,
+        "axisLabel": axisLabel,
+    },
 )
 
 # old version with pandas filtering
@@ -72,5 +79,3 @@ st.dataframe(df_result)
 dataView = st.sidebar.selectbox(
     label="Data view", index=0, key="4", options=["Aggregated data", "Sources"]
 )
-
-

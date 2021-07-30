@@ -5,24 +5,27 @@
 # streamlit run examples/streamlit/network_analysis/create_graphs.py
 
 import os
-import tempfile
 import typing
 
 import streamlit as st
-from streamlit.uploaded_file_manager import UploadedFile
-from kiara import Kiara
-from kiara.processing import JobStatus
-from kiara.workflow.kiara_workflow import KiaraWorkflow
-from kiara_modules.playground.markus.streamlit import init_session, check_workflow_status, onboard_file, \
-    find_all_aliases_of_type
+
+from kiara_modules.playground.markus.streamlit import (
+    find_all_aliases_of_type,
+    init_session,
+    onboard_file,
+)
 
 st.title("Kiara/streamlit experiment - create a network graph")
 
 # we'll use a pipeline description here, instead of a Python kiara module name
-pipeline_file = os.path.join(os.path.dirname(__file__), "..", "..", "pipelines", "create_graph_from_tables.json")
+pipeline_file = os.path.join(
+    os.path.dirname(__file__), "..", "..", "pipelines", "create_graph_from_tables.json"
+)
 kiara, workflow = init_session(st, module_type=pipeline_file)
 
-fp = st.sidebar.file_uploader("Import table(s) from csv file(s)", type=["csv"], accept_multiple_files=True)
+fp = st.sidebar.file_uploader(
+    "Import table(s) from csv file(s)", type=["csv"], accept_multiple_files=True
+)
 if fp:
     onboard_file(kiara=kiara, st=st, uploaded_file=fp)
 
@@ -35,7 +38,9 @@ else:
         st.sidebar.write(a)
 
 
-def create_graph(alias, edges, nodes, source_column, target_column, weight_column, node_index):
+def create_graph(
+    alias, edges, nodes, source_column, target_column, weight_column, node_index
+):
 
     if not alias:
         return ("No alias specified, doing nothing...", None)
@@ -53,7 +58,7 @@ def create_graph(alias, edges, nodes, source_column, target_column, weight_colum
         "source_column": source_column,
         "target_column": target_column,
         "weight_column": weight_column,
-        "index_column_name": node_index
+        "index_column_name": node_index,
     }
 
     try:
@@ -111,17 +116,33 @@ with st.form(key="create_graph"):
     default_weight_name = find_likely_index(edge_column_names, "weight")
     default_id_name = find_likely_index(nodes_column_names, "id")
 
-    source_column_name = st.selectbox("Source column name", edge_column_names, index=default_source_name)
-    target_column_name = st.selectbox("Target column name", edge_column_names, index=default_target_name)
-    weight_column_name = st.selectbox("Weight column name", edge_column_names, index=default_weight_name)
-    nodes_index_name = st.selectbox("Nodes table_index", nodes_column_names, index=default_id_name)
+    source_column_name = st.selectbox(
+        "Source column name", edge_column_names, index=default_source_name
+    )
+    target_column_name = st.selectbox(
+        "Target column name", edge_column_names, index=default_target_name
+    )
+    weight_column_name = st.selectbox(
+        "Weight column name", edge_column_names, index=default_weight_name
+    )
+    nodes_index_name = st.selectbox(
+        "Nodes table_index", nodes_column_names, index=default_id_name
+    )
 
     create_button = st.form_submit_button(label="Create graph")
     if create_button:
-        result, graph = create_graph(alias=graph_alias, edges=select_edges, nodes=select_nodes, source_column=source_column_name, target_column=target_column_name, weight_column=weight_column_name,  node_index=nodes_index_name)
+        result, graph = create_graph(
+            alias=graph_alias,
+            edges=select_edges,
+            nodes=select_nodes,
+            source_column=source_column_name,
+            target_column=target_column_name,
+            weight_column=weight_column_name,
+            node_index=nodes_index_name,
+        )
         st.write(result)
 
-st. sidebar.write("## All your graphs:")
+st.sidebar.write("## All your graphs:")
 all_graph_aliases = find_all_aliases_of_type(kiara, value_type="network_graph")
 if not all_graph_aliases:
     st.sidebar.write(" -- no graphs --")
@@ -136,7 +157,9 @@ all_table_aliases = find_all_aliases_of_type(kiara, value_type="table")
 
 st.write("Graph properties")
 
-props = kiara.run("network.graph.properties", inputs={"graph": graph}, resolve_result=True)
+props = kiara.run(
+    "network.graph.properties", inputs={"graph": graph}, resolve_result=True
+)
 st.write(props)
 
 # try:
@@ -191,6 +214,3 @@ st.write(props)
 # if success:
 #     st.write(workflow.pipeline.outputs.get_all_value_data())
 # # st.write(workflow.current_state.dict())
-
-
-
