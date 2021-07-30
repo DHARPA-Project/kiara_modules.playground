@@ -95,52 +95,50 @@ def find_likely_index(options: typing.Iterable, keyword: str):
 
 
 graph = None
-with st.form(key="create_graph"):
 
-    st.write("Create a new graph")
+st.write("Create a new graph")
 
-    graph_alias = st.text_input("The alias for the graph")
+graph_alias = st.text_input("The alias for the graph")
 
-    default_edge_table = find_likely_index(all_table_aliases, "edge")
-    default_node_table = find_likely_index(all_table_aliases, "node")
+default_edge_table = find_likely_index(all_table_aliases, "edge")
+default_node_table = find_likely_index(all_table_aliases, "node")
 
-    select_edges = st.selectbox("Edges", all_table_aliases, index=default_edge_table)
-    # select_nodes = st.selectbox("Nodes", ["-- no nodes --"] + all_files)
-    select_nodes = st.selectbox("Nodes", all_table_aliases, index=default_node_table)
+select_edges = st.selectbox("Edges", all_table_aliases, index=default_edge_table)
+select_nodes = st.selectbox("Nodes", all_table_aliases, index=default_node_table)
 
-    edge_column_names = get_table_column_names(select_edges)
-    nodes_column_names = get_table_column_names(select_nodes)
+edge_column_names = get_table_column_names(select_edges)
+nodes_column_names = get_table_column_names(select_nodes)
 
-    default_source_name = find_likely_index(edge_column_names, "source")
-    default_target_name = find_likely_index(edge_column_names, "target")
-    default_weight_name = find_likely_index(edge_column_names, "weight")
-    default_id_name = find_likely_index(nodes_column_names, "id")
+default_source_name = find_likely_index(edge_column_names, "source")
+default_target_name = find_likely_index(edge_column_names, "target")
+default_weight_name = find_likely_index(edge_column_names, "weight")
+default_id_name = find_likely_index(nodes_column_names, "id")
 
-    source_column_name = st.selectbox(
-        "Source column name", edge_column_names, index=default_source_name
+source_column_name = st.selectbox(
+    "Source column name", edge_column_names, index=default_source_name
+)
+target_column_name = st.selectbox(
+    "Target column name", edge_column_names, index=default_target_name
+)
+weight_column_name = st.selectbox(
+    "Weight column name", edge_column_names, index=default_weight_name
+)
+nodes_index_name = st.selectbox(
+    "Nodes table_index", nodes_column_names, index=default_id_name
+)
+
+create_button = st.button(label="Create graph")
+if create_button:
+    result, graph = create_graph(
+        alias=graph_alias,
+        edges=select_edges,
+        nodes=select_nodes,
+        source_column=source_column_name,
+        target_column=target_column_name,
+        weight_column=weight_column_name,
+        node_index=nodes_index_name,
     )
-    target_column_name = st.selectbox(
-        "Target column name", edge_column_names, index=default_target_name
-    )
-    weight_column_name = st.selectbox(
-        "Weight column name", edge_column_names, index=default_weight_name
-    )
-    nodes_index_name = st.selectbox(
-        "Nodes table_index", nodes_column_names, index=default_id_name
-    )
-
-    create_button = st.form_submit_button(label="Create graph")
-    if create_button:
-        result, graph = create_graph(
-            alias=graph_alias,
-            edges=select_edges,
-            nodes=select_nodes,
-            source_column=source_column_name,
-            target_column=target_column_name,
-            weight_column=weight_column_name,
-            node_index=nodes_index_name,
-        )
-        st.write(result)
+    st.write(result)
 
 st.sidebar.write("## All your graphs:")
 all_graph_aliases = find_all_aliases_of_type(kiara, value_type="network_graph")
