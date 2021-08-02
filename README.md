@@ -99,20 +99,53 @@ This will delete all imported and generated data from the internal *kiara* data 
 ### Update dependencies
 
 In some cases the dependency *kiara* library or any of the packages that contain modules might have been updated, in which
-case it is advisable to update the playground virtual-env. This can be done using:
+case it is advisable to update the playground virtual-env.
+
+You might want to do a
 
 ```console
+git pull
+```
+
+before any of the following steps.
+
+#### Use latest stable version of *kiara* and *kiara* module packages
+
+##### Linux & Mac OS X (using make)
+
+```console
+# make sure your virtual env is activated!!!
 make update-dependencies
 ```
 
-If you want to track the latest development version of those libraries, use the following instead:
+##### Windows (or manual pip install)
 
 ```console
-make update-dependencies-dev
+# make sure your virtual env is activated!!!
+pip install --extra-index-url https://pypi.fury.io/dharpa/ -e '.[all_dev]'
+pip install --extra-index-url https://pypi.fury.io/dharpa/ -U 'kiara[all]' 'kiara_modules.core[all]' 'kiara_modules.language_processing[all]' 'kiara_modules.network_analysis[all]'
 ```
+
+#### Use latest dev version of *kiara* and *kiara* module packages
+
+If you want to track the latest development version of those libraries, use the following instead:
 
 *Note*: in order to revert back to a non-development version of the libraries, you'll have to remove the dependencies manually, and then re-install.
 
+##### Linux & Mac OS X (using make)
+
+```console
+# make sure your virtual env is activated!!!
+make update-dependencies-dev
+```
+
+##### Windows (or manual pip install)
+
+```console
+# make sure your virtual env is activated!!!
+pip install --extra-index-url https://pypi.fury.io/dharpa/ -e '.[all_dev]'
+pip install --extra-index-url https://pypi.fury.io/dharpa/ -U 'git+https://github.com/DHARPA-Project/kiara.git@develop#egg=kiara[all]' 'git+https://github.com/DHARPA-Project/kiara_modules.core.git@develop#egg=kiara_modules.core[all]' 'git+https://github.com/DHARPA-Project/kiara_modules.language_processing.git@develop#egg=kiara_modules.language_processing[all]' 'git+https://github.com/DHARPA-Project/kiara_modules.network_analysis.git@develop#egg=kiara_modules.network_analysis[all]'
+```
 
 ### ``make`` targets (Linux & Mac OS X)
 
