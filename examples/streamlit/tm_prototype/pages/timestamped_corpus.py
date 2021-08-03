@@ -4,31 +4,44 @@ import json
 import pandas as pd
 import pyarrow as pa
 import streamlit as st
-from kiara import Kiara
+from data_process.agg_data import *
+
+# temporarily disabled Kiara as we will organise things again once there's a full first prototypical
+# draft overview of the full workflow steps
+
+
+
+#from kiara import Kiara
 
 # before running this, the dataset must be imported into the local kiara data store, with the alias 'df_distrib':
 #
 # kiara run table.import.from_local_file path=/Users/mariella.decrouychan/Documents/kiara/kiara_modules.playground/examples/data/tm/df_distrib-3.csv aliases=df_distrib
-from kiara.data import Value
+#from kiara.data import Value
+
+
 from pandas import DataFrame
 from streamlit_observable import observable
 
 def app():
     st.markdown("## Timestamped Corpus")
 
-    kiara = Kiara.instance()
+    #kiara = Kiara.instance()
 
-    table_value: Value = kiara.data_store.load_value("df_distrib")
+    #table_value: Value = kiara.data_store.load_value("df_distrib")
 
-    table: pa.Table = table_value.get_value_data()
-    df: DataFrame = table.to_pandas()
+    #table: pa.Table = table_value.get_value_data()
+    #df: DataFrame = table.to_pandas()
+
+    df = st.session_state.data
+
+    df_distrib = aggregate_date(df)
 
 
-    data = list(df.to_dict(orient="index").values())
+
+    data = list(df_distrib.to_dict(orient="index").values())
     data_json = json.dumps(data, default=str)
     cleaned_data = json.loads(data_json)
 
-    # print(cleaned_data)
 
     timeSelected = st.sidebar.selectbox(
         label="Select time span", index=0, key="0", options=["year", "month", "day"]
@@ -47,11 +60,12 @@ def app():
     #)
 
     # we need to assemble the sql query with the column value to filter on
-    query = f"select * from data where agg='{timeSelected}'"
+    #query = f"select * from data where agg='{timeSelected}'"
     # now we run the 'table.query.sql' kiara module with our table and query
-    result = kiara.run("table.query.sql", inputs={"table": table_value, "query":query})
+    #result = kiara.run("table.query.sql", inputs={"table": table_value, "query":query})
     # here we extract the result table
-    query_result_table = result.get_value_data("query_result")
+    #query_result_table = result.get_value_data("query_result")
+
 
 
     observers = observable(
@@ -65,11 +79,13 @@ def app():
     # st.dataframe(df[df['agg'] == timeSelected])
 
     # here we convert the result table to a pandas data frame
-    df_result = query_result_table.to_pandas()
+    #df_result = query_result_table.to_pandas()
+    
+    df_result = df_distrib[df_distrib['agg'] == timeSelected]
     st.dataframe(df_result)
 
-    dataView = st.sidebar.selectbox(
-        label="Data view", index=0, key="3", options=["Aggregated data", "Sources"]
-    )
+    #dataView = st.sidebar.selectbox(
+    #    label="Data view", index=0, key="3", options=["Aggregated data", "Sources"]
+    #)
 
 
