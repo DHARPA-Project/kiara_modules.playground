@@ -538,259 +538,239 @@
 </div>
 <p>The formatting here will be improved later on, for now this should be enough to get the important details of each module type.</p>
 <h2 id="playgroundlenagraph_components"><code>playground.lena.graph_components</code><a class="headerlink" href="#playgroundlenagraph_components" title="Permanent link">&para;</a></h2>
-<div class="codehilite"><pre><span></span><code>╭─ Module: graph_components ───────────────────────────────────────────────────╮
-│                                                                              │
-│  Documentation                                                               │
-│                           -- n/a --                                          │
-│                                                                              │
-│  Origin                                                                      │
-│                           Authors   Markus Binsteiner (markus@frkl.io)       │
-│                                     Lena Jaskov (helena.jaskov@uni.lu)       │
-│                                                                              │
-│  Context                                                                     │
-│                           Tags         playground                            │
-│                           Labels       package: kiara_modules.playground     │
-│                           References   source_repo:                          │
-│                                        https://github.com/DHARPA-Project…    │
-│                                        documentation:                        │
-│                                        https://dharpa.org/kiara_modules.…    │
-│                                        module_doc:                           │
-│                                        https://dharpa.org/kiara_modules.…    │
-│                                        source_url:                           │
-│                                        https://github.com/DHARPA-Project…    │
-│                                                                              │
-│  Module config                                                               │
-│                           Field                    Type      Required        │
-│                          ─────────────────────────────────────────────       │
-│                           constants                object    no              │
-│                           defaults                 object    no              │
-│                           find_largest_component   boolean   no              │
-│                           number_of_components     boolean   no              │
-│                                                                              │
-│  Python class                                                                │
-│                           class_name    GrpahComponentsModule                │
-│                           module_name   kiara_modules.playground.lena        │
-│                           full_name     kiara_modules.playground.lena.Gr…    │
-│                                                                              │
-│  Processing source code  ─────────────────────────────────────────────────   │
-│                           def process(self, inputs: ValueSet, outputs: V…    │
-│                                                                              │
-│                               if self.get_config_value(&quot;find_largest_com…    │
-│                                   input_graph: Graph = inputs.get_value_…    │
-│                                   undir_graph = nx.to_undirected(input_g…    │
-│                                   undir_components = nx.connected_compon…    │
-│                                   lg_component = max(undir_components, k…    │
-│                                   subgraph = input_graph.subgraph(lg_com…    │
-│                                                                              │
-│                                   outputs.set_values(largest_component=s…    │
-│                                                                              │
-│                               if self.get_config_value(&quot;number_of_compon…    │
-│                                   input_graph = inputs.get_value_data(&quot;g…    │
-│                                   undir_graph = nx.to_undirected(input_g…    │
-│                                   number_of_components = nx.number_conne…    │
-│                                                                              │
-│                                   outputs.set_values(number_of_component…    │
-│                                                                              │
-│                          ─────────────────────────────────────────────────   │
-│                                                                              │
-╰──────────────────────────────────────────────────────────────────────────────╯
+<div class="codehilite"><pre><span></span><code> Documentation                                                                  
+                          -- n/a --                                             
+
+ Origin                                                                         
+                          Authors   Markus Binsteiner (markus@frkl.io)          
+                                    Lena Jaskov (helena.jaskov@uni.lu)          
+
+ Context                                                                        
+                          Tags         playground                               
+                          Labels       package: kiara_modules.playground        
+                          References   source_repo:                             
+                                       https://github.com/DHARPA-Project/kia…   
+                                       documentation:                           
+                                       https://dharpa.org/kiara_modules.play…   
+                                       module_doc:                              
+                                       https://dharpa.org/kiara_modules.play…   
+                                       source_url:                              
+                                       https://github.com/DHARPA-Project/kia…   
+
+ Module config                                                                  
+                          Field                    Type      Required           
+                         ─────────────────────────────────────────────          
+                          constants                object    no                 
+                          defaults                 object    no                 
+                          find_largest_component   boolean   no                 
+                          number_of_components     boolean   no                 
+
+ Python class                                                                   
+                          class_name    GrpahComponentsModule                   
+                          module_name   kiara_modules.playground.lena           
+                          full_name     kiara_modules.playground.lena.GrpahC…   
+
+ Processing source code  ─────────────────────────────────────────────────────  
+                          def process(self, inputs: ValueSet, outputs: Value…   
+
+                              if self.get_config_value(&quot;find_largest_compone…   
+                                  input_graph: Graph = inputs.get_value_data…   
+                                  undir_graph = nx.to_undirected(input_graph)   
+                                  undir_components = nx.connected_components…   
+                                  lg_component = max(undir_components, key=l…   
+                                  subgraph = input_graph.subgraph(lg_compone…   
+
+                                  outputs.set_values(largest_component=subgr…   
+
+                              if self.get_config_value(&quot;number_of_components…   
+                                  input_graph = inputs.get_value_data(&quot;graph…   
+                                  undir_graph = nx.to_undirected(input_graph)   
+                                  number_of_components = nx.number_connected…   
+
+                                  outputs.set_values(number_of_components=nu…   
+
+                         ─────────────────────────────────────────────────────  
 </code></pre></div>
 
 <h2 id="playgroundmarkusfilter_table_by_date"><code>playground.markus.filter_table_by_date</code><a class="headerlink" href="#playgroundmarkusfilter_table_by_date" title="Permanent link">&para;</a></h2>
-<div class="codehilite"><pre><span></span><code>╭─ Module: filter_table_by_date ───────────────────────────────────────────────╮
-│                                                                              │
-│  Documentation                                                               │
-│                           -- n/a --                                          │
-│                                                                              │
-│  Origin                                                                      │
-│                           Authors   Markus Binsteiner (markus@frkl.io)       │
-│                                                                              │
-│  Context                                                                     │
-│                           Tags         playground                            │
-│                           Labels       package: kiara_modules.playground     │
-│                           References   source_repo:                          │
-│                                        https://github.com/DHARPA-Project…    │
-│                                        documentation:                        │
-│                                        https://dharpa.org/kiara_modules.…    │
-│                                        module_doc:                           │
-│                                        https://dharpa.org/kiara_modules.…    │
-│                                        source_url:                           │
-│                                        https://github.com/DHARPA-Project…    │
-│                                                                              │
-│  Module config                                                               │
-│                           Field       Type     Required                      │
-│                          ───────────────────────────────                     │
-│                           constants   object   no                            │
-│                           defaults    object   no                            │
-│                                                                              │
-│  Python class                                                                │
-│                           class_name    MyFirstModule                        │
-│                           module_name   kiara_modules.playground.markus      │
-│                           full_name     kiara_modules.playground.markus.…    │
-│                                                                              │
-│  Processing source code  ─────────────────────────────────────────────────   │
-│                           def process(self, inputs, outputs):                │
-│                                                                              │
-│                               table_obj = inputs.get_value_data(&quot;table_i…    │
-│                               date_input = inputs.get_value_data(&quot;date&quot;)     │
-│                                                                              │
-│                               df: DataFrame = table_obj.to_pandas()          │
-│                                                                              │
-│                               after_date = df[df[&quot;birthday&quot;] &gt;= date_inp…    │
-│                                                                              │
-│                               import pyarrow as pa                           │
-│                                                                              │
-│                               result_table = pa.Table.from_pandas(after_…    │
-│                                                                              │
-│                               outputs.set_value(&quot;table_output&quot;, result_t…    │
-│                                                                              │
-│                          ─────────────────────────────────────────────────   │
-│                                                                              │
-╰──────────────────────────────────────────────────────────────────────────────╯
+<div class="codehilite"><pre><span></span><code> Documentation                                                                  
+                          -- n/a --                                             
+
+ Origin                                                                         
+                          Authors   Markus Binsteiner (markus@frkl.io)          
+
+ Context                                                                        
+                          Tags         playground                               
+                          Labels       package: kiara_modules.playground        
+                          References   source_repo:                             
+                                       https://github.com/DHARPA-Project/kia…   
+                                       documentation:                           
+                                       https://dharpa.org/kiara_modules.play…   
+                                       module_doc:                              
+                                       https://dharpa.org/kiara_modules.play…   
+                                       source_url:                              
+                                       https://github.com/DHARPA-Project/kia…   
+
+ Module config                                                                  
+                          Field       Type     Required                         
+                         ───────────────────────────────                        
+                          constants   object   no                               
+                          defaults    object   no                               
+
+ Python class                                                                   
+                          class_name    MyFirstModule                           
+                          module_name   kiara_modules.playground.markus         
+                          full_name     kiara_modules.playground.markus.MyFi…   
+
+ Processing source code  ─────────────────────────────────────────────────────  
+                          def process(self, inputs, outputs):                   
+
+                              table_obj = inputs.get_value_data(&quot;table_input…   
+                              date_input = inputs.get_value_data(&quot;date&quot;)        
+
+                              df: DataFrame = table_obj.to_pandas()             
+
+                              after_date = df[df[&quot;birthday&quot;] &gt;= date_input.d…   
+
+                              import pyarrow as pa                              
+
+                              result_table = pa.Table.from_pandas(after_date…   
+
+                              outputs.set_value(&quot;table_output&quot;, result_table)   
+
+                         ─────────────────────────────────────────────────────  
 </code></pre></div>
 
 <h2 id="playgroundmarkusfrom_file"><code>playground.markus.from_file</code><a class="headerlink" href="#playgroundmarkusfrom_file" title="Permanent link">&para;</a></h2>
-<div class="codehilite"><pre><span></span><code>╭─ Module: from_file ──────────────────────────────────────────────────────────╮
-│                                                                              │
-│  Documentation                                                               │
-│                           Load table-like data from a kiara file object      │
-│                           (not a path!).                                     │
-│                                                                              │
-│  Origin                                                                      │
-│                           Authors   Markus Binsteiner (markus@frkl.io)       │
-│                                                                              │
-│  Context                                                                     │
-│                           Tags         playground                            │
-│                           Labels       package: kiara_modules.playground     │
-│                           References   source_repo:                          │
-│                                        https://github.com/DHARPA-Project…    │
-│                                        documentation:                        │
-│                                        https://dharpa.org/kiara_modules.…    │
-│                                        module_doc:                           │
-│                                        https://dharpa.org/kiara_modules.…    │
-│                                        source_url:                           │
-│                                        https://github.com/DHARPA-Project…    │
-│                                                                              │
-│  Module config                                                               │
-│                           Field       Type     Required                      │
-│                          ───────────────────────────────                     │
-│                           constants   object   no                            │
-│                           defaults    object   no                            │
-│                                                                              │
-│  Python class                                                                │
-│                           class_name    CreateGraphFromFileModule            │
-│                           module_name   kiara_modules.playground.markus      │
-│                           full_name     kiara_modules.playground.markus.…    │
-│                                                                              │
-│  Processing source code  ─────────────────────────────────────────────────   │
-│                           def process(self, inputs: ValueSet, outputs: V…    │
-│                                                                              │
-│                               input_file: FileMetadata = inputs.get_valu…    │
-│                               imported_data = csv.read_csv(input_file.pa…    │
-│                                                                              │
-│                               if self.get_config_value(&quot;allow_column_fil…    │
-│                                   if self.get_config_value(&quot;columns&quot;):       │
-│                                       imported_data = imported_data.sele…    │
-│                                           self.get_config_value(&quot;only_co…    │
-│                                       )                                      │
-│                                                                              │
-│                               outputs.set_value(&quot;table&quot;, imported_data)      │
-│                                                                              │
-│                          ─────────────────────────────────────────────────   │
-│                                                                              │
-╰──────────────────────────────────────────────────────────────────────────────╯
+<div class="codehilite"><pre><span></span><code> Documentation                                                                  
+                          Load table-like data from a kiara file object (not    
+                          a path!).                                             
+
+ Origin                                                                         
+                          Authors   Markus Binsteiner (markus@frkl.io)          
+
+ Context                                                                        
+                          Tags         playground                               
+                          Labels       package: kiara_modules.playground        
+                          References   source_repo:                             
+                                       https://github.com/DHARPA-Project/kia…   
+                                       documentation:                           
+                                       https://dharpa.org/kiara_modules.play…   
+                                       module_doc:                              
+                                       https://dharpa.org/kiara_modules.play…   
+                                       source_url:                              
+                                       https://github.com/DHARPA-Project/kia…   
+
+ Module config                                                                  
+                          Field       Type     Required                         
+                         ───────────────────────────────                        
+                          constants   object   no                               
+                          defaults    object   no                               
+
+ Python class                                                                   
+                          class_name    CreateGraphFromFileModule               
+                          module_name   kiara_modules.playground.markus         
+                          full_name     kiara_modules.playground.markus.Crea…   
+
+ Processing source code  ─────────────────────────────────────────────────────  
+                          def process(self, inputs: ValueSet, outputs: Value…   
+
+                              input_file: FileMetadata = inputs.get_value_da…   
+                              imported_data = csv.read_csv(input_file.path)     
+
+                              if self.get_config_value(&quot;allow_column_filter&quot;…   
+                                  if self.get_config_value(&quot;columns&quot;):          
+                                      imported_data = imported_data.select(     
+                                          self.get_config_value(&quot;only_column…   
+                                      )                                         
+
+                              outputs.set_value(&quot;table&quot;, imported_data)         
+
+                         ─────────────────────────────────────────────────────  
 </code></pre></div>
 
 <h2 id="playgroundsandboxexample"><code>playground.sandbox.example</code><a class="headerlink" href="#playgroundsandboxexample" title="Permanent link">&para;</a></h2>
-<div class="codehilite"><pre><span></span><code>╭─ Module: example ────────────────────────────────────────────────────────────╮
-│                                                                              │
-│  Documentation                                                               │
-│                           A very simple example module; concatenate two      │
-│                           strings.                                           │
-│                                                                              │
-│                           The purpose of this module is to show the main     │
-│                           elements of a KiaraModule:                         │
-│                                                                              │
-│                           the (optional) configuration :    must inherit     │
-│                           from ModuleTypeConfig, and the config class        │
-│                           must be set as the &quot;_config_cls&quot; attribute on      │
-│                           the KiaraModule class. Configuration values can    │
-│                           be retrieved via the self.get_config_value(key)    │
-│                           method                                             │
-│                                                                              │
-│                           the inputs description :    must return a          │
-│                           dictionary, containing the input name(s) as        │
-│                           keys, and another dictionary containing type       │
-│                           information and documentation about the input      │
-│                           data as value                                      │
-│                                                                              │
-│                           the outputs description :    must return a         │
-│                           dictionary, containing the output name(s) as       │
-│                           keys, and another dictionary containing type       │
-│                           information and documentation about the output     │
-│                           data as value                                      │
-│                                                                              │
-│                           the process method :    this is where the          │
-│                           actual work gets done. Input data can be           │
-│                           accessed via inputs.get_value_data(key),           │
-│                           results can be set with the                        │
-│                           outputs.set_value(key, value) method               │
-│                                                                              │
-│                           Examples:                                          │
-│                                                                              │
-│                           ┌─────────────────────────────────────────────┐    │
-│                           │ This example module can be tested on the c… │    │
-│                           │                                             │    │
-│                           │     kiara module explain-type playground.s… │    │
-│                           │     kiara module explain-instance playgrou… │    │
-│                           │     kiara run playground.sandbox.example t… │    │
-│                           │                                             │    │
-│                           │ To set a different separator in the config… │    │
-│                           │                                             │    │
-│                           │     kiara run playground.sandbox.example -… │    │
-│                           └─────────────────────────────────────────────┘    │
-│                                                                              │
-│  Origin                                                                      │
-│                           Authors   Markus Binsteiner (markus@frkl.io)       │
-│                                                                              │
-│  Context                                                                     │
-│                           Tags         playground                            │
-│                           Labels       package: kiara_modules.playground     │
-│                           References   source_repo:                          │
-│                                        https://github.com/DHARPA-Project…    │
-│                                        documentation:                        │
-│                                        https://dharpa.org/kiara_modules.…    │
-│                                        module_doc:                           │
-│                                        https://dharpa.org/kiara_modules.…    │
-│                                        source_url:                           │
-│                                        https://github.com/DHARPA-Project…    │
-│                                                                              │
-│  Module config                                                               │
-│                           Field       Type     Required                      │
-│                          ───────────────────────────────                     │
-│                           constants   object   no                            │
-│                           defaults    object   no                            │
-│                           separator   string   no                            │
-│                                                                              │
-│  Python class                                                                │
-│                           class_name    ExampleModule                        │
-│                           module_name   kiara_modules.playground.sandbox     │
-│                           full_name     kiara_modules.playground.sandbox…    │
-│                                                                              │
-│  Processing source code  ─────────────────────────────────────────────────   │
-│                           def process(self, inputs: ValueSet, outputs: V…    │
-│                                                                              │
-│                               separator = self.get_config_value(&quot;separat…    │
-│                                                                              │
-│                               text_1 = inputs.get_value_data(&quot;text_1&quot;)       │
-│                               text_2 = inputs.get_value_data(&quot;text_2&quot;)       │
-│                                                                              │
-│                               result = text_1 + separator + text_2           │
-│                               outputs.set_value(&quot;text&quot;, result)              │
-│                                                                              │
-│                          ─────────────────────────────────────────────────   │
-│                                                                              │
-╰──────────────────────────────────────────────────────────────────────────────╯
+<div class="codehilite"><pre><span></span><code> Documentation                                                                  
+                          A very simple example module; concatenate two         
+                          strings.                                              
+
+                          The purpose of this module is to show the main        
+                          elements of a KiaraModule:                            
+
+                          the (optional) configuration :    must inherit from   
+                          ModuleTypeConfig, and the config class must be set    
+                          as the &quot;_config_cls&quot; attribute on the KiaraModule     
+                          class. Configuration values can be retrieved via      
+                          the self.get_config_value(key) method                 
+
+                          the inputs description :    must return a             
+                          dictionary, containing the input name(s) as keys,     
+                          and another dictionary containing type information    
+                          and documentation about the input data as value       
+
+                          the outputs description :    must return a            
+                          dictionary, containing the output name(s) as keys,    
+                          and another dictionary containing type information    
+                          and documentation about the output data as value      
+
+                          the process method :    this is where the actual      
+                          work gets done. Input data can be accessed via        
+                          inputs.get_value_data(key), results can be set with   
+                          the outputs.set_value(key, value) method              
+
+                          Examples:                                             
+
+                          ┌─────────────────────────────────────────────────┐   
+                          │ This example module can be tested on the comma… │   
+                          │                                                 │   
+                          │     kiara module explain-type playground.sandb… │   
+                          │     kiara module explain-instance playground.s… │   
+                          │     kiara run playground.sandbox.example text_… │   
+                          │                                                 │   
+                          │ To set a different separator in the config for… │   
+                          │                                                 │   
+                          │     kiara run playground.sandbox.example --mod… │   
+                          └─────────────────────────────────────────────────┘   
+
+ Origin                                                                         
+                          Authors   Markus Binsteiner (markus@frkl.io)          
+
+ Context                                                                        
+                          Tags         playground                               
+                          Labels       package: kiara_modules.playground        
+                          References   source_repo:                             
+                                       https://github.com/DHARPA-Project/kia…   
+                                       documentation:                           
+                                       https://dharpa.org/kiara_modules.play…   
+                                       module_doc:                              
+                                       https://dharpa.org/kiara_modules.play…   
+                                       source_url:                              
+                                       https://github.com/DHARPA-Project/kia…   
+
+ Module config                                                                  
+                          Field       Type     Required                         
+                         ───────────────────────────────                        
+                          constants   object   no                               
+                          defaults    object   no                               
+                          separator   string   no                               
+
+ Python class                                                                   
+                          class_name    ExampleModule                           
+                          module_name   kiara_modules.playground.sandbox        
+                          full_name     kiara_modules.playground.sandbox.Exa…   
+
+ Processing source code  ─────────────────────────────────────────────────────  
+                          def process(self, inputs: ValueSet, outputs: Value…   
+
+                              separator = self.get_config_value(&quot;separator&quot;)    
+
+                              text_1 = inputs.get_value_data(&quot;text_1&quot;)          
+                              text_2 = inputs.get_value_data(&quot;text_2&quot;)          
+
+                              result = text_1 + separator + text_2              
+                              outputs.set_value(&quot;text&quot;, result)                 
+
+                         ─────────────────────────────────────────────────────  
 </code></pre></div>
                 
               

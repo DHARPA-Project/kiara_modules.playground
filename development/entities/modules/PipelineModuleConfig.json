@@ -64,6 +64,23 @@
     }
   },
   "definitions": {
+    "DocumentationMetadataModel": {
+      "title": "DocumentationMetadataModel",
+      "type": "object",
+      "properties": {
+        "description": {
+          "title": "Description",
+          "description": "Short description of the item.",
+          "default": "-- n/a --",
+          "type": "string"
+        },
+        "doc": {
+          "title": "Doc",
+          "description": "Detailed documentation of the item (in markdown).",
+          "type": "string"
+        }
+      }
+    },
     "StepValueAddress": {
       "title": "StepValueAddress",
       "description": "Small model to describe the address of a value of a step, within a Pipeline/PipelineStructure.",
@@ -105,6 +122,15 @@
           "title": "Module Config",
           "description": "The configuration for the module.",
           "type": "object"
+        },
+        "doc": {
+          "title": "Doc",
+          "description": "Documentation for this operation.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/DocumentationMetadataModel"
+            }
+          ]
         },
         "step_id": {
           "title": "Step Id",
