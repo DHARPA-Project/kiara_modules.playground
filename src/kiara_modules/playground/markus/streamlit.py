@@ -154,3 +154,14 @@ class MultiPageApp(object):
             raise Exception(f"Duplicate page: {title}")
 
         self._pages[title] = func
+
+    def run(self, streamlit):
+        # Drodown to select the page to run
+        page = streamlit.sidebar.selectbox(
+            'App Navigation',
+            self.pages,
+            format_func=lambda page: page['title']
+        )
+
+        # run the app function
+        page['function']()

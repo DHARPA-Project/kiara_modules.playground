@@ -53,6 +53,8 @@ Once that is done, `cd` into a directory where you want this project folder to l
 # make sure your virtual env is activated!!!
 git clone https://github.com/DHARPA-Project/kiara_modules.playground.git
 cd kiara_modules.playground
+# the next command is optional,but if you use conda it's recommended to execute it, contact me if you encounter issues with any of this
+conda install -c conda-forge python-levenshtein
 pip install --extra-index-url https://pypi.fury.io/dharpa/ -U -e .[all_dev]
 ```
 

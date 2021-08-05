@@ -111,6 +111,13 @@
       "input_links": {
         "tokens_array": "remove_stopwords.token_list"
       }
+    },
+    {
+      "module_type": "language.lda.LDA",
+      "step_id": "generate_lda",
+      "input_links": {
+        "tokens_array": "lemmatize_corpus.tokens_array"
+      }
     }
   ],
   "input_aliases": "auto",
