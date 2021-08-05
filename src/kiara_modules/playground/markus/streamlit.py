@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import os
+import shutil
 import tempfile
 import typing
 
@@ -120,6 +121,37 @@ def onboard_file(kiara: Kiara, st, uploaded_file):
                 import_bytes(kiara=kiara, uploaded_file=x)
 
 
+def onboard_file_bundle(kiara: Kiara, uploaded_files, aliases: typing.Optional[typing.Iterable[str]]=None):
+
+    if not uploaded_files:
+        return
+
+    if aliases is None:
+        aliases = []
+    if isinstance(aliases, str):
+        aliases = [aliases]
+
+    bundle_aliases = [f"{x}_uploaded_files" for x in aliases]
+
+    if isinstance(uploaded_files, UploadedFile):
+        uploaded_files = [uploaded_files]
+
+    with tempfile.TemporaryDirectory() as tmpdirname:
+        for uf in uploaded_files:
+            path = os.path.join(tmpdirname, uf.name)
+            with open(path, 'wb') as f:
+                f.write(uf.getbuffer())
+
+        inputs = {
+            "path": tmpdirname,
+            "aliases": aliases,
+            "file_bundle_aliases": bundle_aliases
+        }
+        kiara.run("table.import.from_local_folder", inputs=inputs)
+
+    shutil.rmtree(tmpdirname, ignore_errors=True)
+
+
 def check_workflow_status(workflow: KiaraWorkflow):
 
     status = []
@@ -144,9 +176,22 @@ def check_workflow_status(workflow: KiaraWorkflow):
 
 
 class MultiPageApp(object):
-    def __init__(self):
+    def __init__(self, streamlit):
+
+        self._streamlit = streamlit
+
+        if "kiara" not in self._streamlit.session_state:
+            print("Create kiara object.")
+            self._kiara = Kiara()
+            self._streamlit.session_state["kiara"] = self._kiara
+        else:
+            self._kiara = self._streamlit.session_state["kiara"]
 
         self._pages = {}
+
+    @property
+    def kiara(self) -> Kiara:
+        return self._kiara
 
     def add_page(self, title: str, func: typing.Callable):
 
@@ -155,13 +200,12 @@ class MultiPageApp(object):
 
         self._pages[title] = func
 
-    def run(self, streamlit):
+    def run(self):
         # Drodown to select the page to run
-        page = streamlit.sidebar.selectbox(
-            'App Navigation',
-            self.pages,
-            format_func=lambda page: page['title']
+        page = self._streamlit.sidebar.selectbox(
+            'Step navigation',
+            self._pages.keys(),
         )
 
         # run the app function
-        page['function']()
+        self._pages[page](kiara=self._kiara)
