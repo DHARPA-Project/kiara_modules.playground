@@ -7,6 +7,7 @@ import numpy as np
 # Custom imports
 from kiara_modules.playground.markus.streamlit import MultiPageApp
 from pages.onboarding import page as onboarding
+from pages.timestamped_corpus import page as timestamped_corpus
 app = MultiPageApp(st)
 
 # Title of the main page
@@ -14,6 +15,7 @@ st.title("Kiara experiment: topic modeling multi page")
 
 # Add all your application here
 app.add_page("Select data", onboarding)
+app.add_page("Timestamped corpus", timestamped_corpus)
 # app.add_page("Timestamped data", timestamped_corpus.app)
 
 
