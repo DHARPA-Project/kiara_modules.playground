@@ -1,4 +1,5 @@
 import os
+import typing
 
 from kiara import Kiara
 import streamlit as st
@@ -44,7 +45,8 @@ def page(kiara: Kiara):
         table = table_value
     else:
         augmented_table = augment_table(kiara=kiara, table_value=table_value)
-        saved_md = augmented_table.save()
+        new_alias = f"{selected}_augmented"
+        saved_md = augmented_table.save(aliases=[new_alias])
         saved_id = saved_md.value_id
         table = kiara.data_store.load_value(saved_id)
 
