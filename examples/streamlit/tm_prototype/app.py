@@ -4,7 +4,7 @@ from kiara import Kiara
 
 # Custom imports 
 from multipage import MultiPage
-from pages import files_onboarding, timestamped_corpus
+from pages import files_onboarding, get_file_metadata, timestamped_corpus
 
 app = MultiPage()
 
@@ -16,6 +16,7 @@ st.session_state["kiara"] = kiara
 
 # Add all your application here
 app.add_page("Upload Data", files_onboarding.app)
+app.add_page("Get file metadata", get_file_metadata.app)
 app.add_page("Timestamped data", timestamped_corpus.app)
 
 # The main app

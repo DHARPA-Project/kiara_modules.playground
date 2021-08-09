@@ -14,7 +14,7 @@ def app():
 
     uploaded_files = st.file_uploader("Add files", type = 'txt', accept_multiple_files=True)
     
-    alias = 'tm1'
+    corpus_alias = "tm1"
 
     file_names = [i.name for i in uploaded_files]
     file_txt = [i.getvalue().decode("utf-8") for i in uploaded_files]
@@ -30,14 +30,24 @@ def app():
     
     st.dataframe(df_onboard)
     onboard_button = st.button(label="Onboard")
+
     
-    if onboard_button:
-        onboard_file_bundle(kiara=kiara, uploaded_files=uploaded_files, aliases=alias)
+    if onboard_button and uploaded_files:
+        onboard_file_bundle(
+            kiara=kiara, uploaded_files=uploaded_files, aliases=[corpus_alias]
+        )
+        st.markdown(f"Onboarded corpus: {corpus_alias}. Go to the next step via the navigation menu on the left.")
+    else:
 
-    if kiara.data_store.load_value(alias):
+        st.markdown("Nothing onboarded (yet).")
+        st.stop()
 
-        table_value = kiara.data_store.load_value(alias)
-        table: pa.Table = table_value.get_value_data()
-        df = table.to_pandas()
+
+    if kiara.data_store.load_value(corpus_alias):
+
+        table_value = kiara.data_store.load_value(corpus_alias)
+        #table: pa.Table = table_value.get_value_data()
+        #df = table.to_pandas()
         
-        st.session_state.data = df
+        st.session_state.data = table_value
+        
