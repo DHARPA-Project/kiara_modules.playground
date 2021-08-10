@@ -43,7 +43,7 @@ st.dataframe(data.to_pandas())
 
 
 with st.form(key="sql_query"):
-    query = st.text_input("SQL Query")
+    query = st.text_area("SQL Query")
     st.write(
         "*Note*: the query must use the relation name '***data***' (e.g. 'select \\* from ***data***)"
     )

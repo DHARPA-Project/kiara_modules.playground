@@ -108,7 +108,7 @@ def import_bytes(kiara: Kiara, uploaded_file: UploadedFile):
             )
 
 
-def onboard_file(kiara: Kiara, st, uploaded_file):
+def onboard_file(kiara: Kiara, uploaded_file):
 
     if uploaded_file:
         if isinstance(uploaded_file, UploadedFile):

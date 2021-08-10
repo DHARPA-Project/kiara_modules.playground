@@ -1,20 +1,11 @@
+
 {
   "module_type_name": "topic_modeling_end_to_end",
   "documentation": "Topic modelling dev pipeline.",
   "steps": [
     {
-      "module_type": "import.local_folder",
-      "step_id": "read_files_in_folder"
-    },
-    {
-      "module_type": "table.create.from_file_bundle",
-      "module_config": {
-        "columns": ["id", "rel_path", "file_name", "content"]
-      },
-      "step_id": "create_table_from_csvs",
-      "input_links": {
-        "files": "read_files_in_folder.file_bundle"
-      }
+      "module_type": "table.import_from.folder_path.string",
+      "step_id": "create_table_from_files"
     },
     {
       "module_type": "array.map",
@@ -23,7 +14,7 @@
       },
       "step_id": "extract_date_from_file_name",
       "input_links": {
-        "array": "create_table_from_csvs.table.file_name"
+        "array": "create_table_from_files.value_item.file_name"
       }
     },
     {
@@ -37,7 +28,7 @@
       },
       "step_id": "extract_ref_from_file_name",
       "input_links": {
-        "array": "create_table_from_csvs.table.file_name"
+        "array": "create_table_from_files.value_item.file_name"
       }
     },
     {
@@ -61,7 +52,7 @@
       "step_id": "merged_table",
       "input_links": {
         "sources": [
-          "create_table_from_csvs.table",
+          "create_table_from_files.value_item",
           "extract_date_from_file_name.array",
           "extract_ref_from_file_name.array",
           "lookup_publication_name.array"
@@ -120,7 +111,16 @@
       }
     }
   ],
-  "input_aliases": "auto",
+  "input_aliases": {
+    "create_table_from_files__source": "path",
+    "create_table_from_files__aliases": "table_aliases",
+    "create_date_range_filter__earliest": "earliest",
+    "create_date_range_filter__latest": "latest",
+    "remove_stopwords__languages": "languages",
+    "remove_stopwords__additional_stopwords": "additional_stopwords",
+    "generate_lda__num_topics": "num_topics",
+    "generate_lda__compute_coherence": "compute_coherence"
+  },
   "output_aliases": "auto"
 }
 
