@@ -8,7 +8,10 @@ def app():
 
     table_value = st.session_state.data
 
-    process_metadata = st.radio("Do the file names contain metadata?",("no", "yes"))
+    st.write('This is a temporary/incomplete screen for the file names metadata step.')
+    st.write('Once the preview is loaded, go to the next step via the top left menu.')
+    
+    process_metadata = st.radio("Do the file names contain metadata?",("yes", "no"))
 
     if process_metadata == "yes":
 
@@ -35,4 +38,6 @@ def app():
             st.session_state.augmented_data = augmented_table_value
 
             table = augmented_table_value.get_value_data()
-            st.dataframe(table.to_pandas())
+            df = table.to_pandas()
+            st.write('Result preview')
+            st.dataframe(df.head(10))

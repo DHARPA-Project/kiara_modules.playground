@@ -39,7 +39,6 @@ def app():
     data_json = json.dumps(data, default=str)
     cleaned_data = json.loads(data_json)
 
-    print(cleaned_data)
 
     observers = observable(
         "Test",
