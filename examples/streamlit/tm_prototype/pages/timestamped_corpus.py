@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import streamlit as st
-from st_aggrid import AgGrid
+from st_aggrid import AgGrid, GridOptionsBuilder
 from streamlit_observable import observable
 import json
 
@@ -8,6 +8,7 @@ def app():
     st.markdown("## Timestamped Corpus")
 
     kiara = st.session_state["kiara"]
+    
 
     augmented_table_value = st.session_state.augmented_data
 
@@ -101,8 +102,11 @@ def app():
             query_result_table2 = query_result_value2.get_value_data()
 
             df2 = query_result_table2.to_pandas()
+            gb = GridOptionsBuilder.from_dataframe(df2)
+            
+            gb.configure_column("content", maxWidth=800, tooltipField="content")
 
-            AgGrid(df2.head(100))
+            AgGrid(df2.head(100), gridOptions=gb.build())
 
                 
     
