@@ -43,18 +43,73 @@ def app():
     data_json = json.dumps(data, default=str)
     cleaned_data = json.loads(data_json)
 
-    
-
-
-
     observers = observable(
         "Test",
         notebook="d/d1e17c291019759e",
         targets=["viewof chart", "style"],
         redefine={"timeSelected": unit, "data": cleaned_data, "scaleType": scaleType, "axisLabel": axisLabel},
+        observe=["dateInfo"]
     )
 
-    st.dataframe(query_result_table.to_pandas())
+    timeInfo = observers.get("dateInfo")
+
+    col1, col2 = st.columns(2)
+
+    def col1_callback():
+        st.session_state.col2 = '0'
+        st.session_state.col1 = 'col1'
+
+    def col2_callback():
+        st.session_state.col1 = '0'
+        st.session_state.col2 = 'col2'
+
+
+    with col1:
+        with st.form(key='my_form'):
+            submit_button = st.form_submit_button(label='Data preview', on_click=col1_callback)
+
+    with col2:
+        with st.form(key='my_form2'):
+            submit_button = st.form_submit_button(label='Display sources', on_click=col2_callback)
+
+
+    if 'col1' in st.session_state:
+        if st.session_state.col1 == 'col1':
+            st.dataframe(query_result_table.to_pandas())
+    
+    if 'col2' in st.session_state:
+        if st.session_state.col2 == 'col2':
+            st.text('Click on the tooltip date to display date')
+            if timeInfo is not None:
+                st.write(timeInfo)
+
+
+    # with col1:
+    #     option1 = st.button('Aggregated data preview')
+    #     if option1:
+    #         st.session_state['col1'] = 'on'
+    #         st.session_state['col2'] = 'off'
+
+    # with col2:
+    #     option2 = st.button('Display sources')
+    #     if option2:
+    #         st.session_state['col2'] = 'on'
+    #         st.session_state['col1'] = 'off'
+        
+    
+    # if st.session_state['col1'] == 'on':
+    #     st.dataframe(query_result_table.to_pandas())
+    # if st.session_state['col2'] == 'on':
+    #     st.text('Click on the tooltip date to display date')
+    #     if timeInfo is not None:
+    #         st.write(timeInfo)
+
+
+    # if (st.session_state.column == 'column1'):
+    #     st.dataframe(query_result_table.to_pandas())
+    
+    # if (st.session_state.column == 'column2'):
+        
 
 
 
