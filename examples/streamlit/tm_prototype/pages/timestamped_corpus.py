@@ -9,7 +9,6 @@ def app():
 
     kiara = st.session_state["kiara"]
 
-    table_value = st.session_state.data
     augmented_table_value = st.session_state.augmented_data
 
     sql_query_day = "SELECT strptime(concat(day, '/', month, '/', year), '%d/%m/%Y') as date, pub_name, count FROM (SELECT YEAR(date) as year, MONTH(date) as month, DAY(date) as day, pub_name, count(*) as count FROM data group by YEAR(date), MONTH(date), DAY(date), pub_name ORDER BY year, month, day, pub_name) as agg"
@@ -78,38 +77,48 @@ def app():
             st.dataframe(query_result_table.to_pandas())
     
     if 'col2' in st.session_state:
+        
         if st.session_state.col2 == 'col2':
+
             st.text('Click on the tooltip date to display date')
+            
+            st.write('hello')
+
             if timeInfo is not None:
+
                 st.write(timeInfo)
 
+                
+                sql_query_day2 = f"SELECT pub_name, date, content FROM data WHERE DATE_PART('year', date) = {timeInfo[0]} AND DATE_PART('month', date) = {timeInfo[1]} and DATE_PART('day', date) = {timeInfo[2]}"
+                sql_query_month2 = f"SELECT pub_name, date, content FROM data WHERE DATE_PART('year', date) = {timeInfo[0]} AND DATE_PART('month', date) = {timeInfo[1]}"
+                sql_query_year2 = f"SELECT pub_name, date, content FROM data WHERE DATE_PART('year', date) = {timeInfo[0]}"
 
-    # with col1:
-    #     option1 = st.button('Aggregated data preview')
-    #     if option1:
-    #         st.session_state['col1'] = 'on'
-    #         st.session_state['col2'] = 'off'
+                if unit == "day":
+                    query2 = sql_query_day2
+                elif unit == "month":
+                    query2 = sql_query_month2
+                else:
+                    query2 = sql_query_year2
 
-    # with col2:
-    #     option2 = st.button('Display sources')
-    #     if option2:
-    #         st.session_state['col2'] = 'on'
-    #         st.session_state['col1'] = 'off'
-        
+                
+                query_workflow2 = kiara.create_workflow("table.query.sql")
+                query_workflow2.inputs.set_values(table=augmented_table_value, query=query2)
+
+                query_result_value2 = query_workflow2.outputs.get_value_obj("query_result")
+                query_result_table2 = query_result_value2.get_value_data()
+
+                df2 = query_result_table2.to_pandas()
+                print(df2)
+                st.dataframe(df2.head(10))
+
     
-    # if st.session_state['col1'] == 'on':
-    #     st.dataframe(query_result_table.to_pandas())
-    # if st.session_state['col2'] == 'on':
-    #     st.text('Click on the tooltip date to display date')
-    #     if timeInfo is not None:
-    #         st.write(timeInfo)
+                
 
-
-    # if (st.session_state.column == 'column1'):
-    #     st.dataframe(query_result_table.to_pandas())
+                
     
-    # if (st.session_state.column == 'column2'):
-        
+
+
+
 
 
 

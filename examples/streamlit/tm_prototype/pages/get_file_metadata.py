@@ -40,4 +40,4 @@ def app():
             table = augmented_table_value.get_value_data()
             df = table.to_pandas()
             st.write('Result preview')
-            st.dataframe(df.head(10))
+            st.dataframe(df.head(20))
