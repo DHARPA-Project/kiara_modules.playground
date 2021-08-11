@@ -62,54 +62,59 @@ def app():
         st.session_state.col1 = '0'
         st.session_state.col2 = 'col2'
 
+    if "preview_choice" not in st.session_state:
+        st.session_state.preview_choice = "data"
 
     with col1:
-        with st.form(key='my_form'):
-            submit_button = st.form_submit_button(label='Data preview', on_click=col1_callback)
+        data_preview = st.button(label='Data preview')
 
     with col2:
-        with st.form(key='my_form2'):
-            submit_button = st.form_submit_button(label='Display sources', on_click=col2_callback)
+        source_view = st.button(label='Display sources')
+
+    if data_preview:
+        st.session_state.preview_choice = "data"
+
+    if source_view:
+        st.session_state.preview_choice = "source"
+
+    display_choice = st.session_state.preview_choice
+
+    if display_choice == "data":
+
+        st.dataframe(query_result_table.to_pandas())
+
+    else:
+
+        st.text('Click on the tooltip date to display date')
+
+        st.write('hello')
+
+        if timeInfo is not None:
+
+            st.write(timeInfo)
 
 
-    if 'col1' in st.session_state:
-        if st.session_state.col1 == 'col1':
-            st.dataframe(query_result_table.to_pandas())
-    
-    if 'col2' in st.session_state:
-        
-        if st.session_state.col2 == 'col2':
+            sql_query_day2 = f"SELECT pub_name, date, content FROM data WHERE DATE_PART('year', date) = {timeInfo[0]} AND DATE_PART('month', date) = {timeInfo[1]} and DATE_PART('day', date) = {timeInfo[2]}"
+            sql_query_month2 = f"SELECT pub_name, date, content FROM data WHERE DATE_PART('year', date) = {timeInfo[0]} AND DATE_PART('month', date) = {timeInfo[1]}"
+            sql_query_year2 = f"SELECT pub_name, date, content FROM data WHERE DATE_PART('year', date) = {timeInfo[0]}"
 
-            st.text('Click on the tooltip date to display date')
-            
-            st.write('hello')
+            if unit == "day":
+                query2 = sql_query_day2
+            elif unit == "month":
+                query2 = sql_query_month2
+            else:
+                query2 = sql_query_year2
 
-            if timeInfo is not None:
 
-                st.write(timeInfo)
+            query_workflow2 = kiara.create_workflow("table.query.sql")
+            query_workflow2.inputs.set_values(table=augmented_table_value, query=query2)
 
-                
-                sql_query_day2 = f"SELECT pub_name, date, content FROM data WHERE DATE_PART('year', date) = {timeInfo[0]} AND DATE_PART('month', date) = {timeInfo[1]} and DATE_PART('day', date) = {timeInfo[2]}"
-                sql_query_month2 = f"SELECT pub_name, date, content FROM data WHERE DATE_PART('year', date) = {timeInfo[0]} AND DATE_PART('month', date) = {timeInfo[1]}"
-                sql_query_year2 = f"SELECT pub_name, date, content FROM data WHERE DATE_PART('year', date) = {timeInfo[0]}"
+            query_result_value2 = query_workflow2.outputs.get_value_obj("query_result")
+            query_result_table2 = query_result_value2.get_value_data()
 
-                if unit == "day":
-                    query2 = sql_query_day2
-                elif unit == "month":
-                    query2 = sql_query_month2
-                else:
-                    query2 = sql_query_year2
-
-                
-                query_workflow2 = kiara.create_workflow("table.query.sql")
-                query_workflow2.inputs.set_values(table=augmented_table_value, query=query2)
-
-                query_result_value2 = query_workflow2.outputs.get_value_obj("query_result")
-                query_result_table2 = query_result_value2.get_value_data()
-
-                df2 = query_result_table2.to_pandas()
-                print(df2)
-                st.dataframe(df2.head(10))
+            df2 = query_result_table2.to_pandas()
+            print(df2)
+            st.dataframe(df2.head(10))
 
     
                 
