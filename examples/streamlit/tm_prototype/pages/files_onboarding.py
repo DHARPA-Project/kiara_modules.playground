@@ -10,13 +10,15 @@ def app():
 
     kiara: Kiara = st.session_state["kiara"]
 
-    st.markdown("Select sample data txt files from one publication folder located in  kiara_modules.playground/examples/newspaper_corpora/CI_newspaper_subcorpora") 
-    st.markdown("Please wait for the success message to proceed further.")
+    st.markdown("Download the corpus on your computer, unzip and copy local folder path")
+    st.markdown("https://zenodo.org/record/4596345/files/ChroniclItaly_3.0_original.zip?download")
+    st.markdown("Paste local folder path into input below") 
+    st.markdown("Wait for the success message, and then select next page in top left nav menu")
 
     
     path = st.text_input('Path to files folder')
 
-    button = st.button("Import")
+    button = st.button("Onboard")
     
 
     if button:
@@ -24,7 +26,6 @@ def app():
         aliases = ['my_first_table']
         result = module.run(source=path, aliases=aliases)
 
-        # table_obj = result.get_value_obj("value_item")
         table_value = kiara.data_store.load_value(aliases[0])
         st.session_state.data = table_value
         

@@ -1,4 +1,5 @@
 import streamlit as st
+from st_aggrid import AgGrid
 import os
 
 
@@ -8,10 +9,11 @@ def app():
 
     table_value = st.session_state.data
 
-    st.write('This is a temporary/incomplete screen for the file names metadata step.')
-    st.write('Once the preview is loaded, go to the next step via the top left menu.')
+    st.markdown('Wait for file preview to be displayed, before proceeding to the next step')
+    st.markdown('Temporary screen for file names metadata step')
+    st.markdown('This module will be completed at a later stage (all help welcome!)')
     
-    process_metadata = st.radio("Do the file names contain metadata?",("yes", "no"))
+    process_metadata = st.radio("Do your file names contain metadata?",("yes", "no"))
 
     if process_metadata == "yes":
 
@@ -40,4 +42,4 @@ def app():
             table = augmented_table_value.get_value_data()
             df = table.to_pandas()
             st.write('Result preview')
-            st.dataframe(df.head(20))
+            AgGrid(df.head(50))

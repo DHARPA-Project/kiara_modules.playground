@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-
 import streamlit as st
+from st_aggrid import AgGrid
 from streamlit_observable import observable
 import json
 
@@ -21,8 +21,6 @@ def app():
     scaleType = st.selectbox("Scale by", ('color', 'height'))
 
     axisLabel = st.selectbox("Axis", ('5-year', 'year', 'month', 'day'))
-    
-    #unit = st.radio("Display data by", ("year", "month", "day"))
 
     if unit == "day":
         query = sql_query_day
@@ -54,22 +52,14 @@ def app():
 
     col1, col2 = st.columns(2)
 
-    def col1_callback():
-        st.session_state.col2 = '0'
-        st.session_state.col1 = 'col1'
-
-    def col2_callback():
-        st.session_state.col1 = '0'
-        st.session_state.col2 = 'col2'
-
     if "preview_choice" not in st.session_state:
         st.session_state.preview_choice = "data"
 
     with col1:
-        data_preview = st.button(label='Data preview')
+        data_preview = st.button(label='Aggregated data')
 
     with col2:
-        source_view = st.button(label='Display sources')
+        source_view = st.button(label='Sources list by time period')
 
     if data_preview:
         st.session_state.preview_choice = "data"
@@ -81,17 +71,15 @@ def app():
 
     if display_choice == "data":
 
-        st.dataframe(query_result_table.to_pandas())
+        AgGrid(query_result_table.to_pandas())
 
     else:
 
-        st.text('Click on the tooltip date to display date')
+        if timeInfo is None:
+            st.markdown('Hover over chart and click on date that appears on top')
 
-        st.write('hello')
 
         if timeInfo is not None:
-
-            st.write(timeInfo)
 
 
             sql_query_day2 = f"SELECT pub_name, date, content FROM data WHERE DATE_PART('year', date) = {timeInfo[0]} AND DATE_PART('month', date) = {timeInfo[1]} and DATE_PART('day', date) = {timeInfo[2]}"
@@ -113,11 +101,8 @@ def app():
             query_result_table2 = query_result_value2.get_value_data()
 
             df2 = query_result_table2.to_pandas()
-            print(df2)
-            st.dataframe(df2.head(10))
 
-    
-                
+            AgGrid(df2.head(100))
 
                 
     

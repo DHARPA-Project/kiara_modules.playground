@@ -15,9 +15,9 @@ kiara = Kiara.instance()
 st.session_state["kiara"] = kiara
 
 # Add all your application here
-app.add_page("Upload Data", files_onboarding.app)
-app.add_page("Get file metadata", get_file_metadata.app)
-app.add_page("Timestamped data", timestamped_corpus.app)
+app.add_page("1. Onboard data", files_onboarding.app)
+app.add_page("2. Get file metadata", get_file_metadata.app)
+app.add_page("3. Timestamped data", timestamped_corpus.app)
 
 # The main app
 app.run()
