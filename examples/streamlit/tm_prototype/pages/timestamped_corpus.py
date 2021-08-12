@@ -16,12 +16,14 @@ def app():
     sql_query_month = "SELECT strptime(concat('01/', month, '/', year), '%d/%m/%Y') as date, pub_name, count FROM (SELECT YEAR(date) as year, MONTH(date) as month, pub_name, count(*) as count FROM data group by YEAR(date), MONTH(date), pub_name ORDER BY year, month, pub_name) AS agg"
     sql_query_year = "SELECT strptime(concat('01/01/', year), '%d/%m/%Y') as date, pub_name, count FROM (SELECT YEAR(date) as year, pub_name, count(*) as count FROM data group by YEAR(date), pub_name ORDER BY year, pub_name) AS agg"
 
+    my_expander = st.sidebar.expander(label='Settings')
+    
+    with my_expander:
+        unit = st.selectbox("Aggregate by", ('year', 'month', 'day'))
 
-    unit = st.selectbox("Aggregate by", ('year', 'month', 'day'))
+        scaleType = st.selectbox("Scale by", ('color', 'height'))
 
-    scaleType = st.selectbox("Scale by", ('color', 'height'))
-
-    axisLabel = st.selectbox("Axis", ('5-year', 'year', 'month', 'day'))
+        axisLabel = st.selectbox("Axis", ('5-year', 'year', 'month', 'day'))
 
     if unit == "day":
         query = sql_query_day
