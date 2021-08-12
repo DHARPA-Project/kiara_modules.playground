@@ -125,7 +125,7 @@ make update-dependencies
 ```console
 # make sure your virtual env is activated!!!
 pip install --extra-index-url https://pypi.fury.io/dharpa/ -e '.[all_dev]'
-pip install --extra-index-url https://pypi.fury.io/dharpa/ -U 'kiara[all]' 'kiara_modules.core[all]' 'kiara_modules.language_processing[all]' 'kiara_modules.network_analysis[all]'
+pip install --extra-index-url https://pypi.fury.io/dharpa/ -U kiara[all] kiara_modules.core[all] kiara_modules.language_processing[all] kiara_modules.network_analysis[all]
 ```
 
 #### Use latest dev version of *kiara* and *kiara* module packages
@@ -146,7 +146,7 @@ make update-dependencies-dev
 ```console
 # make sure your virtual env is activated!!!
 pip install --extra-index-url https://pypi.fury.io/dharpa/ -e '.[all_dev]'
-pip install --extra-index-url https://pypi.fury.io/dharpa/ -U 'git+https://github.com/DHARPA-Project/kiara.git@develop#egg=kiara[all]' 'git+https://github.com/DHARPA-Project/kiara_modules.core.git@develop#egg=kiara_modules.core[all]' 'git+https://github.com/DHARPA-Project/kiara_modules.language_processing.git@develop#egg=kiara_modules.language_processing[all]' 'git+https://github.com/DHARPA-Project/kiara_modules.network_analysis.git@develop#egg=kiara_modules.network_analysis[all]'
+pip install --extra-index-url https://pypi.fury.io/dharpa/ -U git+https://github.com/DHARPA-Project/kiara.git@develop#egg=kiara[all] git+https://github.com/DHARPA-Project/kiara_modules.core.git@develop#egg=kiara_modules.core[all] git+https://github.com/DHARPA-Project/kiara_modules.language_processing.git@develop#egg=kiara_modules.language_processing[all] git+https://github.com/DHARPA-Project/kiara_modules.network_analysis.git@develop#egg=kiara_modules.network_analysis[all]
 ```
 
 ### ``make`` targets (Linux & Mac OS X)
