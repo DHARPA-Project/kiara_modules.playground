@@ -20,7 +20,10 @@ def write_operation_info(kiara: Kiara, operation_id: str, container: DeltaGenera
     # this is all operation specific data that is available, pick what you need
     container.markdown("## Operation info")
     container.markdown("### Type metadata")
-    container.write(operation.module_cls.get_type_metadata().dict())
+    type_metadata = operation.module_cls.get_type_metadata()
+    container.write(type_metadata.dict())
+    # you can access specific elements via the Python object attributes, like:
+    # type_metadata.context.references
     container.markdown(("### Inputs"))
     for field_name, schema in operation.input_schemas.items():
         container.write(f"#### {field_name}")
@@ -29,7 +32,6 @@ def write_operation_info(kiara: Kiara, operation_id: str, container: DeltaGenera
     for field_name, schema in operation.output_schemas.items():
         container.write(f"#### {field_name}")
         container.write(schema.dict())
-    # and we can also get an object
 
 
 kiara = Kiara()
