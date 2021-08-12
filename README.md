@@ -89,6 +89,11 @@ You can enable this mode by setting the ``DEVELOP`` environment variable to 'tru
 export DEVELOP=true
 ```
 
+Or, on Windows:
+```
+set "DEVELOP=true"
+```
+
 Once this is done, *kiara* will display additional sub-commands when you use the ``--help`` flag. Currently, the only such
 sub-command that is implemented is:
 
