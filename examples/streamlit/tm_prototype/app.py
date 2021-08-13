@@ -4,7 +4,7 @@ from kiara import Kiara
 
 # Custom imports 
 from multipage import MultiPage
-from pages import files_onboarding, get_file_metadata, timestamped_corpus
+from pages import files_onboarding, get_file_metadata, timestamped_corpus, text_preprocessing
 
 app = MultiPage()
 
@@ -18,6 +18,7 @@ st.session_state["kiara"] = kiara
 app.add_page("1. Onboard data", files_onboarding.app)
 app.add_page("2. Get file metadata", get_file_metadata.app)
 app.add_page("3. Timestamped data", timestamped_corpus.app)
+app.add_page("4. Text pre-processing", text_preprocessing.app)
 
 # The main app
 app.run()
