@@ -24,6 +24,10 @@ class TokenizeModule(KiaraModule):
                 "type": "string",
                 "doc": "The name of the column that contains the content to tokenize.",
                 "default": "content"
+            },
+            "tokenize_by_word": {
+                "type": "boolean",
+                "doc": "Whether to tokenize by word (default), or character."
             }
         }
 
@@ -46,6 +50,7 @@ class TokenizeModule(KiaraModule):
 
         table: pa.Table = inputs.get_value_data("table")
         column_name: str = inputs.get_value_data("column_name")
+        tokenize_by_word: bool = inputs.get_value_data("tokenize_by_word")
 
         if column_name not in table.column_names:
             raise KiaraProcessingException(f"Can't tokenize table: input table does not have a column named '{column_name}'.")
