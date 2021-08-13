@@ -27,7 +27,8 @@ class TokenizeModule(KiaraModule):
             },
             "tokenize_by_word": {
                 "type": "boolean",
-                "doc": "Whether to tokenize by word (default), or character."
+                "doc": "Whether to tokenize by word (default), or character.",
+                "default": True
             }
         }
 
