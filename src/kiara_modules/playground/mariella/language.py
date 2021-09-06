@@ -58,19 +58,29 @@ class TokenizeModule(KiaraModule):
 
         column: pa.Array = table.column(column_name)
 
-        # this is how you can get a Pandas Series from the column
-        print("=========================================")
+        import nltk
+
         pandas_series: Series = column.to_pandas()
-        print(pandas_series)
-        print("=========================================")
+
+        tokenized = pandas_series.apply(lambda x: nltk.word_tokenize(x))
+        
+        #print(tokenized)
+        #print("=========================================")
+
+        # this is how you can get a Pandas Series from the column
+        # print("=========================================")
+        # pandas_series: Series = column.to_pandas()
+        # print(pandas_series)
+        # print("=========================================")
 
         # do your stuff here
 
         # then convert your result into an Arrow Array again
         # below is just a fake result, but should give you an idea how to do it
-        fake_result = [['x', 'y'], ['a', 'b']]
-        fake_result_series = Series(fake_result)
-        result_array = pa.Array.from_pandas(fake_result_series)
+        # fake_result = [['x', 'y'], ['a', 'b'], ['c', 'd']]
+        # fake_result_series = Series(fake_result)
+        
+        result_array = pa.Array.from_pandas(tokenized)
 
         outputs.set_values(tokens_array=result_array)
 

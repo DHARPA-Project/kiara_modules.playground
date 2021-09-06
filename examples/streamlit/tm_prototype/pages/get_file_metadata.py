@@ -11,7 +11,7 @@ def app():
 
     st.markdown('Wait for file preview to be displayed, before proceeding to the next step')
     st.markdown('*Temporary screen for file names metadata step*')
-    st.markdown('*This module will be completed at a later stage (all help welcome!)*')
+    st.markdown('*This module will be completed at a later stage *')
     
     my_expander = st.sidebar.expander(label='Settings')
     
