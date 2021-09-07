@@ -6,32 +6,32 @@ def app():
 
     kiara = st.session_state["kiara"]
 
-    st.write('For languages based on latin characters, use default tokenization option (by word).')
-    st.write('This first pre-processing step is necessary to proceed further. Depending on your corpus size, it could take several minutes')
-    tokenize = st.selectbox("Tokenize by", ('word', 'character'), key="0")
-    token_button = st.button('Proceed')
+    st.write("#### 1. Lowercase")
+    lowercase = st.selectbox(" ",('no', 'yes'), key="1")
+    #isalnum,isalph,isdigit
+    st.write("#### 2. Numbers and punctuation")
+    display_preprocess = ['None','Remove all tokens that include numbers (e.g. ex1ample)','Remove all tokens that include punctuation and numbers (e.g. ex1a.mple)','Remove all tokens that contain numbers only (e.g. 876)']
+    preprocess = st.radio(" ", options=range(len(display_preprocess)),format_func=lambda x: display_preprocess[x])
+    st.write("#### 3. Words length")
+    display_shorttokens = ['None','1','2','3','4','5']
+    shorttokens = st.selectbox("Remove words shorter than ... characters",options=range(len(display_shorttokens)),format_func=lambda x: display_shorttokens[x])
 
-    if token_button:
-        tokenize_workflow = kiara.create_workflow("playground.mariella.language.tokenize")
-        tokenize_workflow.inputs.set_values(table=st.session_state.augmented_data, column_name="content")
-        tokenized_table_value = tokenize_workflow.outputs.get_value_obj("tokens_array")
+    confirmation = st.button('Proceed')
 
-        table = tokenized_table_value.get_value_data()
+    if confirmation:
+        preprocess_workflow = kiara.create_workflow("playground.mariella.text_preprocessing.preprocess")
+        preprocess_workflow.inputs.set_values(table=st.session_state.tokenized_data, column_name="content",lowercase=lowercase=='yes',preprocess_method=preprocess,remove_short_tokens=shorttokens)
 
+        # retrieve the actual table value
+        preprocessed_table_value = preprocess_workflow.outputs.get_value_obj("preprocessed_array")
+        st.session_state.preprocessed_text = preprocessed_table_value
+
+        table = preprocessed_table_value.get_value_data()
 
         if table:
         # if the output exists, we write it as a pandas Series (since streamlit supports that natively)
             df = table.to_pandas()
             st.write('Result preview')
-            st.write('Use the settings menu to apply pre-processing options')
             st.dataframe(df.head(50))
-            my_expander = st.sidebar.expander(label='Settings')
-            with my_expander:
-                lowercase = st.selectbox("Lowercase", ('no', 'yes'), key="1")
-                #isalnum,isalph,isdigit
-                display = ['None','Remove all tokens that include numbers','Remove all tokens that include punctuation and numbers','Remove all numbers']
-                preprocess = st.radio("Text processing", options=range(len(display)),format_func=lambda x: display[x])
         else:
             st.write("No result")
-
-    

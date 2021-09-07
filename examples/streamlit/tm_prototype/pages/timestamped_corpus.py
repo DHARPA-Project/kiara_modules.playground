@@ -8,7 +8,6 @@ def app():
     st.markdown("## Timestamped Corpus")
 
     kiara = st.session_state["kiara"]
-    
 
     augmented_table_value = st.session_state.augmented_data
 
