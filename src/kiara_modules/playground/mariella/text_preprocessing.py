@@ -16,14 +16,9 @@ class PreprocessModule(KiaraModule):
     ]:
 
         return {
-            "table": {
-                "type": "table",
-                "doc": "The table that contains the column to pre-process.",
-            },
-            "column_name": {
-                "type": "string",
-                "doc": "The name of the column that contains the content to pre-process.",
-                "default": "content"
+            "array": {
+                "type": "array",
+                "doc": "The column to pre-process.",
             },
             "lowercase": {
                 "type": "boolean",
@@ -36,8 +31,9 @@ class PreprocessModule(KiaraModule):
                 "default": 0
             },
             "remove_short_tokens": {
-                "type": "string",
-                "doc": "Remove tokens shorter than a certain length"
+                "type": "integer",
+                "doc": "Remove tokens shorter than a certain length",
+                "default": 0
             }
         }
 
@@ -58,18 +54,12 @@ class PreprocessModule(KiaraModule):
 
         import pyarrow as pa
 
-        table: pa.Table = inputs.get_value_data("table")
-        column_name: str = inputs.get_value_data("column_name")
+        array: pa.Array= inputs.get_value_data("array")
         lowercase: bool = inputs.get_value_data("lowercase")
         preprocess_method: int = inputs.get_value_data("preprocess_method")
         remove_short_tokens: str = inputs.get_value_data("remove_short_tokens")
 
-        if column_name not in table.column_names:
-            raise KiaraProcessingException(f"Can't pre-process table: input table does not have a column named '{column_name}'.")
-
-        column: pa.Array = table.column(column_name)
-
-        pandas_series: Series = column.to_pandas()
+        pandas_series: Series = array.to_pandas()
 
         if lowercase == True:
             pandas_series = pandas_series.apply(lambda x: [w.lower() for w in x])

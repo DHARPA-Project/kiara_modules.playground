@@ -20,7 +20,7 @@ def app():
 
     if confirmation:
         preprocess_workflow = kiara.create_workflow("playground.mariella.text_preprocessing.preprocess")
-        preprocess_workflow.inputs.set_values(table=st.session_state.tokenized_data, column_name="content",lowercase=lowercase=='yes',preprocess_method=preprocess,remove_short_tokens=shorttokens)
+        preprocess_workflow.inputs.set_values(array=st.session_state.tokenized_data, lowercase=lowercase=='yes',preprocess_method=preprocess,remove_short_tokens=shorttokens)
 
         # retrieve the actual table value
         preprocessed_table_value = preprocess_workflow.outputs.get_value_obj("preprocessed_array")
