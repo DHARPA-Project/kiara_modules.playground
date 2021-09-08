@@ -1,0 +1,63 @@
+{
+  "$schema": "https://dharpa.org/kiara/development/entities/modules/PipelineModuleConfig.json",
+  "module_type_name": "network_analysis",
+  "doc": "Network analysis development workflow. Requires 'feature/extra_modules_from_lumy' branch of 'kiara_modules.network_analysis'.",
+  "steps": [
+    {
+      "module_type": "playground.rk.shims.table_from_file",
+      "step_id": "load_edges_file"
+    },
+    {
+      "module_type": "playground.rk.shims.table_from_file",
+      "step_id": "load_nodes_file"
+    },
+    {
+      "module_type": "network_graph.from_edges_table",
+      "step_id": "create_graph",
+      "input_links": {
+        "edges_table": "load_edges_file.table"
+      }
+    },
+    {
+      "module_type": "network_graph.augment",
+      "step_id": "add_graph_attributes",
+      "input_links": {
+        "graph": "create_graph.graph",
+        "node_attributes": "load_nodes_file.table"
+      }
+    },
+    {
+      "module_type": "network_graph.add_centrality_calculations",
+      "step_id": "add_centrality",
+      "input_links": {
+        "graph": "add_graph_attributes.graph"
+      }
+    },
+    {
+      "module_type": "network_graph.properties",
+      "step_id": "extract_graph_properties",
+      "input_links": {
+        "graph": "add_centrality.graph"
+      }
+    }
+  ],
+  "input_aliases": {
+    "load_edges_file__file": "edges_file",
+    "load_nodes_file__file": "nodes_file",
+    "create_graph__source_column": "src_col",
+    "create_graph__target_column": "tgt_col",
+    "create_graph__weight_column": "w_col",
+    "add_graph_attributes__index_column_name": "id_col"
+  },
+  "output_aliases": {
+    "load_nodes_file__table": "nodes_table_sample",
+    "add_centrality__graph": "graph",
+    "extract_graph_properties__number_of_nodes": "n_nodes",
+    "extract_graph_properties__number_of_edges": "n_edges",
+    "extract_graph_properties__density": "density",
+    "extract_graph_properties__average_in_degree": "average_in_degree",
+    "extract_graph_properties__average_out_degree": "average_out_degree",
+    "extract_graph_properties__average_degree": "average_degree",
+    "extract_graph_properties__average_shortest_path_length": "average_shortest_path_length"
+  }
+}
