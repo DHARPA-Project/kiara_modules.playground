@@ -6,6 +6,8 @@ def app():
 
     kiara = st.session_state["kiara"]
 
+    data = st.session_state.data.get_value_data() if not st.session_state.augmented_data else st.session_state.augmented_data
+
     st.write('For languages based on latin characters, use default tokenization option (by word).')
     st.write('This first pre-processing step is necessary to proceed further. Depending on your corpus size, it could take several minutes')
     tokenize = st.selectbox("Tokenize by", ('word', 'character'), key="0")
@@ -13,7 +15,7 @@ def app():
 
     if token_button:
         tokenize_workflow = kiara.create_workflow("playground.mariella.language.tokenize")
-        tokenize_workflow.inputs.set_values(table=st.session_state.augmented_data, column_name="content")
+        tokenize_workflow.inputs.set_values(table=data , column_name="content")
         
         tokenized_table_value = tokenize_workflow.outputs.get_value_obj("tokens_array")
 

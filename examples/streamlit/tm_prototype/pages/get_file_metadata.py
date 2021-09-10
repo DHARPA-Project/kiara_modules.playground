@@ -20,7 +20,8 @@ def app():
 
     if process_metadata:
         if process_metadata == 'no':
-            st.session_state.metada = False
+            st.session_state.metadata = False
+            st.session_state.augmented_data = False
         
         elif process_metadata == 'yes':
             # load the pipeline file and create a workflow
@@ -41,6 +42,7 @@ def app():
             augmented_table_value = workflow.outputs.get_value_obj("table")
 
             st.session_state.augmented_data = augmented_table_value
+            st.session_state.metadata = True
 
             table = augmented_table_value.get_value_data()
             df = table.to_pandas()
