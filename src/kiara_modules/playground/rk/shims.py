@@ -3,12 +3,11 @@ import typing
 from kiara import KiaraModule
 from kiara.data import ValueSet
 from kiara.data.values import ValueSchema
-from kiara.module_config import ModuleTypeConfig
-from kiara_modules.core.metadata_schemas import FileMetadata
+from kiara.module_config import ModuleTypeConfigSchema
 from pydantic import Field
 
 
-class CreateTableModuleConfig(ModuleTypeConfig):
+class CreateTableModuleConfig(ModuleTypeConfigSchema):
 
     allow_column_filter: bool = Field(
         description="Whether to add an input option to filter columns.", default=False
@@ -32,8 +31,8 @@ class CreateTableFromFileModule(KiaraModule):
 
         inputs = {
             "file": {
-                "type": "file",
-                "doc": "The file that contains table data.",
+                "type": "string",
+                "doc": "Path of the file that contains table data.",
                 "optional": False,
             }
         }
@@ -59,8 +58,8 @@ class CreateTableFromFileModule(KiaraModule):
 
         from pyarrow import csv
 
-        input_file: FileMetadata = inputs.get_value_data("file")
-        imported_data = csv.read_csv(input_file if isinstance(input_file, str) else input_file.path)
+        input_file = inputs.get_value_data("file")
+        imported_data = csv.read_csv(input_file)
 
         if self.get_config_value("allow_column_filter"):
             if self.get_config_value("columns"):

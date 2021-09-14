@@ -3,8 +3,8 @@ import typing
 from pandas import Series
 
 from kiara import KiaraModule
-from kiara.data.values import ValueSchema, ValueSet
-from kiara.exceptions import KiaraProcessingException
+from kiara.data.values import ValueSchema
+from kiara.data import ValueSet
 
 
 class PreprocessModule(KiaraModule):
